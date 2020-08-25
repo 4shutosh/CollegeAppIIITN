@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewServiceItem"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="@dimen/tenDp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/tenDp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/tenDp"
+                android:contentDescription="@string/serviceIcon"
+                android:src="@drawable/ic_assistant_round" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/serviceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/five_dp"
+                    android:layout_marginStart="@dimen/five_dp"
+                    android:text="@string/serviceName"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/serviceDescShort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/five_dp"
+                    android:layout_marginBottom="@dimen/five_dp"
+                    android:text="@string/serviceDescShort"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

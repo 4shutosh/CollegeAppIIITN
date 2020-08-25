@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="fill_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginTop="@dimen/fifteenDp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="@color/colorOnSurface"
+                    android:id="@+id/topTextProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/oneStepAway"
+                    android:textSize="28sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginTop="@dimen/five_dp"
+                android:layout_marginBottom="@dimen/tenDp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enterRollNumber"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/fifteenDp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="@dimen/tenDp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="15dp">
+
+                    <ImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/profilePhoto"
+                        android:src="@drawable/user_image_demo" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/fifteenDp"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tenDp"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/name"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:textColor="@color/colorOnSurface"
+                    android:id="@+id/profileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:gravity="center|start"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tenDp"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/email"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/profileEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:gravity="center|start"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/rollNumber"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/rollNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:inputType="textCapCharacters" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tenDp"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/year"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/profileYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|start"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tenDp"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/semester"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/profileSemester"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:gravity="center|start"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five_dp"
+                    android:text="@string/branch"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/profileBranch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:gravity="center|start"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/five_dp"
+                android:layout_marginVertical="@dimen/tenDp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/five_dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/proceed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/proceed"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

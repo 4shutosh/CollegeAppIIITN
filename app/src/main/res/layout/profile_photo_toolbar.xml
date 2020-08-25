@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingHorizontal="@dimen/five_dp"
+    android:clipToPadding="false"
+    android:focusable="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginEnd="@dimen/tenDp"
+        android:id="@+id/profile_photo_toolbar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/user_image_demo" />
+
+</FrameLayout>

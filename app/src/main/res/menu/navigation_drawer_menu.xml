@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menuTop"
+        android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/home_24dp"
+            android:id="@+id/homeDrawer"
+            android:title="@string/home" />
+        <item
+            android:icon="@drawable/ic_school_24dp"
+            android:id="@+id/coursesDrawer"
+            android:title="@string/courses" />
+        <item
+            android:icon="@drawable/ic_baseline_event_24"
+            android:id="@+id/eventsDrawer"
+            android:title="@string/events" />
+        <item
+            android:icon="@drawable/ic_baseline_mail_outline_24"
+            android:id="@+id/servicesDrawer"
+            android:title="@string/services" />
+    </group>
+
+
+    <group
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/settings" />
+    </group>
+
+    <group
+        android:id="@+id/menuBottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/exitApp"
+            android:icon="@drawable/ic_exit_24dp"
+            android:title="@string/exit" />
+        <item
+            android:id="@+id/logOut"
+            android:icon="@drawable/ic_baseline_person_outline_24"
+            android:title="@string/logout" />
+    </group>
+
+</menu>

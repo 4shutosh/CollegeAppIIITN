@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet_todo"
+        style="@style/BottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:id="@+id/pill_reset"
+            android:layout_width="50dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/pill"
+            android:src="@drawable/horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/pill_reset">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/todo"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/todoBottomSheetText1"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:text="@string/todoBottomSheetText2"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/tenDp"
+                    android:background="@color/colorSurface"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:layout_margin="@dimen/five_dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/notifications"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/todo_one" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:text="@string/todoBottomSheetText3"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/tenDp"
+                    android:background="@color/colorSurface"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:layout_margin="@dimen/five_dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/notifications"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/todo_two" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginVertical="@dimen/tenDp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:text="@string/todoBottomSheetText4"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginVertical="@dimen/tenDp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:text="@string/todoBottomSheetText5"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/five_dp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/todoBottomSheetText6"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

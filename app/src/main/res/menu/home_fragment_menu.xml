@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/profilePhoto"
+        android:title="@string/profilePhoto"
+        app:actionLayout="@layout/profile_photo_toolbar"
+        app:showAsAction="always" />
+
+</menu>

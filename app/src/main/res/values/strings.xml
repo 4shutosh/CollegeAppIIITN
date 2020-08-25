@@ -1,0 +1,271 @@
+<resources>
+    <string name="app_name">College App</string>
+    <string name="hello">Hello!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login_text">Login to your account</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="reset_text">Weak memory? Get Help</string>
+    <string name="auth_text_login">Or Login with</string>
+    <string name="auth_text_signup">Or Sign Up with</string>
+    <string name="singup_text">Don\'t have an account. Create One.</string>
+    <string name="create_account">Create your Account</string>
+    <string name="email">Email</string>
+    <string name="signup">Sign Up</string>
+    <string name="reset">Reset</string>
+    <string name="enter_email">Please Enter your Registered Email</string>
+    <string name="username_login_error_username">Please enter username</string>
+    <string name="username_login_error_email">Please enter valid email</string>
+    <string name="password_error">Please enter Password</string>
+    <string name="login_in">Login in....</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="name">Name:</string>
+    <string name="error_authentication_failed">Authentication Failed!</string>
+    <string name="error_signIn">Sign in Failed</string>
+    <string name="error_noUser">User not found!</string>
+    <string name="message_emailSent">Email Sent! Please check your email.</string>
+    <string name="error_input_email">Please enter email.</string>
+    <string name="error_failed">Failed : Email already registered? </string>
+    <string name="input_error_password">Password should be starting with a character containing atleast one special character,digit(0–9)</string>
+    <string name="input_error_enterPassword">Please enter password</string>
+    <string name="success">Success!</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="todo">Todo</string>
+    <string name="exit">Exit</string>
+    <string name="logout">Log Out</string>
+    <string name="example_email">collegeapp@support.com</string>
+    <string name="navigation_drawer_open">Navigaiton Drawer Open</string>
+    <string name="navigation_drawer_close">Navigation Drawer Close</string>
+    <string name="addImage">Add Image</string>
+    <string name="selectFrom">Select from:</string>
+    <string name="input_image_upload_error">Image Upload Failed</string>
+    <string name="courses">Courses</string>
+    <string name="events">Events</string>
+    <string name="services">Services</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="delete">Delete</string>
+    <string name="yes">Yes</string>
+    <string name="add_title_todo">Set a title</string>
+    <string name="todo_description_dailog_text">Add a description to your TODO, take notes, etc</string>
+    <string name="toDo">ToDo</string>
+    <string name="todoTitleError">Title is required</string>
+    <string name="save_todo">Save ToDo</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete_all_todo_dialog">Are you sure you want delete all of your To-dos?</string>
+    <string name="cancel">Cancel</string>
+    <string name="okay">Okay</string>
+    <string name="no_todo_found">No Todo Found!</string>
+    <string name="add_one">Add one</string>
+    <string name="message">Message</string>
+    <string name="default_notification_channel_id">default notification</string>
+    <string name="fcm_message">1234</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="delete_all__marked_todo_dialog">Delete all todos which are marked as done?</string>
+    <string name="courseNameEx">Course Name</string>
+    <string name="courseCodeEx">CODE 101</string>
+    <string name="large_text">
+        "Material is the metaphor."
+        "\n\nA material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic."
+        "\nSurfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics."
+        "\nThe fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts."
+        "\n\nBold, graphic, intentional."
+        "\n\nThe foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience."
+        "\nAn emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user."
+        "\n\nMotion provides meaning."
+        "\n\nMotion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design."
+        "\nAll action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize."
+        "\nMotion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent."
+        "\n\n3D world."
+        "\n\nThe material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness."
+        "\nOn the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis."
+        "\n\nLight and shadow."
+        "\n\nWithin the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles."
+        "\nShadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp."
+        "\n\nResting elevation."
+        "\n\nAll material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible."
+        "\n\nComponent elevations."
+        "\n\nThe resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app)."
+        "\nComponents may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop)."
+        "\n\nResponsive elevation and dynamic elevation offsets."
+        "\n\nSome component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets."
+        "\nDynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation."
+        "\nOnce the input event is completed or cancelled, the component will return to its resting "
+        "elevation."
+        "\n\nAvoiding elevation interference."
+        "\n\nComponents with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout."
+        "\nOn a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears."
+        "\nOn the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="timetable">Time Table</string>
+    <string name="checkYourAttendance">Check Your Attendance</string>
+    <string name="collegeWebsite">College Website</string>
+    <string name="clubs">Clubs</string>
+    <string name="yourCourses">Your </string>
+    <string name="allCourses">All </string>
+    <string name="attendanceComingSoonText">
+        "<b><p style="text-align:center;">Attendance Calculator</p></b>"
+        "\n <ul><li>An interface which will reflect your real time attendance of the courses</li>"
+        "\n<li>This will make the most bewildered decision of attending classes very easy</li>"
+        "\n<li>This will not be a calculator, but more like a dashboard</li>"
+        "\n<li>Most likely information to be displayed will be current attendance percentage, lectures left, lectures attended, lecture leaves remaining (for 75%), and same for the labs.</li>"
+        "\n<li>This feature requires contribution from lecturers thus is still in development phase.</li></ul>"
+        "\n\n<p style="text-align:center;">Suggestions and Ideas are highly appreciated.</p>"
+
+
+</string>
+    <string name="pill">pill for bottom sheet</string>
+    <string name="notificationsInfoSheetText">Notifications</string>
+    <string name="info">Info</string>
+    <string name="nameOfCourse">Course Name:</string>
+    <string name="courseNameExample"><![CDATA[Data Structures & Algorithms]]></string>
+    <string name="courseCode">Course Code:</string>
+    <string name="about">About</string>
+    <string name="loremIpsumP1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper ligula mauris, eu ultrices massa dictum iaculis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor, sem vitae tristique varius, enim velit gravida eros, sed convallis lacus nibh sed turpis. Praesent quis pharetra nisl, nec consequat odio. Praesent turpis nibh, venenatis ut ornare quis, suscipit nec lectus. Integer sed dictum sapien, sed vestibulum nisl. Sed vel pharetra elit. Aenean sed risus nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse magna lectus, rutrum sed pharetra id, placerat a est.</string>
+    <string name="faculty">"Faculty "</string>
+    <string name="facultyExample">Faculty Faculty</string>
+    <string name="classroomLink">Classroom Link:</string>
+    <string name="openLink">Open Link</string>
+    <string name="suggestedPlaylist">Suggested Video Playlist:</string>
+    <string name="googleDriveBooksLink">Drive Link for Books:</string>
+    <string name="facultyContact">Contact Faculty:</string>
+    <string name="facultyContactExample">faculty.contact@iiitn.com, 9992333ABC</string>
+    <string name="noCoursesFound">
+                "No Courses Found!"
+        "\nPlease mark your courses from all courses list "
+    </string>
+    <string name="takingThisCourse">Studying this Course?</string>
+    <string name="no">No</string>
+    <string name="ELibrary">E Library</string>
+    <string name="infoYourCourses">
+        "This screen shows your courses "
+        "\n (Upcoming Feature) The app will automatically fetch courses that all the students in your branch and course are registered for."
+        "And the open course/repeat courses can be added manually from the all courses list  "
+    </string>
+    <string name="information">Information</string>
+    <string name="logOutText">"Logging Out of Account will delete all of your offline data (Todo , Courses, Notification, etc)"</string>
+    <string name="sureLogOut">Are you sure you want to log out?</string>
+    <string name="markYourCourse">Mark your course from course screen using the star icon</string>
+    <string name="profilePhoto">Profile Photo</string>
+    <string name="rollNumber">Roll Number:</string>
+    <string name="year">Year:</string>
+    <string name="semester">Semester:</string>
+    <string name="branch">Branch:</string>
+    <string name="pleaseConfirmProfileText">Please Confirm your Details</string>
+    <string name="oneStepAway">You\'re just a step away</string>
+    <string name="enterRollNumber">Please enter your roll number</string>
+    <string name="proceed">Proceed</string>
+    <string name="NotificationsInfoTop">What are Notifications?</string>
+    <string name="todoOnTop">What is a TODO?</string>
+    <string name="todoInfoSheetText">Todo Info</string>
+    <string name="settings">Settings</string>
+    <string name="theme">Theme Options</string>
+    <string name="darkTheme">Dark Theme</string>
+    <string name="brightnessIcon">BrightnessIcon</string>
+    <string name="systemDefault">System Default</string>
+    <string name="lightTheme">Light Theme</string>
+    <string name="save">Save</string>
+    <string name="chooseTheme">Choose Theme</string>
+    <string name="collegeApp">College App</string>
+    <string name="appVersion">College App v0.1 beta</string>
+    <string name="github">Github</string>
+    <string name="createdBy">Created by Ashutosh Singh / 4shutosh</string>
+    <string name="userImage">User demo Image</string>
+    <string name="authBar">Authentication Bar Icons</string>
+    <string name="preferredAuth">(Preferred while beta testing)</string>
+    <string name="bugFound">Found a bug? Create an Issue</string>
+    <string name="feedback">Feedback</string>
+    <string name="writeUs">Write Your Feedback</string>
+    <string name="feedbackText">Feedback and Suggestions</string>
+    <string name="clearAllNotiications">Clear All Notifications</string>
+    <string name="delete_all_noticiations">Remove all notifications?</string>
+    <string name="no_notifications_found">No Notifications Found!</string>
+    <string name="notificationSheetText2">Notifications will include Announcements and Updates from Officials and Groups \n(Courses, Clubs, etc that you are a part of)</string>
+    <string name="notificationSheetText3">Notifications will be sent by the faculties, Class Representatives, Club Managers, etc through a custom web portal </string>
+    <string name="notificationSheetText4">"We aim to make IMPORTANT notifications stand out from all the Whats App's garbage messages and notifications"</string>
+    <string name="notificationSheetText5">Some Android Phones might not receive notifications due to rogue Chinese ROMS, future updates might fix this.</string>
+    <string name="notificationsSheetText6">Done with a notification? Swipe it away</string>
+    <string name="todoBottomSheetText1">// TODO is a note taking system for the tasks that we aim to do in future.</string>
+    <string name="todoBottomSheetText2">We can use it for taking notes, reminders, any data that is worth enough to be remembered :)</string>
+    <string name="todoBottomSheetText3">Add a TODO with a title and description</string>
+    <string name="todoBottomSheetText4">"Set a reminder for the TODO, pick the desied date and time followed by clicking on the clock icon (REQUIRED: make the clock icon green to set the reminder) "</string>
+    <string name="todoBottomSheetText5">The status of the checkbox in front of the title indicates the status of the TODO</string>
+    <string name="todoBottomSheetText6">Reminders might get suppressed due to the rogue Chinese ROMS, future updates might fix this.</string>
+    <string name="clubImage">Club Image</string>
+    <string name="clubName">Club Name</string>
+    <string name="clubHead">Club Head:</string>
+    <string name="clubField">Club Field</string>
+    <string name="applicationStatus">Application Eligibility:</string>
+    <string name="openForAll">Open for All</string>
+    <string name="apply">Apply</string>
+    <string name="upcomingEvents">Upcoming Events</string>
+    <string name="none">None</string>
+    <string name="comingSoon">Coming Soon, Check back later</string>
+    <string name="perks">Perks</string>
+    <string name="clubPerk">Club Perks</string>
+    <string name="otherLink">Useful Links</string>
+    <string name="ELibraryUpComing">
+        "<b><p style="text-align:center;">E Library</p></b>"
+        "\n <ul><li>This will be the integration of the so called E-Library Feature that is supposed to be provided by college.</li>"
+        "\n<li>Otherwise this would be implemented by following method below</li>"
+        "\n<li>Issuing the Book using the QR Code Scanner from this app, and the Librarian will have the access to web portal for the management of the books.</li>"</ul>"
+        "\n<p style="text-align:center;">Suggestions and Ideas are highly appreciated.</p>"
+
+    </string>
+    <string name="serviceName">Service Name</string>
+    <string name="serviceIcon">ServiceIcon</string>
+    <string name="serviceDescShort">This is the service for servicing this.</string>
+    <string name="servicesOnTop">What is a Service?</string>
+    <string name="servicesSheetText1">"Services include all the links related to the important official tasks for example fee payment, mess complaint, library fee payment, event registration, etc"</string>
+    <string name="servicesSheetText2">"This is a dynamic list, which updates accordingly to the availability/requirement of the service. "</string>
+    <string name="eventsSheetText1">This will consist information regarding upcoming events related to cultural fest, technical fests, club events, etc</string>
+    <string name="eventsSheetText2">This is a dynamic list, which updates according to the future events</string>
+    <string name="eventsInfo">What are events?</string>
+    <string name="eventDate">Event Date</string>
+    <string name="eventName">Event Name</string>
+    <string name="eventDesc">Event Description</string>
+    <string name="noEvents">No Events Available, check back later.</string>
+
+</resources>

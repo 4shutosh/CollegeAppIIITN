@@ -1,0 +1,141 @@
+<resources>
+
+    <style name="GoogleSans">
+        <item name="android:fontFamily">@font/googlesans_regular</item>
+    </style>
+
+    <style name="BottomSheet">
+        <item name="android:background">@color/bottomSheetBackground</item>
+    </style>
+
+    <style name="Widget.CollegeApp.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="homeAsUpIndicator">@color/white</item>
+    </style>
+
+    <style name="Widget.CollegeApp.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/colorSurface</item>
+        <item name="itemBackground">@color/colorSurface</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="homeAsUpIndicator">@color/white</item>
+    </style>
+
+    <style name="Widget.CollegeApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/colorOnSurface</item>
+        <item name="android:textColor">@color/colorSurface</item>
+    </style>
+
+    <style name="Widget.CollegeApp.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:colorPrimary">@color/colorOnSurface</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/ButtonBarNegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/ButtonBarNegativeButtonStyle</item>
+    </style>
+
+    <style name="MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:colorPrimary">@color/colorOnSurface</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ButtonBarNegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/ButtonBarPositiveButtonStyle</item>
+    </style>
+
+
+    <style name="ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="ButtonBarPositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/green400</item>
+    </style>
+
+    <style name="Widget.CollegeApp.MaterialCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/cardViewBackground</item>
+    </style>
+
+    <style name="DatePickerTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/ButtonBarNegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/ButtonBarNegativeButtonStyle</item>
+    </style>
+
+    <style name="Widget.CollegeApp.MaterialCard.HomeScreen" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/cardViewBackground</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="cardCornerRadius">@dimen/main_screen_card_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="background">?android:attr/selectableItemBackground</item>
+
+    </style>
+
+    <style name="Widget.CollegeApp.MaterialCard.SettingsFragment" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/cardViewBackground</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="cardCornerRadius">@dimen/five_dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="background">?android:attr/selectableItemBackground</item>
+
+    </style>
+
+
+    <style name="Widget.CollegeApp.FAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorSurface</item>
+        <item name="backgroundTint">@color/colorOnSurface</item>
+    </style>
+
+    <style name="CollegeAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/statusBarColor</item>
+    </style>
+
+    <style name="CollegeAppActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="iconTint">@color/colorOnSurface</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:iconTint">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CollegeAppImageHome">
+        <item name="android:minHeight">76dp</item>
+        <item name="android:minWidth">76dp</item>
+    </style>
+
+    <style name="CollegeAppHomeFragmentTextView">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="CollegeAppTextViewHeadNormal">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnSurface</item>
+    </style>
+
+    <style name="CollegeAppTextViewBodyNormal">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+        <!--        club name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="@dimen/five_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clubName" />
+
+            <TextView
+                android:id="@+id/clubName"
+                style="@style/CollegeAppTextViewBodyNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:text="@string/clubHead" />
+
+        </LinearLayout>
+        <!--        club code-->
+        <!--club fields-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="@dimen/five_dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clubField" />
+
+            <TextView
+                android:id="@+id/clubField"
+                style="@style/CollegeAppTextViewBodyNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:text="@string/clubField" />
+
+        </LinearLayout>
+
+        <!--club about text-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="@dimen/five_dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about" />
+
+            <TextView
+                android:id="@+id/clubAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/loremIpsumP1"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="@dimen/tenDp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clubHead" />
+
+            <TextView
+                android:id="@+id/clubHeads"
+                style="@style/CollegeAppTextViewBodyNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:text="@string/clubHead" />
+
+        </LinearLayout>
+        <!--application -->
+        <LinearLayout
+            android:id="@+id/applicationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginBottom="@dimen/tenDp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/applicationStatus" />
+
+            <TextView
+                android:id="@+id/applicationStatus"
+                style="@style/CollegeAppTextViewBodyNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:text="@string/openForAll" />
+
+        </LinearLayout>
+
+        <!-- upcoming events       -->
+
+        <TextView
+            style="@style/CollegeAppTextViewHeadNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:text="@string/upcomingEvents" />
+
+
+        <TextView
+            android:id="@+id/upComingEvents"
+            style="@style/CollegeAppTextViewBodyNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/tenDp"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:text="@string/comingSoon" />
+
+        <!-- club perks      -->
+        <TextView
+            style="@style/CollegeAppTextViewHeadNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:layout_marginTop="@dimen/tenDp"
+            android:text="@string/perks" />
+
+        <TextView
+            android:id="@+id/clubPerks"
+            style="@style/CollegeAppTextViewBodyNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:layout_marginStart="@dimen/tenDp"
+            android:text="@string/clubPerk" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="@dimen/tenDp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/otherLink" />
+
+            <TextView
+                android:id="@+id/facultyContactTextView"
+                style="@style/CollegeAppTextViewBodyNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/otherLink" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/tenDp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/clubApplyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tenDp"
+                android:padding="1dp"
+                android:paddingVertical="1dp"
+                android:text="@string/apply" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

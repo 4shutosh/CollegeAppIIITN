@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item>-->
+<!--        <shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            android:innerRadius="0dp"-->
+<!--            android:useLevel="false">-->
+
+<!--            <stroke android:width="0.5dp" android:color="#bdbdbd" />-->
+<!--            <corners android:radius="80dp"/>-->
+<!--            <padding android:left="0dip" android:top="0dip" android:right="0dip" android:bottom="0dip" />-->
+<!--        </shape>-->
+<!--    </item>-->
+    <item
+        android:id="@+id/userIcon_toolbar"
+        android:drawable="@drawable/ic_person_36dp"/>
+</layer-list>

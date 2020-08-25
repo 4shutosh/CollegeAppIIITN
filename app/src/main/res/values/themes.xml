@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Top level theme to be used in AndroidManifest.xml-->
+    <style name="CollegeAppTheme" parent="Base.CollegeApp" />
+
+    <style name="Base.CollegeApp" parent="Base.MaterialThemeBuilder">
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorPrimaryVariant">?colorPrimary</item>
+        <item name="colorSecondary">?colorPrimary</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondaryVariant">?colorPrimary</item>
+        <item name="android:colorBackground">?colorSurface</item>
+        <item name="fontFamily">@font/googlesans_regular</item>
+        <item name="android:windowAnimationStyle">@style/CollegeAppActivityAnimation</item>
+    </style>
+
+    <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Remap legacy AppCompat attributes to MaterialComponent attributes-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">?colorPrimary</item>
+
+        <!--Material Components-->
+        <item name="toolbarStyle">@style/Widget.CollegeApp.Toolbar</item>
+        <item name="android:windowLightStatusBar">@bool/lightStatusNav</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="materialButtonStyle">@style/Widget.CollegeApp.Button</item>
+        <item name="floatingActionButtonStyle">@style/Widget.CollegeApp.FAB</item>
+        <item name="materialAlertDialogTheme">@style/Widget.CollegeApp.MaterialAlertDialog</item>
+        <item name="bottomNavigationStyle">@style/Widget.CollegeApp.BottomNavigation</item>
+        <!--        <item name="materialCardViewStyle">@style/Widget.CollegeApp.MaterialCard</item>-->
+        <!--&lt;!&ndash;        <item name="checkboxStyle">@style/CheckBoxStyle</item>&ndash;&gt;-->
+        <!--        <item name="windowActionBar">false</item>-->
+        <!--        <item name="android:windowNoTitle">true</item>-->
+        <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <!--        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
+    </style>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height_image_view">220dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="main_screen_card_radius">20dp</dimen>
+    <dimen name="tenDp">10dp</dimen>
+    <dimen name="fifteenDp">15dp</dimen>
+</resources>

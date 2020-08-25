@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:background="@color/colorSurface"
+            android:id="@+id/HomeAppBar"
+            app:elevation="0dp"
+            android:layout_width="match_parent"
+            android:layout_margin="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/toolbar"
+            android:elevation="8dp"
+            android:background="@drawable/toolbar_corner"
+            android:layout_margin="@dimen/tenDp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.college.app.utils.CollegeAppViewPager
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintTop_toBottomOf="@+id/HomeAppBar"
+            app:layout_constraintVertical_bias="0.0" />
+        <!-- android:layout_marginBottom="?android:attr/actionBarSize"
+        -->
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemIconTint="@drawable/bottom_navigation_item_color"
+            app:itemTextColor="@drawable/bottom_navigation_item_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_navigation_menu" />
+        <!-- app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomSheet_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/includeLayoutNotifications"
+            layout="@layout/bottomsheet_notifications" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomSheets_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/bottomsheet_profile" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/includeLayoutTodo"
+            layout="@layout/bottomsheet_todo" />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:itemIconTint="@color/drawer_item_color"
+        app:itemTextColor="@color/drawer_item_color"
+        app:menu="@menu/navigation_drawer_menu" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
