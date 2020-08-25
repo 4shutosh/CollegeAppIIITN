@@ -89,7 +89,7 @@ class SettingsFragment : Fragment() {
     companion object {
         const val THEME = "Theme"
         const val MyPREFERENCES = "MyPrefs"
-        const val REPO_LINK = "http://www.github.com/4shutosh"
+        const val REPO_LINK = "http://www.github.com/4shutosh/CollegeAppIIITN"
         const val FEEDBACK_LINK = "https://forms.gle/CCCwsUunfb2nktPd8"
     }
 }
