@@ -15,7 +15,7 @@ class ELibraryFragment : Fragment() {
         if (h != null) {
             h.setSupportActionBar(eLibraryFragmentBinding!!.toolbar)
             h.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            h.supportActionBar!!.title = "Attendance Calculator"
+            h.supportActionBar!!.title = "ELibrary"
             setHasOptionsMenu(true)
         }
         return eLibraryFragmentBinding!!.root
