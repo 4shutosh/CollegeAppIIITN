@@ -186,14 +186,15 @@
                 android:text="@string/otherLink" />
 
             <TextView
-                android:id="@+id/facultyContactTextView"
+                android:id="@+id/usefulLinksClub"
                 style="@style/CollegeAppTextViewBodyNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tenDp"
+                android:padding="@dimen/five_dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/otherLink" />
+                android:text="@string/none" />
 
         </LinearLayout>
 

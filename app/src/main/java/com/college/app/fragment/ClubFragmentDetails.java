@@ -120,5 +120,17 @@ public class ClubFragmentDetails extends Fragment {
         clubFragmentDetailsBinding.scrollLayout.clubAbout.setText(fetchedClub.getAbout());
         clubFragmentDetailsBinding.scrollLayout.upComingEvents.setText(fetchedClub.getUpComingEvents());
         clubFragmentDetailsBinding.scrollLayout.clubPerks.setText(fetchedClub.getPerks());
+        clubFragmentDetailsBinding.scrollLayout.clubPerks.setText(fetchedClub.getPerks());
+        if (!fetchedClub.getUsefulLinks().isEmpty()) {
+            clubFragmentDetailsBinding.scrollLayout.usefulLinksClub.setText(fetchedClub.getUsefulLinks());
+        }
+        clubFragmentDetailsBinding.scrollLayout.usefulLinksClub.setOnClickListener(v -> {
+            if (!fetchedClub.getUsefulLinks().isEmpty()) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(fetchedClub.getUsefulLinks()));
+                startActivity(i);
+            } else {
+                Toast.makeText(a, "Unavailable!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
