@@ -19,12 +19,14 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nameOfCourse"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
+                style="@style/CollegeAppTextViewBodyNormal"
                 android:id="@+id/courseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,12 +43,14 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/courseCode"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
+                style="@style/CollegeAppTextViewBodyNormal"
                 android:id="@+id/courseCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,12 +67,14 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/faculty"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
+                style="@style/CollegeAppTextViewBodyNormal"
                 android:id="@+id/courseFacultyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,6 +91,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/takingThisCourse"
@@ -101,6 +108,7 @@
                 android:focusable="true" />
 
             <TextView
+
                 android:id="@+id/yesNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,12 +127,14 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
+                style="@style/CollegeAppTextViewBodyNormal"
                 android:id="@+id/courseAbout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,6 +154,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/classroomLink"
@@ -169,6 +180,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/suggestedPlaylist"
@@ -194,6 +206,7 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/googleDriveBooksLink"
@@ -211,20 +224,23 @@
         </LinearLayout>
         <!-- faculty contact details        -->
         <LinearLayout
+            android:layout_marginBottom="?attr/actionBarSize"
             android:id="@+id/facultyContactLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/tenDp"
+            android:layout_marginTop="@dimen/tenDp"
             android:orientation="horizontal">
 
             <TextView
+                style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/facultyContact"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
+                style="@style/CollegeAppTextViewBodyNormal"
                 android:id="@+id/facultyContactTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

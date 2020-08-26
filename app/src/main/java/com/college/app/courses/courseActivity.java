@@ -50,7 +50,7 @@ public class courseActivity extends AppCompatActivity {
         your = getIntent().getExtras().getBoolean("your");
         courseCodeFromIntent = getIntent().getExtras().getString("courseCode");
         Log.d(TAG, "onCreate: course code obtained" + courseCodeFromIntent + "your status " + your);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
