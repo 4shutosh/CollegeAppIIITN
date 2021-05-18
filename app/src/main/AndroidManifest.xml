@@ -37,7 +37,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/CollegeAppTheme" />
         <activity
-            android:name=".courses.courseActivity"
+            android:name=".courses.CourseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"

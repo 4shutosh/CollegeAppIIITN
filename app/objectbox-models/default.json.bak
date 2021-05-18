@@ -95,7 +95,7 @@
     },
     {
       "id": "3:492859431928067780",
-      "lastPropertyId": "9:4483684262558949979",
+      "lastPropertyId": "11:4247054940134297336",
       "name": "Course",
       "properties": [
         {
@@ -146,6 +146,16 @@
           "name": "your",
           "type": 1,
           "flags": 2
+        },
+        {
+          "id": "10:6136139087812135969",
+          "name": "faculty",
+          "type": 9
+        },
+        {
+          "id": "11:4247054940134297336",
+          "name": "photoUrl",
+          "type": 9
         }
       ],
       "relations": []

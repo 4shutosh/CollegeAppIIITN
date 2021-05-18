@@ -9,7 +9,6 @@
     <color name="colorOnSurface">@color/white</color>
 
 
-
     <color name="bottomSheetBackground">@color/grey900</color>
     <color name="colorButton">@color/icon_inside_7</color>
     <color name="buttonText">@color/white</color>

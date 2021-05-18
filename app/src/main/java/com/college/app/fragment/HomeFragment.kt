@@ -25,7 +25,11 @@ class HomeFragment : Fragment() {
     private val COLLEGE_WEBSITE = "http://www.iiitn.ac.in"
     private var profileBoxStore: BoxStore? = null
     private var profileBox: Box<Profile>? = null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         cardViews()
@@ -41,29 +45,46 @@ class HomeFragment : Fragment() {
             val i = Intent(activity, CoursesActivity::class.java)
             startActivity(i)
         }
-        fragmentHomeBinding!!.attendanceCard.setOnClickListener {
-            val extra = arrayOf("A", "B", "C") // just for example
-            HolderActivity.startActivity(context, AttendanceFragment::class.java, "settings", extra)
-        }
-        fragmentHomeBinding!!.clubsCard.setOnClickListener {
-            val extra = arrayOf("A", "B", "C") // just for example
-            HolderActivity.startActivity(context, ClubFragment::class.java, "clubs", extra)
-        }
-        fragmentHomeBinding!!.timeTableCardView.setOnClickListener {
-            val intent = Intent(activity, TimeTableActivity::class.java)
-            startActivity(intent)
-        }
-        fragmentHomeBinding!!.eLibraryCard.setOnClickListener {
-            val extra = arrayOf("A", "B", "C") // redundant
-            HolderActivity.startActivity(context, ELibraryFragment::class.java, "ELibrary", extra)
-        }
-        fragmentHomeBinding!!.servicesCard.setOnClickListener {
-            val extra = arrayOf("A", "B", "C") // redundant
-            HolderActivity.startActivity(context, ServiceFragment::class.java, "ELibrary", extra)
-        }
-        fragmentHomeBinding!!.eventsCard.setOnClickListener {
-            val extra = arrayOf("A", "B", "C") // redundant
-            HolderActivity.startActivity(context, EventsFragment::class.java, "Events", extra)
+        context?.let { context ->
+            fragmentHomeBinding!!.attendanceCard.setOnClickListener {
+                val extra = arrayOf("A", "B", "C") // just for example
+                HolderActivity.startActivity(
+                    context,
+                    AttendanceFragment::class.java,
+                    "settings",
+                    extra
+                )
+            }
+            fragmentHomeBinding!!.clubsCard.setOnClickListener {
+                val extra = arrayOf("A", "B", "C") // just for example
+                HolderActivity.startActivity(context, ClubFragment::class.java, "clubs", extra)
+            }
+            fragmentHomeBinding!!.timeTableCardView.setOnClickListener {
+                val intent = Intent(activity, TimeTableActivity::class.java)
+                startActivity(intent)
+            }
+            fragmentHomeBinding!!.eLibraryCard.setOnClickListener {
+                val extra = arrayOf("A", "B", "C") // redundant
+                HolderActivity.startActivity(
+                    context,
+                    ELibraryFragment::class.java,
+                    "ELibrary",
+                    extra
+                )
+            }
+            fragmentHomeBinding!!.servicesCard.setOnClickListener {
+                val extra = arrayOf("A", "B", "C") // redundant
+                HolderActivity.startActivity(
+                    context,
+                    ServiceFragment::class.java,
+                    "ELibrary",
+                    extra
+                )
+            }
+            fragmentHomeBinding!!.eventsCard.setOnClickListener {
+                val extra = arrayOf("A", "B", "C") // redundant
+                HolderActivity.startActivity(context, EventsFragment::class.java, "Events", extra)
+            }
         }
     }
 
@@ -84,7 +105,8 @@ class HomeFragment : Fragment() {
             if (profile.imageBitmapEncoded != null) img.setImageBitmap(decodeImageBitmap(profile.imageBitmapEncoded))
         }
         img.setOnClickListener {
-            Toast.makeText(context, "Profile Editing options not available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Profile Editing options not available", Toast.LENGTH_SHORT)
+                .show()
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
