@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             val title: String? = extras!!.getString("Title")
             val body: String? = extras.getString("Message")
             NotificationAdapter.notificationAdapterBox.put(Notification(0, title, body))
-            NotificationsFragment.notificationAdapter!!.updateNotificationView()
+//            NotificationsFragment.notificationAdapter!!.updateNotificationView()
         } else {
             Log.d(TAG, "handleFCMData: no data found")
             //            Toast.makeText(this, "no data found", Toast.LENGTH_SHORT).show();

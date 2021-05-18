@@ -5,9 +5,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
 
-/**
- * Created by zhang on 2017.11.22.
- */
 object AppUtils {
     fun checkAppInstalled(context: Context, packageName: String?): Boolean {
         return try {

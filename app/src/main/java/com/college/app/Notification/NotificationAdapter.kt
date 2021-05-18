@@ -104,7 +104,7 @@ class NotificationAdapter(private val mContext: Context?, var data: ArrayList<No
 
     companion object {
         private lateinit var notificationBoxStore: BoxStore
-        private lateinit var notificationAdapterBox: Box<Notification?>
+        lateinit var notificationAdapterBox: Box<Notification?>
     }
 
     init {

@@ -59,18 +59,18 @@ class YourCoursesFragment : Fragment() {
     fun onEvent(course: Course) {
         if (activity != null) {
             activity!!.runOnUiThread {
-                if (course.getYour()) {
+                if (course.your) {
                     yourCoursesAdapter!!.addCourse(course)
                     yourCoursesAdapter!!.notifyDataSetChanged()
                     //                        attachRecyclerView(getContext());
                     Log.d(
                         TAG,
-                        "run: " + yourCourses.size + course.getCourseCode() + "your COde " + course.getYour()
+                        "run: " + yourCourses.size + course.courseCode + "your COde " + course.your
                     )
                 } else {
                     Log.d(
                         TAG,
-                        "run: " + yourCourses.size + course.getCourseCode() + " your COde " + course.getYour()
+                        "run: " + yourCourses.size + course.courseCode + " your COde " + course.your
                     )
                     yourCoursesAdapter!!.removeItem(course)
                     yourCoursesAdapter!!.notifyDataSetChanged()

@@ -31,7 +31,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 class ProfileActivity : AppCompatActivity() {
-    var activityProfileBinding: ActivityProfileBinding? = null
+    private lateinit var activityProfileBinding: ActivityProfileBinding
     var profileSem = 0
     var auth: FirebaseAuth? = null
     var profileYear = 0
@@ -281,9 +281,9 @@ class ProfileActivity : AppCompatActivity() {
             override fun onPrepareLoad(placeHolderDrawable: Drawable) {}
         }
         activityProfileBinding!!.profileImage.tag = target
-        Picasso.get()
-            .load(uri)
-            .into(target)
+//        Picasso.get()
+//            .load(uri)
+//            .into(target)
 
         // save image into box
     }

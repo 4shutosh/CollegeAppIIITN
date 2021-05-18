@@ -27,9 +27,11 @@ import io.objectbox.Box
 import io.objectbox.BoxStore
 import java.util.*
 
-class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
+class TodoAdapter constructor(
+    context: Context,
+    private var list: List<Todo>
+) : RecyclerView.Adapter<TodoAdapter.Item>() {
     private var mContext: Context? = null
-    private var mList: List<Todo>? = null
     private var boxStore: BoxStore? = null
     private var adapterBox: Box<Todo>? = null
     var mYear = 0
@@ -43,16 +45,13 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
     var todoDay = 0
     var todoHour = 0
     var todoMin = 0
-    var reminder: Calendar? = null
+    private var reminder: Calendar
 
-    internal constructor(mContext: Context, mData: List<Todo>?) {
-        this.mContext = mContext
-        mList = mData
-        boxStore = ((mContext as MainActivity).application as AppClass).boxStore
+    init {
+        boxStore = ((context as MainActivity).application as AppClass).boxStore
         adapterBox = boxStore!!.boxFor(Todo::class.java)
+        reminder = Calendar.getInstance()
     }
-
-    constructor() {}
 
     inner class Item internal constructor(binding: TodoItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -62,51 +61,55 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
             when (v.id) {
                 R.id.editTodoItem -> showDialog(
                     MODE_EDIT,
-                    mList!![adapterPosition].getId(),
-                    mList!![adapterPosition].completed
+                    list!![adapterPosition].id,
+                    list!![adapterPosition].completed
                 )
                 R.id.deleteTodoItem -> {
-                    deleteTodo(mList!![adapterPosition].getId())
+                    deleteTodo(list!![adapterPosition].id)
                     updateTodoView()
                     Snackbar.make(v, "Todo Deleted", Snackbar.LENGTH_SHORT)
                         .setAction("Okay") { view: View? -> }
                         .show() // TODO: 26/4/20 think of toast & snackbar
                 }
                 R.id.todo_title_checkbox -> {
-                    val todo = getTodoById(mList!![adapterPosition].getId())
+                    val todo = getTodoById(list!![adapterPosition].id)
                     isChecked = todoItemBinding.todoTitleCheckbox.isChecked
                     if (isChecked!!) {
-                        mList!![adapterPosition].completed = true
+                        list!![adapterPosition].completed = true
                         todoItemBinding.todoTitleCheckbox.isChecked = true
-                        addOrUpdateTodo(
-                            Todo(
-                                todo.getId(),
-                                todo.getTitle(),
-                                todo.getDescription(),
-                                true,
-                                false
+                        if (todo != null) {
+                            addOrUpdateTodo(
+                                Todo(
+                                    todo.id,
+                                    todo.title,
+                                    todo.description,
+                                    true,
+                                    false
+                                )
                             )
-                        )
+                        }
                         todoItemBinding.todoTitle.paintFlags =
                             todoItemBinding.todoTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     } else {
                         todoItemBinding.todoTitleCheckbox.isChecked = false
-                        mList!![adapterPosition].completed = false
-                        addOrUpdateTodo(
-                            Todo(
-                                todo.getId(),
-                                todo.getTitle(),
-                                todo.getDescription(),
-                                false,
-                                false
+                        list!![adapterPosition].completed = false
+                        if (todo != null) {
+                            addOrUpdateTodo(
+                                Todo(
+                                    todo.id,
+                                    todo.title,
+                                    todo.description,
+                                    false,
+                                    false
+                                )
                             )
-                        )
+                        }
                         todoItemBinding.todoTitle.paintFlags =
                             todoItemBinding.todoTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     }
                 }
                 R.id.clock -> {
-                    val t = getTodoById(mList!![adapterPosition].getId())
+                    val t = getTodoById(list!![adapterPosition].id)
                     val alarmManager =
                         mContext!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
                     val _myIntent = Intent(mContext, TodoBroadcast::class.java)
@@ -115,11 +118,11 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
                     ) {
                         if (todoItemBinding.clock.isChecked) {
                             // saving the todo details
-                            addOrUpdateTodo(
+                            t?.let {
                                 Todo(
-                                    t.getId(),
-                                    t.getTitle(),
-                                    t.getDescription(),
+                                    it.id,
+                                    it.title,
+                                    it.description,
                                     false,
                                     true,
                                     todoDay,
@@ -128,21 +131,26 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
                                     todoHour,
                                     todoMin
                                 )
-                            )
+                            }?.let {
+                                addOrUpdateTodo(
+                                    it
+                                )
+                            }
                             // for notification purpose
-                            reminder = Calendar.getInstance()
                             //                            reminder.setTimeInMillis(System.currentTimeMillis());
-                            Log.d(Constraints.TAG, "onClick: " + t.getMonth())
-                            reminder.set(
-                                t.getYear(),
-                                t.getMonth() - 1,
-                                t.getDay(),
-                                t.getHour(),
-                                t.getMin(),
-                                0
-                            )
-                            _myIntent.putExtra("MyMessage", t.getTitle())
-                            _myIntent.putExtra("todoId", t.getId())
+                            Log.d(Constraints.TAG, "onClick: " + t?.month)
+                            if (t != null) {
+                                reminder.set(
+                                    t.year,
+                                    t.month - 1,
+                                    t.day,
+                                    t.hour,
+                                    t.min,
+                                    0
+                                )
+                            }
+                            _myIntent.putExtra("MyMessage", t?.title)
+                            _myIntent.putExtra("todoId", t?.id)
                             _myPendingIntent = PendingIntent.getBroadcast(
                                 mContext,
                                 123,
@@ -155,7 +163,9 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
                                 mContext, "You will be notified on " + todoItemBinding.todoDate.text
                                         + " on " + todoItemBinding.todoTime.text, Toast.LENGTH_LONG
                             ).show()
-                            Log.d(Constraints.TAG, "onClick: " + t.getTitle() + t.getId())
+                            if (t != null) {
+                                Log.d(Constraints.TAG, "onClick: " + t.title + t.id)
+                            }
                         } else {
                             alarmManager.cancel(_myPendingIntent)
                             Toast.makeText(mContext, "Notification Stopped", Toast.LENGTH_SHORT)
@@ -181,7 +191,7 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
         }
 
         fun datePickerDialog() {
-            val todo = getTodoById(mList!![adapterPosition].getId())
+            val todo = getTodoById(list!![adapterPosition].id)
             val c = Calendar.getInstance()
             mYear = c[Calendar.YEAR]
             mMonth = c[Calendar.MONTH]
@@ -205,8 +215,8 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
                 .setTextColor(positiveColor)
         }
 
-        fun timePickerDialog() {
-            val todo = getTodoById(mList!![adapterPosition].getId())
+        private fun timePickerDialog() {
+            val todo = getTodoById(list!![adapterPosition].id)
             val c = Calendar.getInstance()
             mHour = c[Calendar.HOUR_OF_DAY]
             mMin = c[Calendar.MINUTE]
@@ -226,7 +236,7 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
         /// check this for checkbox issue
         fun bindCheck(n: Int) {
             Log.d(Constraints.TAG, "bindCheck: started")
-            val status = mList!![n].completed
+            val status = list!![n].completed
             if (status!!) {
                 todoItemBinding.todoTitleCheckbox.isChecked = true
                 todoItemBinding.todoTitle.paintFlags =
@@ -261,24 +271,23 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
     }
 
     override fun onBindViewHolder(holder: Item, position: Int) {
-        holder.todoItemBinding.todoTitle.text = mList!![position].getTitle()
-        holder.todoItemBinding.todoTitleCheckbox.isChecked = mList!![position].completed
+        holder.todoItemBinding.todoTitle.text = list!![position].title
+        holder.todoItemBinding.todoTitleCheckbox.isChecked = list!![position].completed
         holder.bindCheck(position)
-        holder.todoItemBinding.clock.isChecked = mList!![position].getReminderStatus()
-        if (mList!![position].getReminderStatus()) {
+        holder.todoItemBinding.clock.isChecked = list!![position].reminderStatus
+        if (list!![position].reminderStatus) {
             holder.todoItemBinding.todoTime.text =
-                "Time: " + mList!![position].getHour() + ":" + mList!![position].getMin()
+                "Time: " + list!![position].hour + ":" + list!![position].min
             holder.todoItemBinding.todoDate.text =
-                "Date: " + mList!![position].getDay() + "-" + mList!![position]
-                    .getMonth() + "-" + mList!![position].getYear()
+                "Date: " + list!![position].day + "-" + list!![position].month + "-" + list!![position].year
         }
         //        Log.d(TAG, "onBindViewHolder: status checkbox " + mList.get(position).getCompleted());
-        holder.todoItemBinding.todoDescription.text = mList!![position].getDescription()
+        holder.todoItemBinding.todoDescription.text = list!![position].description
         Log.d(Constraints.TAG, "onBindViewHolder: Yes")
     }
 
     override fun getItemCount(): Int {
-        return mList!!.size
+        return list!!.size
     }
 
     fun showDialog(mode: Int, id: Long, status: Boolean) {
@@ -295,8 +304,8 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
             }
             MODE_EDIT -> {
                 val todoEdit = getTodoById(id)
-                todoTitleAdd.setText(todoEdit.getTitle())
-                todoDescriptionAdd.setText(todoEdit.getDescription())
+                todoTitleAdd.setText(todoEdit?.title)
+                todoDescriptionAdd.setText(todoEdit?.description)
             }
             else -> {
             }
@@ -363,7 +372,7 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
     }
 
     private fun setTodo(list: List<Todo>) {
-        mList = list
+        this.list = list
         notifyDataSetChanged()
     }
 
@@ -408,8 +417,8 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
                 .setTitle(mContext!!.getString(R.string.delete_all__marked_todo_dialog))
                 .setPositiveButton(mContext!!.getString(R.string.yes)) { dialog: DialogInterface?, which: Int ->
                     for (t in adapterBox!!.all) {
-                        if (t.isCompleted) {
-                            deleteTodo(t.getId())
+                        if (t.completed) {
+                            deleteTodo(t.id)
                         }
                     }
                     Toast.makeText(mContext, "Removed!", Toast.LENGTH_SHORT).show()
@@ -432,20 +441,22 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
     fun markAsDoneNotification(id: Long) {
         adapterBox = boxStore!!.boxFor(Todo::class.java)
         val t = getTodoById(id)
-        addOrUpdateTodo(
-            Todo(
-                t.getId(),
-                t.getTitle(),
-                t.getDescription(),
-                true,
-                true,
-                todoDay,
-                todoMonth,
-                todoYear,
-                todoHour,
-                todoMin
+        if (t != null) {
+            addOrUpdateTodo(
+                Todo(
+                    t.id,
+                    t.title,
+                    t.description,
+                    true,
+                    true,
+                    todoDay,
+                    todoMonth,
+                    todoYear,
+                    todoHour,
+                    todoMin
+                )
             )
-        )
+        }
         Toast.makeText(mContext, "Done!", Toast.LENGTH_SHORT).show()
     }
 
@@ -458,12 +469,14 @@ class TodoAdapter : RecyclerView.Adapter<TodoAdapter.Item> {
             PendingIntent.getBroadcast(mContext, 123, _myIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         reminder = Calendar.getInstance()
         reminder.setTimeInMillis(System.currentTimeMillis())
-        Log.d(Constraints.TAG, "onClick: " + t.getMonth())
-        reminder.set(t.getYear(), t.getMonth() - 1, t.getDay(), t.getHour(), t.getMin(), 0)
-        _myIntent.putExtra("MyMessage", t.getTitle())
-        _myIntent.putExtra("todoId", t.getId())
-        alarmManager[AlarmManager.RTC_WAKEUP, reminder.getTimeInMillis()] = _myPendingIntent
-        Toast.makeText(mContext, "You'll be snoozed after 10 mins.", Toast.LENGTH_SHORT).show()
+        if (t != null) {
+            Log.d(Constraints.TAG, "onClick: " + t.month)
+            reminder.set(t.year, t.month - 1, t.day, t.hour, t.min, 0)
+            _myIntent.putExtra("MyMessage", t.title)
+            _myIntent.putExtra("todoId", t.id)
+            alarmManager[AlarmManager.RTC_WAKEUP, reminder.getTimeInMillis()] = _myPendingIntent
+            Toast.makeText(mContext, "You'll be snoozed after 10 mins.", Toast.LENGTH_SHORT).show()
+        }
     } //    @Override
 
     //    public int getItemViewType(int position) {

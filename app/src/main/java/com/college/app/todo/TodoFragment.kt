@@ -30,7 +30,7 @@ class TodoFragment : Fragment() {
         setHasOptionsMenu(true)
         ///////////////////////////////////////////////// Recycler View
         val recyclerView = fragmentTodoBinding!!.todoRecyclerView
-        adapter = TodoAdapter(activity, listTodo)
+        adapter = activity?.let { TodoAdapter(it, listTodo) }
         adapter!!.updateTodoView()
         retainInstance = true
         linearLayoutManager = LinearLayoutManager(activity)
