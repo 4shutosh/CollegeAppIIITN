@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         public override fun onReceive(context: Context, intent: Intent) {
-            val message: String = intent.getStringExtra("body")
+            val message = intent.getStringExtra("body")
         }
     }
     private val bottomNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener =

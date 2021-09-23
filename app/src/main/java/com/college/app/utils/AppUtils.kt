@@ -8,7 +8,7 @@ import android.os.Build
 object AppUtils {
     fun checkAppInstalled(context: Context, packageName: String?): Boolean {
         return try {
-            context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+//            context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES) todo fix this
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
