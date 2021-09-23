@@ -1,6 +1,7 @@
 package com.college.app.attendance
 
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -64,7 +65,8 @@ class TimeTableActivity : AppCompatActivity() {
     private val isNetworkConnected: Boolean
         get() {
             val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-            return cm.activeNetworkInfo != null && cm.activeNetworkInfo.isConnected
+//            return cm.activeNetworkInfo != null && cm.activeNetworkInfo.isConnected :: TODO this should be replaced
+            return true
         }
 
     //You can replace it with your name

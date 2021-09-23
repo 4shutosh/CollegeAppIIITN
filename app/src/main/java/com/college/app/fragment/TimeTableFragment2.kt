@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener
 
 class TimeTableFragment2 : Fragment() {
     var timetableFragmentBinding: TimetableFragmentBinding? = null
-    var link: String? = null
+    var link: String = ""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         timetableFragmentBinding = TimetableFragmentBinding.inflate(inflater)
         links

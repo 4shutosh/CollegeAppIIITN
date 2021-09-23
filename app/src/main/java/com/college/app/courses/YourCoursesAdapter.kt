@@ -63,7 +63,7 @@ class YourCoursesAdapter(var context: Context?, private var courseList: MutableL
             ContentValues.TAG,
             "onEvent: add course reached with id " + course.id + "code: " + course.courseCode
         )
-        if (!courseBox.all.contains(course.courseCode)) {
+//        if (!courseBox.all.contains(course.courseCode)) { fixme
             try {
                 courseList.add(0, course)
                 courseBox.put(course)
@@ -74,7 +74,7 @@ class YourCoursesAdapter(var context: Context?, private var courseList: MutableL
                 Log.e(ContentValues.TAG, "addCourse: ", e)
                 Toast.makeText(context, "Already in your courses", Toast.LENGTH_SHORT).show()
             }
-        }
+//        }
 
 //        try {
 //            courseList.add(0, course);
