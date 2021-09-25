@@ -229,7 +229,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun updateUserDetails() {
-        profileBoxStore = (this.application as AppClass).boxStore
+        profileBoxStore = (this.application as CollegeApplication).boxStore
         profileBox = profileBoxStore!!.boxFor(Profile::class.java) as Box<Profile>
         val list: List<Profile> = profileBox!!.all
         val profile: Profile = list[0]

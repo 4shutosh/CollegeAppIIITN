@@ -12,7 +12,7 @@ import android.view.View.OnCreateContextMenuListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.college.app.AppClass
+import com.college.app.CollegeApplication
 import com.college.app.databinding.CourseItemBinding
 import io.objectbox.Box
 import io.objectbox.BoxStore
@@ -120,7 +120,7 @@ class YourCoursesAdapter(var context: Context?, private var courseList: MutableL
         get() = courseBox.isEmpty
 
     init {
-        boxStore = ((context as CoursesActivity?)!!.application as AppClass).boxStore
+        boxStore = ((context as CoursesActivity?)!!.application as CollegeApplication).boxStore
         courseBox = boxStore!!.boxFor(Course::class.java)
     }
 }

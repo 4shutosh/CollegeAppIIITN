@@ -1,14 +1,13 @@
 package com.college.app
 
 import android.app.Application
-import com.college.app.AppClass
 import io.objectbox.BoxStore
 
-class AppClass : Application() {
+class CollegeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Companion.boxStore = MyObjectBox.builder()
-                .androidContext(this@AppClass)
+                .androidContext(this@CollegeApplication)
                 .build()
     }
 

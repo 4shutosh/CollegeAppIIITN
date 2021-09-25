@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.college.app.AppClass
+import com.college.app.CollegeApplication
 import com.college.app.MainActivity
 import com.college.app.R
 import com.college.app.databinding.NotificationItemBinding
@@ -108,7 +108,7 @@ class NotificationAdapter(private val mContext: Context?, var data: ArrayList<No
     }
 
     init {
-        notificationBoxStore = ((mContext as MainActivity?)!!.application as AppClass).boxStore!!
+        notificationBoxStore = ((mContext as MainActivity?)!!.application as CollegeApplication).boxStore!!
         notificationAdapterBox = notificationBoxStore.boxFor(
             Notification::class.java
         )

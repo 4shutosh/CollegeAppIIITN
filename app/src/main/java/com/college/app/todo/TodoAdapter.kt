@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.Constraints
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.college.app.AppClass
+import com.college.app.CollegeApplication
 import com.college.app.MainActivity
 import com.college.app.R
 import com.college.app.databinding.TodoItemBinding
@@ -48,7 +48,7 @@ class TodoAdapter constructor(
     private var reminder: Calendar
 
     init {
-        boxStore = ((context as MainActivity).application as AppClass).boxStore
+        boxStore = ((context as MainActivity).application as CollegeApplication).boxStore
         adapterBox = boxStore!!.boxFor(Todo::class.java)
         reminder = Calendar.getInstance()
     }

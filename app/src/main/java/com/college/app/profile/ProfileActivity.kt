@@ -15,14 +15,12 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.college.app.AppClass
+import com.college.app.CollegeApplication
 import com.college.app.MainActivity
 import com.college.app.databinding.ActivityProfileBinding
-import com.college.app.profile.ProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
 import io.objectbox.Box
@@ -117,7 +115,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun initiateObjectBox() {
-        profileBoxStore = (this.application as AppClass).boxStore
+        profileBoxStore = (this.application as CollegeApplication).boxStore
         profileBox = profileBoxStore!!.boxFor(Profile::class.java)
     }
 

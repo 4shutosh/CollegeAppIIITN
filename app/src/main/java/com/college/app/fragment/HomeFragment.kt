@@ -9,7 +9,7 @@ import android.util.Base64
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.college.app.AppClass
+import com.college.app.CollegeApplication
 import com.college.app.R
 import com.college.app.attendance.AttendanceFragment
 import com.college.app.attendance.TimeTableActivity
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
         inflater.inflate(R.menu.home_fragment_menu, menu)
         val item = menu.findItem(R.id.profilePhoto)
         val img: CircleImageView = item.actionView.findViewById(R.id.profile_photo_toolbar)
-        profileBoxStore = (activity!!.application as AppClass).boxStore
+        profileBoxStore = (activity!!.application as CollegeApplication).boxStore
         profileBox = profileBoxStore!!.boxFor(Profile::class.java)
         val list = (profileBox)?.all
         val profile = list?.get(0)

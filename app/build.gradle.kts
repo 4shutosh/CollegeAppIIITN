@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("io.objectbox") // here the order of plugin MATTERS
+//    id("kotlin-parcelize")
     kotlin("android.extensions")
     kotlin("kapt")
     id("com.google.gms.google-services")
@@ -71,10 +72,6 @@ dependencies {
 
     //parse
     implementation("com.github.parse-community.Parse-SDK-Android:parse:1.23.1")
-
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30")
