@@ -1,10 +1,11 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
+
     kotlin("android")
-    id("io.objectbox") // here the order of plugin MATTERS
-//    id("kotlin-parcelize")
     kotlin("android.extensions")
     kotlin("kapt")
+
     id("com.google.gms.google-services")
 }
 
@@ -65,20 +66,24 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:19.2.0")
     implementation("com.google.firebase:firebase-database:20.0.2")
     implementation("com.google.firebase:firebase-storage:20.0.0")
-    implementation("com.google.firebase:firebase-messaging:20.2.4")
+    implementation(libs.firebase.messaging)
 
     //picasso
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.picasso)
 
     //parse
-    implementation("com.github.parse-community.Parse-SDK-Android:parse:1.23.1")
+//    implementation("com.github.parse-community.Parse-SDK-Android:parse:1.23.1")
 
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation(libs.androidx.core)
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30")
 
-    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
+    implementation(libs.shimmer)
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     //circular view
-    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation(libs.circularview)
+
+    // hilt
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
 }
