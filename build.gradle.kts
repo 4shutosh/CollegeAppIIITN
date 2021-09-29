@@ -1,9 +1,10 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
         maven("https://jitpack.io")
     }
     dependencies {
@@ -14,6 +15,10 @@ buildscript {
     }
 }
 
+plugins {
+    alias(libs.plugins.gradleDependencyUpdate)
+}
+
 allprojects {
     repositories {
         google()
@@ -22,6 +27,28 @@ allprojects {
     }
 }
 
+subprojects {
+    // todo setup spotless here
+}
+
 tasks.create<Delete>("clean") {
     delete = setOf(rootProject.buildDir)
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        // todo check for the resolution strategy and the rejection case here
+        currentVersion.isNonStable()
+    }
+    checkForGradleUpdate = true
+    outputFormatter = "json"
+    outputDir = "build/dependencyUpdates"
+    reportfileName = "dependencyReport"
+}
+
+fun String.isNonStable(): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(this)
+    return isStable.not()
 }

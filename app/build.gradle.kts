@@ -5,8 +5,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -46,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation (fileTree(mapOf("dir" to "libs","include" to listOf("*.jar"))))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
@@ -80,4 +78,9 @@ dependencies {
     // hilt
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
+}
+
+if (file("google-services.json").exists()) {
+    apply { plugin("com.google.gms.google-services") }
+//    apply { plugin("com.google.firebase.crashlytics") } todo setup crashlytics
 }
