@@ -48,37 +48,31 @@ android {
 dependencies {
     implementation (fileTree(mapOf("dir" to "libs","include" to listOf("*.jar"))))
 
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
 
     //recycler View
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.recyclerview:recyclerview-selection:1.2.0-alpha01")
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.recyclerview.selection)
 
     // material
-    implementation("com.google.android.material:material:1.4.0")
-
-    //EventBus
-    implementation("org.greenrobot:eventbus:3.2.0")
+    implementation(libs.google.material)
 
     // firebase
-    implementation("com.google.firebase:firebase-auth:21.0.1")
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
-    implementation("com.google.firebase:firebase-database:20.0.2")
-    implementation("com.google.firebase:firebase-storage:20.0.0")
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.gmsauth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
     implementation(libs.firebase.messaging)
 
     //picasso
     implementation(libs.picasso)
 
-    //parse
-//    implementation("com.github.parse-community.Parse-SDK-Android:parse:1.23.1")
-
     implementation(libs.androidx.core)
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30")
+    implementation(libs.kotlin.stdlib)
 
     implementation(libs.shimmer)
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation(libs.swipeRefresh)
 
     //circular view
     implementation(libs.circularview)
