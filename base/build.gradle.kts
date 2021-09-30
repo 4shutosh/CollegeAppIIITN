@@ -17,4 +17,7 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.kotlin.stdlib)
     implementation(libs.google.material)
+
+    implementation(libs.timber)
+    implementation(libs.firebase.crashlytics)
 }
