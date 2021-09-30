@@ -12,6 +12,8 @@ buildscript {
         classpath(libs.kotlin.pluginGradle)
         classpath(libs.hilt.pluginGradle)
         classpath(libs.google.gmsGoogleServices)
+
+        classpath(libs.firebase.crashlyticsGradle)
     }
 }
 

@@ -46,24 +46,29 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":base"))
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
 
-    //recycler View
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.androidx.startup)
+
+    implementation(libs.firebase.crashlytics)
+
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
 
-    // material
     implementation(libs.google.material)
 
-    // firebase
     implementation(libs.firebase.auth)
     implementation(libs.firebase.gmsauth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.messaging)
 
-    //picasso
     implementation(libs.picasso)
 
     implementation(libs.androidx.core)
@@ -72,12 +77,7 @@ dependencies {
     implementation(libs.shimmer)
     implementation(libs.swipeRefresh)
 
-    //circular view
     implementation(libs.circularview)
-
-    // hilt
-    implementation(libs.hilt.library)
-    kapt(libs.hilt.compiler)
 }
 
 if (file("google-services.json").exists()) {
