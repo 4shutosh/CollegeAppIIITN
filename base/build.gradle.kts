@@ -4,6 +4,8 @@ plugins {
 }
 
 android {
+    compileSdkVersion(Versions.COMPILE_SDK)
+
     kotlinOptions {
         jvmTarget = "1.8"
     }

@@ -3,7 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 
     kotlin("android")
-    kotlin("android.extensions")
+    id("kotlin-parcelize")
     kotlin("kapt")
 }
 
@@ -38,7 +38,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
     }
 
 }
@@ -48,18 +48,21 @@ dependencies {
 
     implementation(project(":base"))
 
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
 
-    implementation(libs.androidx.startup)
-
+    implementation(libs.timber)
     implementation(libs.firebase.crashlytics)
 
+    implementation(libs.kotlin.stdlib)
+
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
+    implementation(libs.androidx.startup)
+//    implementation(libs.androidx.core.splash)
 
     implementation(libs.google.material)
 
@@ -71,10 +74,7 @@ dependencies {
 
     implementation(libs.picasso)
 
-    implementation(libs.androidx.core)
-    implementation(libs.kotlin.stdlib)
-
-    implementation(libs.shimmer)
+    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
     implementation(libs.swipeRefresh)
 
     implementation(libs.circularview)
@@ -82,5 +82,5 @@ dependencies {
 
 if (file("google-services.json").exists()) {
     apply { plugin("com.google.gms.google-services") }
-//    apply { plugin("com.google.firebase.crashlytics") } todo setup crashlytics
+    apply { plugin("com.google.firebase.crashlytics") }
 }
