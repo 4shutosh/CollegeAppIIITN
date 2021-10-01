@@ -1,11 +1,9 @@
 package com.college.app.todo
 
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
 
-@Entity
+//@Entity
 class Todo {
-    @Id
+//    @Id
     var id: Long
     var title: String?
     var description: String?

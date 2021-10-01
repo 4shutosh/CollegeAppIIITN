@@ -45,4 +45,11 @@
         <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
         <!--        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
     </style>
+    
+<!--    <style name="CollegeSplashTheme" parent="Theme.SplashScreen">-->
+
+<!--        <item name="windowSplashScreenBackground">@color/white</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>-->
+<!--        <item name="postSplashScreenTheme">@style/CollegeAppTheme</item>-->
+<!--    </style>-->
 </resources>
