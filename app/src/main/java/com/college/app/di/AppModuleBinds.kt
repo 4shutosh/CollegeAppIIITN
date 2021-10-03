@@ -1,8 +1,8 @@
 package com.college.app.di
 
-import com.curieo.base.utils.logger.CollegeLogger
-import com.curieo.base.utils.logger.CrashlyticsTree
-import com.curieo.base.utils.logger.Logger
+import com.college.base.utils.logger.CollegeLogger
+import com.college.base.utils.logger.CrashlyticsTree
+import com.college.base.utils.logger.Logger
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

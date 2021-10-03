@@ -19,9 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CollegeAppTheme">
-        <activity android:name=".SplashActivity"
-            android:theme="@style/CollegeAppTheme"
-            android:launchMode="singleTask">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,17 +31,17 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
-<!--        <receiver-->
-<!--            android:name=".utils.FirebaseDataReceiver"-->
-<!--            android:exported="true"-->
-<!--            android:permission="com.google.android.c2dm.permission.SEND">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--                <action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-<!--        <receiver android:name=".todo.TodoBroadcast" />-->
-<!--        <receiver android:name=".utils.NotificationAction" />-->
+        <!--        <receiver-->
+        <!--            android:name=".utils.FirebaseDataReceiver"-->
+        <!--            android:exported="true"-->
+        <!--            android:permission="com.google.android.c2dm.permission.SEND">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+        <!--                <action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+        <!--            </intent-filter>-->
+        <!--        </receiver>-->
+        <!--        <receiver android:name=".todo.TodoBroadcast" />-->
+        <!--        <receiver android:name=".utils.NotificationAction" />-->
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -51,8 +49,12 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.college.app.initializers.LoggerInitializer"
+                android:name="com.college.app.initializers.DependencyGraphInitializer"
                 android:value="androidx.startup" />
+
+<!--            <meta-data-->
+<!--                android:name="com.college.app.initializers.LoggerInitializer"-->
+<!--                android:value="androidx.startup" />-->
         </provider>
 
     </application>

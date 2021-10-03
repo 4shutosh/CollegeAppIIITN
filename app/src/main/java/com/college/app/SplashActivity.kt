@@ -2,11 +2,21 @@ package com.college.app
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.college.app.databinding.ActivitySplashBinding
+import com.college.base.utils.logger.CollegeLogger
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var logger : CollegeLogger
+
     private lateinit var activitySplashBinding: ActivitySplashBinding
     private var skipStatus: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +26,12 @@ class SplashActivity : AppCompatActivity() {
 //        installSplashScreen()
 
 //        moveActivity()
+    }
+
+
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+        logger.d("post create buddy")
     }
 
     private fun moveActivity() {

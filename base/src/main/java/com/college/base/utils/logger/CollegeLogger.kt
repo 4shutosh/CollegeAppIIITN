@@ -1,4 +1,4 @@
-package com.curieo.base.utils.logger
+package com.college.base.utils.logger
 
 import timber.log.Timber
 import javax.inject.Inject

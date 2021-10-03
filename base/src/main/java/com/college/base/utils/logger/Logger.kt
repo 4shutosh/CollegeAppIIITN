@@ -1,4 +1,4 @@
-package com.curieo.base.utils.logger
+package com.college.base.utils.logger
 
 interface Logger {
 
