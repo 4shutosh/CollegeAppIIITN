@@ -9,7 +9,9 @@ class CollegeLogger @Inject constructor(
 
     fun init(debugMode: Boolean) {
         // check usage of customDebug tree here
-        if (debugMode) Timber.plant(Timber.DebugTree())
+        if (debugMode) {
+            Timber.plant(Timber.DebugTree())
+        }
         else {
             // setup crashlytics here
             try {

@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.college.app"
-        minSdkVersion(Versions.MIN_SDK)
-        targetSdkVersion(Versions.TARGET_SDK)
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
 
@@ -22,12 +22,12 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled(true)
+            isMinifyEnabled = true
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         getByName("debug") {
-            debuggable(true)
-            minifyEnabled(false)
+            isDebuggable = true
+            isMinifyEnabled = false
         }
     }
     kotlinOptions {
@@ -37,8 +37,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
     buildFeatures {
         dataBinding = true
+        compose = true
     }
 
 }
@@ -59,10 +63,25 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.datastore)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
     implementation(libs.androidx.startup)
-//    implementation(libs.androidx.core.splash)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.core.splash) target android 12
+
+    implementation(libs.compose.ui.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.compiler)
+    implementation(libs.compose.foundation.foundation)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.foundation.layout)
+    implementation(libs.compose.material.material)
+    implementation(libs.compose.material.iconsext)
+    implementation(libs.androidx.hilt.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.google.material)
 

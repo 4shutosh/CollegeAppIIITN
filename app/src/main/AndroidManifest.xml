@@ -19,7 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CollegeAppTheme">
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,9 +54,9 @@
                 android:name="com.college.app.initializers.DependencyGraphInitializer"
                 android:value="androidx.startup" />
 
-<!--            <meta-data-->
-<!--                android:name="com.college.app.initializers.LoggerInitializer"-->
-<!--                android:value="androidx.startup" />-->
+            <!--            <meta-data-->
+            <!--                android:name="com.college.app.initializers.LoggerInitializer"-->
+            <!--                android:value="androidx.startup" />-->
         </provider>
 
     </application>

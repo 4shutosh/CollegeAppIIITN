@@ -5,7 +5,6 @@
 
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,17 +13,10 @@
         android:orientation="vertical"
         tools:context=".SplashActivity">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/tenDp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round" />
-        </com.google.android.material.card.MaterialCardView>
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/splashText"
