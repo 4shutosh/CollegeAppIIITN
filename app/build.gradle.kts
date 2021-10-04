@@ -82,6 +82,12 @@ dependencies {
     implementation(libs.androidx.hilt.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.accompanist.swiperefresh)
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.insetsui)
+    implementation(libs.accompanist.systemuicontroller)
+
+    implementation(libs.coil.coil)
 
     implementation(libs.google.material)
 
@@ -92,11 +98,6 @@ dependencies {
     implementation(libs.firebase.messaging)
 
     implementation(libs.picasso)
-
-    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
-    implementation(libs.swipeRefresh)
-
-    implementation(libs.circularview)
 }
 
 if (file("google-services.json").exists()) {

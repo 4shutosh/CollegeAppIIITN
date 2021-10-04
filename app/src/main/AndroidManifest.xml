@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/CollegeAppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".onboarding.OnBoardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
