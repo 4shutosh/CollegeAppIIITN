@@ -1,4 +1,4 @@
-package com.college.base.utils.logger
+package com.college.base.logger
 
 import timber.log.Timber
 import javax.inject.Inject

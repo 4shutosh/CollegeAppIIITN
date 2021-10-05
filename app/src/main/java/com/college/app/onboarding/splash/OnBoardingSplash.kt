@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.college.app.R
 import com.college.app.utils.getImageBitmapFromDrawable
+import javax.inject.Inject
 
 @Composable
 @Preview

@@ -1,5 +1,6 @@
 package com.college.app.di
 
+import com.college.base.AppCoroutineDispatcher
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.Module
 import dagger.Provides
@@ -14,4 +15,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFirebaseCrashlytics(): FirebaseCrashlytics = FirebaseCrashlytics.getInstance()
+
+    @Singleton
+    @Provides
+    fun provideCoroutineDispatchers() = AppCoroutineDispatcher()
 }

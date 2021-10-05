@@ -59,17 +59,20 @@ dependencies {
     implementation(libs.firebase.crashlytics)
 
     implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.kotlin.coroutines.android)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.datastore)
+//    implementation(libs.androidx.datastore)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview.selection)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-//    implementation(libs.androidx.core.splash) target android 12
+    implementation(libs.androidx.core.splash)
+    implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.compose.ui.ui)
     implementation(libs.compose.ui.tooling)

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.college.app.BuildConfig
 import com.college.app.di.InitializerEntryPoint
-import com.college.base.utils.logger.CollegeLogger
+import com.college.base.logger.CollegeLogger
 import javax.inject.Inject
 
 /*

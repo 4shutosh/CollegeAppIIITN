@@ -1,8 +1,10 @@
 package com.college.app.di
 
-import com.college.base.utils.logger.CollegeLogger
-import com.college.base.utils.logger.CrashlyticsTree
-import com.college.base.utils.logger.Logger
+import com.college.app.data.DataStoreRepository
+import com.college.app.data.DataStoreRepositoryImpl
+import com.college.base.logger.CollegeLogger
+import com.college.base.logger.CrashlyticsTree
+import com.college.base.logger.Logger
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,5 +22,9 @@ abstract class AppModuleBinds {
 
     @Singleton
     @Binds
-    abstract fun bindsCrashlyticsTree(bind: CrashlyticsTree) : Timber.Tree
+    abstract fun bindsCrashlyticsTree(bind: CrashlyticsTree): Timber.Tree
+
+    @Singleton
+    @Binds
+    abstract fun bindsDataStoreRepository(dataStoreRepository: DataStoreRepositoryImpl): DataStoreRepository
 }

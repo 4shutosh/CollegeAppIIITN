@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../layout/compose-model-1633363327534.xml" value="0.29307432432432434" />
+        <entry key="../../../layout/compose-model-1633430216023.xml" value="0.2922297297297297" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottomsheet_signup.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3388888888888889" />
       </map>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package com.college.base.utils.logger
+package com.college.base.logger
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics

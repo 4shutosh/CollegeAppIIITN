@@ -6,7 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.college.app.onboarding.OnBoardingDestinations.LOGIN
 import com.college.app.onboarding.OnBoardingDestinations.SPLASH
+import com.college.app.onboarding.login.OnBoardingLogin
 import com.college.app.onboarding.splash.OnBoardingSplash
 
 object OnBoardingDestinations {
@@ -24,6 +26,9 @@ fun OnBoardingNavGraph(
     NavHost(navController = navHostController, startDestination = startDestination) {
         composable(SPLASH) {
             OnBoardingSplash()
+        }
+        composable(LOGIN) {
+            OnBoardingLogin()
         }
     }
 
