@@ -85,10 +85,16 @@ dependencies {
     implementation(libs.androidx.hilt.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.compose.livedata)
+
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.insetsui)
+    implementation(libs.accompanist.navigation.animation)
     implementation(libs.accompanist.systemuicontroller)
+
+    implementation(libs.moshi)
+    implementation(libs.moshi.compiler)
 
     implementation(libs.coil.coil)
 
