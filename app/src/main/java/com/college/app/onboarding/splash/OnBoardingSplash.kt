@@ -2,6 +2,7 @@ package com.college.app.onboarding.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Colors
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.college.app.R
 import com.college.app.utils.getImageBitmapFromDrawable
-import javax.inject.Inject
 
 @Composable
 @Preview

@@ -23,7 +23,6 @@ class OnBoardingActivity : AppCompatActivity() {
         installSplashScreen()
         setUpViews()
         setUpObservers()
-
     }
 
     private fun setUpViews() {
@@ -31,7 +30,7 @@ class OnBoardingActivity : AppCompatActivity() {
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
-                    return if (viewModel.isReady) {
+                    return if (viewModel.onBoardingViewState.value?.isReady == true) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         true
                     } else false

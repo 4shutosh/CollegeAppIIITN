@@ -1,6 +1,13 @@
 <resources>
+
+    <!--  Login Screen  -->
+    <string name="login_hello">Hello!</string>
+    <string name="login_footer">Welcome to College App</string>
+
+
+
+
     <string name="app_name">College App</string>
-    <string name="hello">Hello!</string>
     <string name="welcome">Welcome!</string>
     <string name="login_text">Login to your account</string>
     <string name="username">Username</string>

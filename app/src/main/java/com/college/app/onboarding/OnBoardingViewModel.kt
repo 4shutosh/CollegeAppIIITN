@@ -20,10 +20,8 @@ class OnBoardingViewModel @Inject constructor(
 
     data class OnBoardingViewState(
         var isReady: Boolean = false,
-        var startDestination: String = OnBoardingDestinations.SPLASH
+        var startDestination: OnBoardingDestinations = OnBoardingDestinations.Splash
     )
-
-    var isReady = false
 
     val onBoardingViewState: MutableLiveData<OnBoardingViewState> = MutableLiveData()
 
@@ -39,7 +37,7 @@ class OnBoardingViewModel @Inject constructor(
     private fun demoLogin() {
         viewModelScope.launch {
             dataStoreRepository.setUserId(121)
-            delay(100)
+//            checkForLogin()
         }
     }
 
@@ -48,11 +46,10 @@ class OnBoardingViewModel @Inject constructor(
         viewModelScope.launch(appCoroutineDispatcher.main) {
             onBoardingViewState.value = currentOnBoardingViewState().copy(
                 startDestination = if (dataStoreRepository.getUserId() == null) {
-                    OnBoardingDestinations.LOGIN
-                } else OnBoardingDestinations.SPLASH,
+                    OnBoardingDestinations.Login
+                } else OnBoardingDestinations.Splash,
                 isReady = true
             )
-            isReady = true
         }
     }
 
