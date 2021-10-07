@@ -93,6 +93,8 @@ dependencies {
     implementation(libs.accompanist.navigation.animation)
     implementation(libs.accompanist.systemuicontroller)
 
+    implementation(libs.lottie)
+
     implementation(libs.moshi)
     implementation(libs.moshi.compiler)
 

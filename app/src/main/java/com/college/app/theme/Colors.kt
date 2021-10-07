@@ -11,6 +11,11 @@ val Red900 = Color(0xffc20029)
 val Grey800 = Color(0xff424242)
 
 
+val PurpleLighter = Color(0xffDBD8E3)
+val PurpleLight = Color(0xff5C5470)
+val PurpleDark = Color(0xff352F44)
+val PurpleDarker = Color(0xff2A2438)
+
 
 // property colours
 val textColorPrimary = Grey800

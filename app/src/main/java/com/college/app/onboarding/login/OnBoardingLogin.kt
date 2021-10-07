@@ -4,10 +4,12 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.college.app.R
 import com.college.app.network.login.GoogleApiContract
 import com.college.app.theme.getAppColorScheme
@@ -28,6 +34,14 @@ fun OnBoardingLogin() {
 
     val context = LocalContext.current
     val colorScheme = getAppColorScheme(isSystemInDarkTheme())
+
+    val userRawRes = if (isSystemInDarkTheme()) {
+        R.raw.login_light_user_lottie
+    } else {
+        R.raw.login_dark_user_lottie
+    }
+
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(userRawRes))
 
     val viewModel = hiltViewModel<OnBoardingLoginViewModel>()
 
@@ -54,36 +68,52 @@ fun OnBoardingLogin() {
                 launcher.launch(signInRequestCode)
             }
         }
-        else -> print(command.value)
     }
 
-    Scaffold {
+    Scaffold(backgroundColor = MaterialTheme.colors.surface) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxHeight(0.5f)
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-
             Spacer(modifier = Modifier.height(50.dp))
 
-            Text(
-                text = context.getString(R.string.login_hello),
-                fontSize = 30.sp,
-                color = colorScheme.primaryTextColor
+            LottieAnimation(
+                composition = composition,
+                iterations = LottieConstants.IterateForever,
+                modifier = Modifier
+                    .width(150.dp)
+                    .height(150.dp)
             )
-            Text(
-                text = context.getString(R.string.login_footer),
-                fontSize = 18.sp,
-                color = colorScheme.secondaryTextColor
-            )
+            Column(horizontalAlignment = Alignment.Start) {
+                Text(
+                    text = context.getString(R.string.login_hello),
+                    fontSize = 30.sp,
+                    color = colorScheme.primaryTextColor
+                )
+                Text(
+                    text = context.getString(R.string.login_footer),
+                    fontSize = 18.sp,
+                    color = colorScheme.primaryTextColor
+                )
 
-            Spacer(modifier = Modifier.height(100.dp))
-
-            Button(onClick = { viewModel.userClickedForLogin() }) {
+                Spacer(modifier = Modifier.height(100.dp))
+            }
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            Button(onClick = {
+                viewModel.userClickedForLogin()
+            }) {
                 Text(text = context.getString(R.string.login))
             }
-
-//            LoginOutlinedTextField(label = context.getString(R.string.email))
         }
     }
 }

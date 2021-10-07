@@ -11,12 +11,12 @@ data class CollegeAppColors(
 fun getAppColorScheme(lightTheme: Boolean): CollegeAppColors {
     return if (lightTheme) {
         CollegeAppColors(
-            primaryTextColor = Color.Black,
+            primaryTextColor = PurpleDarker,
             secondaryTextColor = Grey800
         )
     } else {
         CollegeAppColors(
-            primaryTextColor = Color.Black,
+            primaryTextColor = PurpleLighter,
             secondaryTextColor = Red700
         )
     }
