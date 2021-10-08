@@ -48,4 +48,6 @@
     <color name="icon_inside_10">#ffc77d</color>
     <color name="icon_inside_11">#ffbc57</color>
     <color name="icon_inside_12">#bcaaa4</color>
+
+    <color  name="splash_color">#2A2438</color>
 </resources>

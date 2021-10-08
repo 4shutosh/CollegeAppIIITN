@@ -3,67 +3,40 @@ package com.college.app.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-fun collegeAppLightColors(
-    primary: Color = Color(0xFF6200EE),
-    primaryVariant: Color = Color(0xFF3700B3),
-    secondary: Color = Color(0xFF03DAC6),
-    secondaryVariant: Color = Color(0xFF018786),
-    background: Color = Color.White,
-    surface: Color = PurpleLighter,
-    error: Color = Color(0xFFB00020),
-    onPrimary: Color = Color.White,
-    onSecondary: Color = Color.Black,
-    onBackground: Color = Color.Black,
-    onSurface: Color = Color.Black,
-    onError: Color = Color.White,
-): Colors = Colors(
-    primary,
-    primaryVariant,
-    secondary,
-    secondaryVariant,
-    background,
-    surface,
-    error,
-    onPrimary,
-    onSecondary,
-    onBackground,
-    onSurface,
-    onError,
-    true
+val lightAppColors = lightColors(
+    primary = Color(0xFF6200EE),
+    primaryVariant = Color(0xFF3700B3),
+    secondary = Color(0xFF03DAC6),
+    secondaryVariant = Color(0xFF018786),
+    background = Color.White,
+    surface = PurpleLighter,
+    error = Color(0xFFB00020),
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = PurpleDarker,
+    onError = Color.White,
 )
 
-fun collegeAppDarkColors(
-    primary: Color = Color(0xFF6200EE),
-    primaryVariant: Color = Color(0xFF3700B3),
-    secondary: Color = Color(0xFF03DAC6),
-    secondaryVariant: Color = Color(0xFF018786),
-    background: Color = Color.White,
-    surface: Color = PurpleDarker,
-    error: Color = Color(0xFFB00020),
-    onPrimary: Color = Color.White,
-    onSecondary: Color = Color.Black,
-    onBackground: Color = Color.Black,
-    onSurface: Color = Color.Black,
-    onError: Color = Color.White,
-): Colors = Colors(
-    primary,
-    primaryVariant,
-    secondary,
-    secondaryVariant,
-    background,
-    surface,
-    error,
-    onPrimary,
-    onSecondary,
-    onBackground,
-    onSurface,
-    onError,
-    false
+val darkAppColors = darkColors(
+    primary = Color(0xFF6200EE),
+    primaryVariant = Color(0xFF3700B3),
+    secondary = Color(0xFF03DAC6),
+    secondaryVariant = Color(0xFF018786),
+    background = Color.White,
+    surface = PurpleDarker,
+    error = Color(0xFFB00020),
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = PurpleLighter,
+    onError = Color.White,
 )
-
 
 @Composable
 fun CollegeAppTheme(
@@ -71,7 +44,7 @@ fun CollegeAppTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colors = if (darkTheme) collegeAppLightColors() else collegeAppDarkColors(),
+        colors = if (darkTheme) darkAppColors else lightAppColors,
         typography = CollegeAppTypography,
         content = content
     )

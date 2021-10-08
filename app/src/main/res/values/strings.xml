@@ -3,7 +3,7 @@
     <!--  Login Screen  -->
     <string name="login_hello">Hello!</string>
     <string name="login_footer">Welcome Back</string>
-
+    <string name="login_footer_message">You are only allowed to login using \n your college GSuite email.</string>
 
 
 

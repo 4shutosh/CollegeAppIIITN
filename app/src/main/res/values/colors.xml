@@ -65,5 +65,6 @@
     <color name="icon_inside_11">#ffbc57</color>
     <color name="icon_inside_12">#4e342e</color>
 
+    <color  name="splash_color">#DBD8E3</color>
 
 </resources>

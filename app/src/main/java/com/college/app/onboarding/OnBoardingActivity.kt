@@ -6,11 +6,13 @@ import android.view.ViewTreeObserver
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.college.app.theme.CollegeAppTheme
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,6 +51,9 @@ class OnBoardingActivity : AppCompatActivity() {
                         ProvideWindowInsets {
                             val scaffoldState = rememberScaffoldState()
                             Scaffold(scaffoldState = scaffoldState) {
+                                rememberSystemUiController().setSystemBarsColor(
+                                    color = MaterialTheme.colors.surface
+                                )
                                 OnBoardingNavGraph(
                                     scaffoldState = scaffoldState,
                                     startDestination = viewState.startDestination

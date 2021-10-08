@@ -1,19 +1,24 @@
 package com.college.app.onboarding.login
 
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,12 +41,19 @@ fun OnBoardingLogin() {
     val colorScheme = getAppColorScheme(isSystemInDarkTheme())
 
     val userRawRes = if (isSystemInDarkTheme()) {
-        R.raw.login_light_user_lottie
-    } else {
         R.raw.login_dark_user_lottie
+    } else {
+        R.raw.login_light_user_lottie
     }
 
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(userRawRes))
+    val loadingRawRes = if (isSystemInDarkTheme()) {
+        R.raw.lottie_loader_dark
+    } else {
+        R.raw.lottie_loader_light
+    }
+
+    val userComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(userRawRes))
+    val loadingComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(loadingRawRes))
 
     val viewModel = hiltViewModel<OnBoardingLoginViewModel>()
 
@@ -49,7 +61,7 @@ fun OnBoardingLogin() {
     val command = viewModel.command.observeAsState()
 
     when (command.value) {
-        OnBoardingLoginViewModel.Command.StartGoogleLogin -> {
+        is OnBoardingLoginViewModel.Command.StartGoogleLogin -> {
             val launcher = rememberLauncherForActivityResult(contract = GoogleApiContract()) {
                 try {
                     val googleUser = it?.getResult(ApiException::class.java)
@@ -70,37 +82,50 @@ fun OnBoardingLogin() {
         }
     }
 
+    if (loginViewState.value?.isLoading == true) {
+        Surface(
+            Modifier.fillMaxSize(1f),
+            color = MaterialTheme.colors.surface.copy(alpha = 0.6f)
+        ) {
+            LottieAnimation(
+                composition = loadingComposition,
+                iterations = LottieConstants.IterateForever,
+                modifier = Modifier
+                    .width(200.dp)
+                    .height(200.dp)
+            )
+        }
+    }
+
     Scaffold(backgroundColor = MaterialTheme.colors.surface) {
         Column(
             modifier = Modifier
-                .fillMaxHeight(0.5f)
+                .fillMaxHeight()
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             Spacer(modifier = Modifier.height(50.dp))
-
             LottieAnimation(
-                composition = composition,
+                composition = userComposition,
                 iterations = LottieConstants.IterateForever,
                 modifier = Modifier
-                    .width(150.dp)
-                    .height(150.dp)
+                    .width(350.dp)
+                    .height(350.dp)
             )
-            Column(horizontalAlignment = Alignment.Start) {
-                Text(
-                    text = context.getString(R.string.login_hello),
-                    fontSize = 30.sp,
-                    color = colorScheme.primaryTextColor
-                )
-                Text(
-                    text = context.getString(R.string.login_footer),
-                    fontSize = 18.sp,
-                    color = colorScheme.primaryTextColor
-                )
-
-                Spacer(modifier = Modifier.height(100.dp))
-            }
+            Text(
+                text = context.getString(R.string.login_hello),
+                fontSize = 50.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorScheme.primaryTextColor,
+            )
+            Text(
+                text = context.getString(R.string.login_footer),
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Normal,
+                color = colorScheme.primaryTextColor
+            )
+            Spacer(modifier = Modifier.height(100.dp))
         }
         Column(
             modifier = Modifier
@@ -109,13 +134,85 @@ fun OnBoardingLogin() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
-            Button(onClick = {
+            GoogleSignInButton(onClicked = {
                 viewModel.userClickedForLogin()
-            }) {
-                Text(text = context.getString(R.string.login))
+            })
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = context.getString(R.string.login_footer_message),
+                textAlign = TextAlign.Center,
+                fontSize = 15.sp,
+                fontStyle = FontStyle.Italic,
+                fontWeight = FontWeight.Light,
+                color = colorScheme.primaryTextColor
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+    }
+}
+
+
+@Composable
+fun GoogleSignInButton(
+    modifier: Modifier = Modifier,
+    onClicked: () -> Unit,
+    text: String = "Sign in with Google",
+    textColor: Color = MaterialTheme.colors.surface,
+    icon: Int = R.drawable.ic_google_logo,
+    backgroundColor: Color = MaterialTheme.colors.onSurface,
+) {
+    var clicked by remember { mutableStateOf(false) }
+
+    Surface(
+        color = backgroundColor,
+        shape = RoundedCornerShape(25),
+        modifier = modifier
+            .clickable { clicked = !clicked }
+            .fillMaxWidth(0.7f)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(
+                    start = 12.dp,
+                    end = 16.dp,
+                    top = 12.dp,
+                    bottom = 12.dp
+                )
+                .animateContentSize(
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = LinearOutSlowInEasing
+                    )
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = "Google Button",
+                tint = Color.Unspecified
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = text,
+                color = textColor,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+            if (clicked) {
+                onClicked()
+                clicked = false
             }
         }
     }
+}
+
+@Composable
+@Preview
+private fun GoogleButtonPreview() {
+    GoogleSignInButton(
+        onClicked = {}
+    )
 }
 
 @Composable

@@ -8,15 +8,15 @@ data class CollegeAppColors(
     val secondaryTextColor: Color
 )
 
-fun getAppColorScheme(lightTheme: Boolean): CollegeAppColors {
-    return if (lightTheme) {
+fun getAppColorScheme(darkTheme: Boolean): CollegeAppColors {
+    return if (darkTheme) {
         CollegeAppColors(
-            primaryTextColor = PurpleDarker,
+            primaryTextColor = PurpleLighter,
             secondaryTextColor = Grey800
         )
     } else {
         CollegeAppColors(
-            primaryTextColor = PurpleLighter,
+            primaryTextColor = PurpleDarker,
             secondaryTextColor = Red700
         )
     }
