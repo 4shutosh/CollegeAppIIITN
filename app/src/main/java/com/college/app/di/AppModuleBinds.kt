@@ -4,6 +4,7 @@ import com.college.app.data.DataStoreRepository
 import com.college.app.data.DataStoreRepositoryImpl
 import com.college.app.network.CollegeFirebaseService
 import com.college.app.network.CollegeFirebaseServiceImpl
+import com.college.app.network.CollegeNetworking
 import com.college.base.logger.CollegeLogger
 import com.college.base.logger.CrashlyticsTree
 import com.college.base.logger.Logger
@@ -33,4 +34,9 @@ abstract class AppModuleBinds {
     @Singleton
     @Binds
     abstract fun bindsCollegeFirebaseService(collegeFirebaseService: CollegeFirebaseServiceImpl): CollegeFirebaseService
+
+    @Singleton
+    @Binds
+    fun provideCollegeAppService(collegeNetworking: CollegeNetworking) =
+        collegeNetworking.collegeAppService()
 }

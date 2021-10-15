@@ -14,6 +14,9 @@ import javax.inject.Inject
 interface DataStoreRepository {
     suspend fun setUserId(userId: Long)
     suspend fun getUserId(): Long?
+
+    fun getAccessToken(): String?
+    suspend fun setAccessToken(token: String?)
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
@@ -29,6 +32,14 @@ class DataStoreRepositoryImpl @Inject constructor(
 
     override suspend fun getUserId(): Long? {
         return dataStore.data.map { it[USER_KEY] }.firstOrNull()
+    }
+
+    override fun getAccessToken(): String? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun setAccessToken(token: String?) {
+        TODO("Not yet implemented")
     }
 
     companion object {

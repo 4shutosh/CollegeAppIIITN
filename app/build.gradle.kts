@@ -23,11 +23,17 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+//            applicationIdSuffix(".debug")
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue("string", "app_name", "College App Debug")
+            resValue("string", "college_endpoint", "http://staging.collegeapp.com")
         }
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
+
+            resValue("string", "app_name", "College App")
+            resValue("string", "college_endpoint", "http://staging.collegeapp.com")
         }
     }
     kotlinOptions {
@@ -96,7 +102,11 @@ dependencies {
 
     implementation(libs.lottie)
 
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.okhttp.okhttp)
+    implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.moshi)
+    implementation(libs.moshi.converter)
     implementation(libs.moshi.compiler)
 
     implementation(libs.coil.coil)
