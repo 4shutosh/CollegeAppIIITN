@@ -24,4 +24,8 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.firebase.crashlytics)
+
+    implementation(libs.moshi)
+    implementation(libs.moshi.converter)
+    implementation(libs.moshi.compiler)
 }
