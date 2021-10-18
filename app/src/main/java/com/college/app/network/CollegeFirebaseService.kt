@@ -14,6 +14,7 @@ class CollegeFirebaseServiceImpl @Inject constructor(
     private val collegeLogger: CollegeLogger
 ) : CollegeFirebaseService {
 
+    // check if users exists if not create one : get user in response
     override suspend fun checkForUser(googleUserIdToken: String): Boolean {
         val credential = GoogleAuthProvider.getCredential(googleUserIdToken, null)
         var result = false
