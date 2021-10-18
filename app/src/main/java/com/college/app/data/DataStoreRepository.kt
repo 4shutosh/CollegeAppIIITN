@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
@@ -15,8 +16,8 @@ interface DataStoreRepository {
     suspend fun setUserId(userId: Long)
     suspend fun getUserId(): Long?
 
-    fun getAccessToken(): String?
-    suspend fun setAccessToken(token: String?)
+    suspend fun getAccessToken(): String?
+    suspend fun setAccessToken(token: String)
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
@@ -34,18 +35,19 @@ class DataStoreRepositoryImpl @Inject constructor(
         return dataStore.data.map { it[USER_KEY] }.firstOrNull()
     }
 
-    override fun getAccessToken(): String? {
-        TODO("Not yet implemented")
+    override suspend fun getAccessToken(): String? {
+        return dataStore.data.map { it[USER_TOKEN] }.firstOrNull()
     }
 
-    override suspend fun setAccessToken(token: String?) {
-        TODO("Not yet implemented")
+    override suspend fun setAccessToken(token: String) {
+        dataStore.edit { it[USER_TOKEN] = token }
     }
 
     companion object {
         const val APP_PREFERENCES = "college_app_preferences"
 
         val USER_KEY = longPreferencesKey("user_id_key")
+        val USER_TOKEN = stringPreferencesKey("user_token")
     }
 
 }

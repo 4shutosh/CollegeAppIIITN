@@ -31,7 +31,7 @@ class OnBoardingLoginViewModel @Inject constructor(
 
     val loginViewState: MutableLiveData<LoginViewState> = MutableLiveData()
 
-    fun currentLoginViewState(): LoginViewState = loginViewState.value!!
+    private fun currentLoginViewState(): LoginViewState = loginViewState.value!!
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
 
@@ -64,8 +64,14 @@ class OnBoardingLoginViewModel @Inject constructor(
 //            }
 
             user.idToken?.let {
-                loginUseCase(LoginRequest(it)).onSuccess {
-
+                loginUseCase(
+                    LoginRequest(
+                        name = user.displayName.orEmpty(),
+                        email = user.email.orEmpty(),
+                        imageUrl = user.photoUrl?.toString()
+                    )
+                ).onSuccess {
+                    logger.d(this.toString())
                 }
             }
         }

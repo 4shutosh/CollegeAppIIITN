@@ -2,6 +2,7 @@ package com.college.app.di
 
 import com.college.app.data.DataStoreRepository
 import com.college.app.data.DataStoreRepositoryImpl
+import com.college.app.network.CollegeAppService
 import com.college.app.network.CollegeFirebaseService
 import com.college.app.network.CollegeFirebaseServiceImpl
 import com.college.app.network.CollegeNetworking
@@ -34,6 +35,10 @@ abstract class AppModuleBinds {
     @Singleton
     @Binds
     abstract fun bindsCollegeFirebaseService(collegeFirebaseService: CollegeFirebaseServiceImpl): CollegeFirebaseService
+
+    @Singleton
+    @Binds
+    abstract fun bindsCollegeFirebaseService(collegeFirebaseService: CollegeAppService): CollegeAppService
 
     @Singleton
     @Binds

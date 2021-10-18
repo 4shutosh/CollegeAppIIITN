@@ -1,5 +1,7 @@
 package com.college.app.models.network.requests
 
 data class LoginRequest(
-    val googleUserIdToken: String
+    val email: String,
+    val name: String,
+    val imageUrl: String?
 )
