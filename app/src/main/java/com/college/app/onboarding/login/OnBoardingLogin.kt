@@ -82,20 +82,20 @@ fun OnBoardingLogin() {
         }
     }
 
-    if (loginViewState.value?.isLoading == true) {
-        Surface(
-            Modifier.fillMaxSize(1f),
-            color = MaterialTheme.colors.surface.copy(alpha = 0.6f)
-        ) {
-            LottieAnimation(
-                composition = loadingComposition,
-                iterations = LottieConstants.IterateForever,
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(200.dp)
-            )
-        }
-    }
+//    if (loginViewState.value?.isLoading == true) {
+//        Surface(
+//            Modifier.fillMaxSize(1f),
+//            color = MaterialTheme.colors.surface.copy(alpha = 0.6f)
+//        ) {
+//            LottieAnimation(
+//                composition = loadingComposition,
+//                iterations = LottieConstants.IterateForever,
+//                modifier = Modifier
+//                    .width(200.dp)
+//                    .height(200.dp)
+//            )
+//        }
+//    }
 
     Scaffold(backgroundColor = MaterialTheme.colors.surface) {
         Column(

@@ -1,11 +1,13 @@
 package com.college.app.models.network.responses
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class LoginResponse(
 
     @Json(name = "userId")
-    val userId: Long,
+    val userId: String,
 
     @Json(name = "accessToken")
     val accessToken: String,

@@ -46,7 +46,7 @@ class OnBoardingLoginViewModel @Inject constructor(
     fun loginSuccess(user: GoogleSignInAccount) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
 
-            loginViewState.value = currentLoginViewState().copy(isLoading = true)
+//            loginViewState.value = currentLoginViewState().copy(isLoading = true)
 
             logger.d("user found : ${user.email} with user id ${user.id}")
 
