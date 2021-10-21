@@ -7,7 +7,6 @@
 
 
 
-    <string name="app_name">College App</string>
     <string name="welcome">Welcome!</string>
     <string name="login_text">Login to your account</string>
     <string name="username">Username</string>

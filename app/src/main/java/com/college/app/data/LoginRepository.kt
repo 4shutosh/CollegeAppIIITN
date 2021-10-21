@@ -15,12 +15,13 @@ class LoginRepositoryImpl @Inject constructor(
     private val firebaseService: CollegeFirebaseService,
     private val collegeService: CollegeAppService
 ) : LoginRepository {
+
     override suspend fun checkForUser(loginRequest: LoginRequest): LoginResponse {
         return collegeService.loginOrCreateUser(
             email = loginRequest.email,
             name = loginRequest.name,
             imageUrl = loginRequest.imageUrl.orEmpty()
-        ).dataOrThrowException()
+        )
     }
 
 }

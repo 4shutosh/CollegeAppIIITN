@@ -36,12 +36,4 @@ abstract class AppModuleBinds {
     @Binds
     abstract fun bindsCollegeFirebaseService(collegeFirebaseService: CollegeFirebaseServiceImpl): CollegeFirebaseService
 
-    @Singleton
-    @Binds
-    abstract fun bindsCollegeFirebaseService(collegeFirebaseService: CollegeAppService): CollegeAppService
-
-    @Singleton
-    @Binds
-    fun provideCollegeAppService(collegeNetworking: CollegeNetworking) =
-        collegeNetworking.collegeAppService()
 }
