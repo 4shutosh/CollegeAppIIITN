@@ -1,4 +1,4 @@
-package com.college.app.onboarding.login
+package com.college.app.ui.onboarding.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +10,7 @@ import com.college.app.network.login.LoginUseCase
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
+import com.college.base.result.onError
 import com.college.base.result.onSuccess
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -72,6 +73,10 @@ class OnBoardingLoginViewModel @Inject constructor(
                     )
                 ).onSuccess {
                     logger.d(this.toString())
+                    dataStoreRepository.setUserId(this.userId)
+                    dataStoreRepository.setAccessToken(this.accessToken)
+                }.onError {
+                    loginFail(this.toString())
                 }
             }
         }

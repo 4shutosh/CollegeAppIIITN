@@ -1,4 +1,4 @@
-package com.college.app.onboarding.splash
+package com.college.app.ui.onboarding.splash
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

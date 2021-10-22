@@ -1,4 +1,4 @@
-package com.college.app.onboarding
+package com.college.app.ui.onboarding
 
 import android.os.Bundle
 import android.view.View

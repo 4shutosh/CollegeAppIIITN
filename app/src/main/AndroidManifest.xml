@@ -22,7 +22,7 @@
         android:theme="@style/CollegeAppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".onboarding.OnBoardingActivity"
+            android:name="com.college.app.ui.onboarding.OnBoardingActivity"
             android:exported="true"
             android:theme="@style/CollegeSplashTheme">
             <intent-filter>

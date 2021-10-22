@@ -34,7 +34,11 @@ subprojects {
 }
 
 tasks.create<Delete>("clean") {
-    delete = setOf(rootProject.buildDir)
+    delete = setOf(
+        rootProject.buildDir,
+        project(":app").buildDir,
+        project(":base").buildDir
+    )
 }
 
 tasks.withType<DependencyUpdatesTask> {

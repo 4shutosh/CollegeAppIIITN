@@ -1,4 +1,4 @@
-package com.college.app.onboarding
+package com.college.app.ui.onboarding
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,6 @@ import com.college.app.data.DataStoreRepository
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.logger.CollegeLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,13 +32,6 @@ class OnBoardingViewModel @Inject constructor(
     }
 
     private fun currentOnBoardingViewState(): OnBoardingViewState = onBoardingViewState.value!!
-
-    private fun demoLogin() {
-        viewModelScope.launch {
-            dataStoreRepository.setUserId(121)
-//            checkForLogin()
-        }
-    }
 
     private fun checkForLogin() {
         logger.d("checking for login")

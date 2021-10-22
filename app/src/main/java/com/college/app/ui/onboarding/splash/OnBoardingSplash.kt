@@ -1,8 +1,7 @@
-package com.college.app.onboarding.splash
+package com.college.app.ui.onboarding.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Colors
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

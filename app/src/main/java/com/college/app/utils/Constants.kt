@@ -19,8 +19,4 @@ class Constants {
         const val BUILD_VERSION_CODE = "build-version-code"
         const val BUILD_VERSION_NAME = "build-version-name"
     }
-
-    object Routes {
-        const val USERS = "users"
-    }
 }

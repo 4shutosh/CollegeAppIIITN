@@ -1,4 +1,4 @@
-package com.college.app.onboarding.login
+package com.college.app.ui.onboarding.login
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.animation.animateContentSize
@@ -95,6 +95,8 @@ fun OnBoardingLogin() {
 //                    .height(200.dp)
 //            )
 //        }
+//    }else{
+//
 //    }
 
     Scaffold(backgroundColor = MaterialTheme.colors.surface) {

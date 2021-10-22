@@ -21,17 +21,17 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-//            applicationIdSuffix(".debug")
-//            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            resValue("string", "app_name", "College App Debug")
-            resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
-        }
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
 
+            resValue("string", "app_name", "College App Debug")
+            resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
+        }
+        getByName("release") {
+            isMinifyEnabled = true
+//            applicationIdSuffix(".debug")
+//            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue("string", "app_name", "College App")
             resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
         }
