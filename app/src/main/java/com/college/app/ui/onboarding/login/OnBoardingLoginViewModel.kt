@@ -1,6 +1,5 @@
 package com.college.app.ui.onboarding.login
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.data.DataStoreRepository
@@ -14,6 +13,10 @@ import com.college.base.result.onError
 import com.college.base.result.onSuccess
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,14 +33,14 @@ class OnBoardingLoginViewModel @Inject constructor(
         val userState: CollegeUser? = null
     )
 
-    val loginViewState: MutableLiveData<LoginViewState> = MutableLiveData()
-
-    private fun currentLoginViewState(): LoginViewState = loginViewState.value!!
+    private val _loginViewState = MutableStateFlow(LoginViewState())
+    val loginViewState: StateFlow<LoginViewState> = _loginViewState.asStateFlow()
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
 
     sealed class Command {
         object StartGoogleLogin : Command()
+        object NavigateToMainGraph : Command()
     }
 
     fun userClickedForLogin() {
@@ -47,22 +50,9 @@ class OnBoardingLoginViewModel @Inject constructor(
     fun loginSuccess(user: GoogleSignInAccount) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
 
-//            loginViewState.value = currentLoginViewState().copy(isLoading = true)
+            _loginViewState.update { it.copy(isLoading = true) }
 
             logger.d("user found : ${user.email} with user id ${user.id}")
-
-//            user.id?.let {
-//                logger.setUserId(it)
-//                dataStoreRepository.setUserId(it.toLong())
-//                loginViewState.value = currentLoginViewState().copy(
-//                    isLoading = false,
-//                    userState = CollegeUser(
-//                        id = it.toLong(),
-//                        email = user.email.orEmpty(),
-//                        name = user.displayName.orEmpty(),
-//                    )
-//                )
-//            }
 
             user.idToken?.let {
                 loginUseCase(
@@ -73,17 +63,28 @@ class OnBoardingLoginViewModel @Inject constructor(
                     )
                 ).onSuccess {
                     logger.d(this.toString())
+
                     dataStoreRepository.setUserId(this.userId)
                     dataStoreRepository.setAccessToken(this.accessToken)
+
+                    moveToMainGraph()
                 }.onError {
                     loginFail(this.toString())
+                    _loginViewState.update { it.copy(isLoading = false) }
                 }
             }
         }
     }
 
+    private fun moveToMainGraph() {
+        viewModelScope.launch(appCoroutineDispatcher.main) {
+            command.value = Command.NavigateToMainGraph
+        }
+    }
+
     fun loginFail(message: String) {
         logger.e("login Fail $message")
+        // todo show toast message here
         command.value = null
     }
 

@@ -10,6 +10,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.college.app.nav.CollegeDestinations
+import com.college.app.nav.CollegeNavGraph
 import com.college.app.theme.CollegeAppTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -54,9 +56,13 @@ class OnBoardingActivity : AppCompatActivity() {
                                 rememberSystemUiController().setSystemBarsColor(
                                     color = MaterialTheme.colors.surface
                                 )
-                                OnBoardingNavGraph(
-                                    scaffoldState = scaffoldState,
-                                    startDestination = viewState.startDestination
+                                CollegeNavGraph(
+                                    scaffoldState = scaffoldState, startDestination =
+                                    if (viewState.loggedIn) {
+                                        CollegeDestinations.HomeGraph
+                                    } else {
+                                        CollegeDestinations.OnBoardingGraph
+                                    }
                                 )
                             }
                         }

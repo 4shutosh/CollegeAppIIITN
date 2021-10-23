@@ -1,9 +1,11 @@
 package com.college.app.ui.onboarding.login
 
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -23,41 +25,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.college.app.R
+import com.college.app.nav.CollegeDestinations
 import com.college.app.network.login.GoogleApiContract
 import com.college.app.theme.getAppColorScheme
 import com.google.android.gms.common.api.ApiException
 
 @Composable
-fun OnBoardingLogin() {
+fun OnBoardingLogin(
+    navigationController: NavController
+) {
 
     val signInRequestCode = 1
-
-    val context = LocalContext.current
-    val colorScheme = getAppColorScheme(isSystemInDarkTheme())
-
-    val userRawRes = if (isSystemInDarkTheme()) {
-        R.raw.login_dark_user_lottie
-    } else {
-        R.raw.login_light_user_lottie
-    }
-
-    val loadingRawRes = if (isSystemInDarkTheme()) {
-        R.raw.lottie_loader_dark
-    } else {
-        R.raw.lottie_loader_light
-    }
-
-    val userComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(userRawRes))
-    val loadingComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(loadingRawRes))
-
     val viewModel = hiltViewModel<OnBoardingLoginViewModel>()
 
-    val loginViewState = viewModel.loginViewState.observeAsState()
+    val loginViewState by viewModel.loginViewState.collectAsState()
     val command = viewModel.command.observeAsState()
 
     when (command.value) {
@@ -80,24 +67,55 @@ fun OnBoardingLogin() {
                 launcher.launch(signInRequestCode)
             }
         }
+        is OnBoardingLoginViewModel.Command.NavigateToMainGraph -> {
+            LaunchedEffect("navigation") {
+                navigationController.popBackStack()
+                navigationController.navigate(CollegeDestinations.HomeGraph.route) {
+                    popUpTo(CollegeDestinations.HomeGraph.route) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            }
+        }
     }
 
-//    if (loginViewState.value?.isLoading == true) {
-//        Surface(
-//            Modifier.fillMaxSize(1f),
-//            color = MaterialTheme.colors.surface.copy(alpha = 0.6f)
-//        ) {
-//            LottieAnimation(
-//                composition = loadingComposition,
-//                iterations = LottieConstants.IterateForever,
-//                modifier = Modifier
-//                    .width(200.dp)
-//                    .height(200.dp)
-//            )
-//        }
-//    }else{
-//
-//    }
+    LoginContent(
+        loading = loginViewState.isLoading,
+        loadingContent = { LoadingContent() },
+        content = { LoginForm(viewModel = viewModel) }
+    )
+}
+
+
+@Composable
+fun LoginContent(
+    loading: Boolean,
+    loadingContent: @Composable () -> Unit,
+    content: @Composable () -> Unit
+) {
+    if (loading) {
+        loadingContent()
+    } else {
+        content()
+    }
+}
+
+@Composable
+fun LoginForm(
+    viewModel: OnBoardingLoginViewModel,
+) {
+
+    val context = LocalContext.current
+    val colorScheme = getAppColorScheme(isSystemInDarkTheme())
+
+    val userRawRes = if (isSystemInDarkTheme()) {
+        R.raw.login_dark_user_lottie
+    } else {
+        R.raw.login_light_user_lottie
+    }
+
+    val userComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(userRawRes))
 
     Scaffold(backgroundColor = MaterialTheme.colors.surface) {
         Column(
@@ -150,6 +168,30 @@ fun OnBoardingLogin() {
             )
             Spacer(modifier = Modifier.height(10.dp))
         }
+    }
+}
+
+@Composable
+fun LoadingContent() {
+
+    val loadingRawRes = if (isSystemInDarkTheme()) {
+        R.raw.lottie_loader_dark
+    } else {
+        R.raw.lottie_loader_light
+    }
+    val loadingComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(loadingRawRes))
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colors.surface)
+            .wrapContentSize(Alignment.Center)
+    ) {
+        LottieAnimation(
+            modifier = Modifier.fillMaxSize(0.40f),
+            composition = loadingComposition,
+            iterations = LottieConstants.IterateForever
+        )
     }
 }
 
@@ -215,10 +257,4 @@ private fun GoogleButtonPreview() {
     GoogleSignInButton(
         onClicked = {}
     )
-}
-
-@Composable
-@Preview
-fun PreviewOnBoardingLogin() {
-    OnBoardingLogin()
 }

@@ -19,15 +19,13 @@ class OnBoardingViewModel @Inject constructor(
 
     data class OnBoardingViewState(
         var isReady: Boolean = false,
-        var startDestination: OnBoardingDestinations = OnBoardingDestinations.Splash
+        var loggedIn: Boolean = false,
     )
 
     val onBoardingViewState: MutableLiveData<OnBoardingViewState> = MutableLiveData()
 
     init {
         onBoardingViewState.value = OnBoardingViewState()
-
-//        demoLogin()
         checkForLogin()
     }
 
@@ -37,9 +35,7 @@ class OnBoardingViewModel @Inject constructor(
         logger.d("checking for login")
         viewModelScope.launch(appCoroutineDispatcher.main) {
             onBoardingViewState.value = currentOnBoardingViewState().copy(
-                startDestination = if (dataStoreRepository.getUserId() == null) {
-                    OnBoardingDestinations.Login
-                } else OnBoardingDestinations.Splash,
+                loggedIn = dataStoreRepository.getUserId() != null,
                 isReady = true
             )
         }
