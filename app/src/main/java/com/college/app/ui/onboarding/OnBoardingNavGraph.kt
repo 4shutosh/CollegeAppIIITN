@@ -1,11 +1,10 @@
 package com.college.app.ui.onboarding
 
-import androidx.compose.material.ScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
+import com.college.app.nav.CollegeDestinations
 import com.college.app.ui.onboarding.OnBoardingDestinations.Login
 import com.college.app.ui.onboarding.OnBoardingDestinations.Splash
 import com.college.app.ui.onboarding.login.OnBoardingLogin
@@ -16,20 +15,18 @@ sealed class OnBoardingDestinations(var route: String) {
     object Login : OnBoardingDestinations("login")
 }
 
-@Composable
-fun OnBoardingNavGraph(
-    scaffoldState: ScaffoldState,
-    navHostController: NavHostController = rememberNavController(),
-    startDestination: OnBoardingDestinations = Splash
+fun NavGraphBuilder.onBoardingNavGraph(
+    navController: NavController
 ) {
-
-    NavHost(navController = navHostController, startDestination = startDestination.route) {
+    navigation(
+        startDestination = Login.route,
+        route = CollegeDestinations.OnBoardingGraph.route
+    ) {
+        composable(Login.route) {
+            OnBoardingLogin(navController)
+        }
         composable(Splash.route) {
             OnBoardingSplash()
         }
-        composable(Login.route) {
-            OnBoardingLogin()
-        }
     }
-
 }
