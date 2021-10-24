@@ -1,7 +1,7 @@
 package com.college.app.ui.onboarding.login
 
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -32,13 +32,14 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.college.app.R
 import com.college.app.nav.CollegeDestinations
-import com.college.app.network.login.GoogleApiContract
+import com.college.app.network.login.GoogleLoginApiContract
 import com.college.app.theme.getAppColorScheme
 import com.google.android.gms.common.api.ApiException
 
 @Composable
 fun OnBoardingLogin(
-    navigationController: NavController
+    navigationController: NavController,
+    scaffoldState: ScaffoldState
 ) {
 
     val signInRequestCode = 1
@@ -47,13 +48,26 @@ fun OnBoardingLogin(
     val loginViewState by viewModel.loginViewState.collectAsState()
     val command = viewModel.command.observeAsState()
 
+    val toast = viewModel.toast.observeAsState()
+
+    if (toast.value?.isNotEmpty() == true) {
+        LaunchedEffect(key1 = "snackBar") {
+            scaffoldState.snackbarHostState.showSnackbar(toast.value.orEmpty())
+        }
+    }
+
     when (command.value) {
         is OnBoardingLoginViewModel.Command.StartGoogleLogin -> {
-            val launcher = rememberLauncherForActivityResult(contract = GoogleApiContract()) {
+            val launcher = rememberLauncherForActivityResult(contract = GoogleLoginApiContract()) {
                 try {
                     val googleUser = it?.getResult(ApiException::class.java)
                     if (googleUser != null) {
-                        viewModel.loginSuccess(googleUser)
+//                        viewModel.loginSuccess(googleUser)
+                        if (viewModel.validateGoogleEmail(googleUser.email.orEmpty())) {
+                            viewModel.loginSuccess(googleUser)
+                        } else {
+                            viewModel.wrongEmailLogout()
+                        }
                     } else {
                         // todo show error
                         viewModel.loginFail(it?.exception?.message.orEmpty())
@@ -200,12 +214,14 @@ fun LoadingContent() {
 fun GoogleSignInButton(
     modifier: Modifier = Modifier,
     onClicked: () -> Unit,
-    text: String = "Sign in with Google",
+    @StringRes stringRes: Int = R.string.login_using_google_title,
     textColor: Color = MaterialTheme.colors.surface,
     icon: Int = R.drawable.ic_google_logo,
     backgroundColor: Color = MaterialTheme.colors.onSurface,
 ) {
     var clicked by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
 
     Surface(
         color = backgroundColor,
@@ -238,7 +254,7 @@ fun GoogleSignInButton(
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = text,
+                text = context.getString(stringRes),
                 color = textColor,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold

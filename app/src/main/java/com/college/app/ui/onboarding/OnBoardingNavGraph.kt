@@ -1,5 +1,6 @@
 package com.college.app.ui.onboarding
 
+import androidx.compose.material.ScaffoldState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -16,6 +17,7 @@ sealed class OnBoardingDestinations(var route: String) {
 }
 
 fun NavGraphBuilder.onBoardingNavGraph(
+    scaffoldState: ScaffoldState,
     navController: NavController
 ) {
     navigation(
@@ -23,7 +25,7 @@ fun NavGraphBuilder.onBoardingNavGraph(
         route = CollegeDestinations.OnBoardingGraph.route
     ) {
         composable(Login.route) {
-            OnBoardingLogin(navController)
+            OnBoardingLogin(navController, scaffoldState)
         }
         composable(Splash.route) {
             OnBoardingSplash()

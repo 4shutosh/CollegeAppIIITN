@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.college.app.data.DataStoreRepository
 import com.college.app.models.local.CollegeUser
 import com.college.app.models.network.requests.LoginRequest
+import com.college.app.network.login.GoogleLogOutHelper
 import com.college.app.network.login.LoginUseCase
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
@@ -25,7 +26,8 @@ class OnBoardingLoginViewModel @Inject constructor(
     private val appCoroutineDispatcher: AppCoroutineDispatcher,
     private val dataStoreRepository: DataStoreRepository,
     private val loginUseCase: LoginUseCase,
-    private val logger: CollegeLogger
+    private val logger: CollegeLogger,
+    private val googleLogOutHelper: GoogleLogOutHelper
 ) : ViewModel() {
 
     data class LoginViewState(
@@ -33,8 +35,11 @@ class OnBoardingLoginViewModel @Inject constructor(
         val userState: CollegeUser? = null
     )
 
+    // view state update should be always on the main thread and not in any other scope
     private val _loginViewState = MutableStateFlow(LoginViewState())
     val loginViewState: StateFlow<LoginViewState> = _loginViewState.asStateFlow()
+
+    val toast: SingleLiveEvent<String> = SingleLiveEvent()
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
 
@@ -49,12 +54,13 @@ class OnBoardingLoginViewModel @Inject constructor(
 
     fun loginSuccess(user: GoogleSignInAccount) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
+            logger.d("user found : ${user.email} with user id ${user.id}")
 
             _loginViewState.update { it.copy(isLoading = true) }
 
-            logger.d("user found : ${user.email} with user id ${user.id}")
+            val userEmail = user.email
 
-            user.idToken?.let {
+            if (!user.idToken.isNullOrEmpty() && !userEmail.isNullOrEmpty()) {
                 loginUseCase(
                     LoginRequest(
                         name = user.displayName.orEmpty(),
@@ -67,25 +73,49 @@ class OnBoardingLoginViewModel @Inject constructor(
                     dataStoreRepository.setUserId(this.userId)
                     dataStoreRepository.setAccessToken(this.accessToken)
 
-                    moveToMainGraph()
+                    navigateToMainScreen()
                 }.onError {
                     loginFail(this.toString())
-                    _loginViewState.update { it.copy(isLoading = false) }
+                    viewModelScope.launch(appCoroutineDispatcher.main) {
+                        _loginViewState.update { it.copy(isLoading = false) }
+                    }
                 }
             }
         }
     }
 
-    private fun moveToMainGraph() {
+    // todo introduce community build type to bypass this check with other database
+    fun validateGoogleEmail(emailAddress: String): Boolean {
+        return if (emailAddress.isEmpty()) {
+            false
+        } else {
+            val domain = emailAddress.substringAfter('@')
+            domain == requiredEmailDomain
+        }
+    }
+
+    fun wrongEmailLogout() {
+        googleLogOutHelper.signOutAndClearPreferences()
+        toast.value = "Wrong Email Used, Please Use College Email"
+        command.value = null
+    }
+
+    private fun navigateToMainScreen() {
         viewModelScope.launch(appCoroutineDispatcher.main) {
             command.value = Command.NavigateToMainGraph
+            toast.value = welcomeMessage
         }
     }
 
     fun loginFail(message: String) {
         logger.e("login Fail $message")
-        // todo show toast message here
+        toast.value = message
         command.value = null
+    }
+
+    companion object {
+        const val requiredEmailDomain = "iiitn.ac.in"
+        const val welcomeMessage = "Welcome!"
     }
 
 }

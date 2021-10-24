@@ -33,7 +33,7 @@ class AppModule {
 
     @Provides
     @Named(IS_DEBUG)
-    fun providesIsDebug() : Boolean = BuildConfig.DEBUG
+    fun providesIsDebug(): Boolean = BuildConfig.DEBUG
 
     @Provides
     @Named(BUILD_VERSION_CODE)

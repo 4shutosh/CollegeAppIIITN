@@ -2,10 +2,8 @@ package com.college.app.di
 
 import com.college.app.data.DataStoreRepository
 import com.college.app.data.DataStoreRepositoryImpl
-import com.college.app.network.CollegeAppService
 import com.college.app.network.CollegeFirebaseService
 import com.college.app.network.CollegeFirebaseServiceImpl
-import com.college.app.network.CollegeNetworking
 import com.college.base.logger.CollegeLogger
 import com.college.base.logger.CrashlyticsTree
 import com.college.base.logger.Logger

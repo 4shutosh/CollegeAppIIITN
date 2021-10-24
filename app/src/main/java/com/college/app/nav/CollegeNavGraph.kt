@@ -23,7 +23,7 @@ fun CollegeNavGraph(
 
     NavHost(navController = navController, startDestination = startDestination.route) {
 
-        onBoardingNavGraph(navController = navController)
+        onBoardingNavGraph(navController = navController, scaffoldState = scaffoldState)
 
         mainNavGraph(navController = navController)
 

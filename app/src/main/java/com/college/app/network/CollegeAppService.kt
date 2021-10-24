@@ -1,7 +1,7 @@
 package com.college.app.network
 
 import com.college.app.models.network.responses.LoginResponse
-import com.college.app.network.EndPoints.USERS
+import com.college.app.network.EndPoints.LOGIN
 import com.college.app.utils.Constants.Params.EMAIL
 import com.college.app.utils.Constants.Params.IMAGE_URL
 import com.college.app.utils.Constants.Params.NAME
@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface CollegeAppService {
 
-    @POST(USERS)
+    @POST(LOGIN)
     suspend fun loginOrCreateUser(
         @Query(NAME) name: String,
         @Query(EMAIL) email: String,
