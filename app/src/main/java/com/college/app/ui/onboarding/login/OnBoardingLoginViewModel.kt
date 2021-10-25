@@ -52,7 +52,7 @@ class OnBoardingLoginViewModel @Inject constructor(
         command.value = Command.StartGoogleLogin
     }
 
-    fun loginSuccess(user: GoogleSignInAccount) {
+    private fun loginSuccess(user: GoogleSignInAccount) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             logger.d("user found : ${user.email} with user id ${user.id}")
 
@@ -84,8 +84,16 @@ class OnBoardingLoginViewModel @Inject constructor(
         }
     }
 
+    fun processGoogleUser(googleUser: GoogleSignInAccount) {
+        if (validateGoogleEmail(googleUser.email.orEmpty())) {
+            loginSuccess(googleUser)
+        } else {
+            wrongEmailLogout()
+        }
+    }
+
     // todo introduce community build type to bypass this check with other database
-    fun validateGoogleEmail(emailAddress: String): Boolean {
+    private fun validateGoogleEmail(emailAddress: String): Boolean {
         return if (emailAddress.isEmpty()) {
             false
         } else {
@@ -94,7 +102,7 @@ class OnBoardingLoginViewModel @Inject constructor(
         }
     }
 
-    fun wrongEmailLogout() {
+    private fun wrongEmailLogout() {
         googleLogOutHelper.signOutAndClearPreferences()
         toast.value = "Wrong Email Used, Please Use College Email"
         command.value = null

@@ -11,7 +11,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +53,21 @@ fun OnBoardingLogin(
 
     val toast = viewModel.toast.observeAsState()
 
+    val authLauncher = rememberLauncherForActivityResult(contract = GoogleLoginApiContract()) {
+        try {
+            val googleUser = it?.getResult(ApiException::class.java)
+            if (googleUser != null) {
+                viewModel.processGoogleUser(googleUser)
+            } else {
+                // todo show error
+                viewModel.loginFail(it?.exception?.message.orEmpty())
+            }
+
+        } catch (e: ApiException) {
+            viewModel.loginFail(e.toString())
+        }
+    }
+
     if (toast.value?.isNotEmpty() == true) {
         LaunchedEffect(key1 = "snackBar") {
             scaffoldState.snackbarHostState.showSnackbar(toast.value.orEmpty())
@@ -58,27 +76,8 @@ fun OnBoardingLogin(
 
     when (command.value) {
         is OnBoardingLoginViewModel.Command.StartGoogleLogin -> {
-            val launcher = rememberLauncherForActivityResult(contract = GoogleLoginApiContract()) {
-                try {
-                    val googleUser = it?.getResult(ApiException::class.java)
-                    if (googleUser != null) {
-//                        viewModel.loginSuccess(googleUser)
-                        if (viewModel.validateGoogleEmail(googleUser.email.orEmpty())) {
-                            viewModel.loginSuccess(googleUser)
-                        } else {
-                            viewModel.wrongEmailLogout()
-                        }
-                    } else {
-                        // todo show error
-                        viewModel.loginFail(it?.exception?.message.orEmpty())
-                    }
-
-                } catch (e: ApiException) {
-                    viewModel.loginFail(e.toString())
-                }
-            }
-            SideEffect {
-                launcher.launch(signInRequestCode)
+            LaunchedEffect("googleLogin") {
+                authLauncher.launch(signInRequestCode)
             }
         }
         is OnBoardingLoginViewModel.Command.NavigateToMainGraph -> {
@@ -219,7 +218,6 @@ fun GoogleSignInButton(
     icon: Int = R.drawable.ic_google_logo,
     backgroundColor: Color = MaterialTheme.colors.onSurface,
 ) {
-    var clicked by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
@@ -227,7 +225,7 @@ fun GoogleSignInButton(
         color = backgroundColor,
         shape = RoundedCornerShape(25),
         modifier = modifier
-            .clickable { clicked = !clicked }
+            .clickable { onClicked() }
             .fillMaxWidth(0.7f)
     ) {
         Row(
@@ -259,10 +257,6 @@ fun GoogleSignInButton(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold
             )
-            if (clicked) {
-                onClicked()
-                clicked = false
-            }
         }
     }
 }
