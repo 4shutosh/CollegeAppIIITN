@@ -96,7 +96,12 @@ fun OnBoardingLogin(
     LoginContent(
         loading = loginViewState.isLoading,
         loadingContent = { LoadingContent() },
-        content = { LoginForm(viewModel = viewModel) }
+        content = {
+            LoginForm(
+                viewModel = viewModel,
+                communityEdition = loginViewState.communityEdition
+            )
+        }
     )
 }
 
@@ -116,6 +121,7 @@ fun LoginContent(
 
 @Composable
 fun LoginForm(
+    communityEdition: Boolean,
     viewModel: OnBoardingLoginViewModel,
 ) {
 
@@ -171,14 +177,16 @@ fun LoginForm(
                 viewModel.userClickedForLogin()
             })
             Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = context.getString(R.string.login_footer_message),
-                textAlign = TextAlign.Center,
-                fontSize = 15.sp,
-                fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.Light,
-                color = colorScheme.primaryTextColor
-            )
+            if (!communityEdition) {
+                Text(
+                    text = context.getString(R.string.login_footer_message),
+                    textAlign = TextAlign.Center,
+                    fontSize = 15.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Light,
+                    color = colorScheme.primaryTextColor
+                )
+            }
             Spacer(modifier = Modifier.height(10.dp))
         }
     }

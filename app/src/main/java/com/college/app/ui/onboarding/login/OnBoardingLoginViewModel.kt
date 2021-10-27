@@ -7,6 +7,8 @@ import com.college.app.models.local.CollegeUser
 import com.college.app.models.network.requests.LoginRequest
 import com.college.app.network.login.GoogleLogOutHelper
 import com.college.app.network.login.LoginUseCase
+import com.college.app.utils.CollegeBuildVariantType
+import com.college.app.utils.isCommunityType
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
@@ -27,11 +29,13 @@ class OnBoardingLoginViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
     private val loginUseCase: LoginUseCase,
     private val logger: CollegeLogger,
-    private val googleLogOutHelper: GoogleLogOutHelper
+    private val googleLogOutHelper: GoogleLogOutHelper,
+    private val collegeBuildVariantType: CollegeBuildVariantType
 ) : ViewModel() {
 
     data class LoginViewState(
         var isLoading: Boolean = false,
+        var communityEdition: Boolean = false,
         val userState: CollegeUser? = null
     )
 
@@ -42,6 +46,14 @@ class OnBoardingLoginViewModel @Inject constructor(
     val toast: SingleLiveEvent<String> = SingleLiveEvent()
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
+
+    init {
+        viewModelScope.launch(appCoroutineDispatcher.main) {
+            if (collegeBuildVariantType.isCommunityType()) {
+                _loginViewState.update { it.copy(communityEdition = true) }
+            }
+        }
+    }
 
     sealed class Command {
         object StartGoogleLogin : Command()
@@ -85,14 +97,17 @@ class OnBoardingLoginViewModel @Inject constructor(
     }
 
     fun processGoogleUser(googleUser: GoogleSignInAccount) {
-        if (validateGoogleEmail(googleUser.email.orEmpty())) {
-            loginSuccess(googleUser)
+        if (!loginViewState.value.communityEdition) {
+            if (validateGoogleEmail(googleUser.email.orEmpty())) {
+                loginSuccess(googleUser)
+            } else {
+                wrongEmailLogout()
+            }
         } else {
-            wrongEmailLogout()
+            loginSuccess(googleUser)
         }
     }
 
-    // todo introduce community build type to bypass this check with other database
     private fun validateGoogleEmail(emailAddress: String): Boolean {
         return if (emailAddress.isEmpty()) {
             false
