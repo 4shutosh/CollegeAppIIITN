@@ -29,11 +29,22 @@ android {
             resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
         }
         getByName("release") {
+            isDebuggable = false
             isMinifyEnabled = true
 //            applicationIdSuffix(".debug")
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue("string", "app_name", "College App")
             resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
+            // todo add db options of product flavours
+        }
+    }
+    flavorDimensions("type")
+    productFlavors {
+        create("community") {
+            dimension = "type"
+        }
+        create("college") {
+            dimension = "type"
         }
     }
     kotlinOptions {
