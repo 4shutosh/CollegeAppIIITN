@@ -1,7 +1,7 @@
 package com.college.app.di
 
-import com.college.app.data.DataStoreRepository
-import com.college.app.data.DataStoreRepositoryImpl
+import com.college.app.data.repositories.DataStoreRepository
+import com.college.app.data.repositories.DataStoreRepositoryImpl
 import com.college.app.network.CollegeFirebaseService
 import com.college.app.network.CollegeFirebaseServiceImpl
 import com.college.base.logger.CollegeLogger

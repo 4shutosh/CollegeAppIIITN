@@ -1,7 +1,7 @@
 package com.college.app.di
 
-import com.college.app.data.LoginRepository
-import com.college.app.data.LoginRepositoryImpl
+import com.college.app.data.repositories.LoginRepository
+import com.college.app.data.repositories.LoginRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

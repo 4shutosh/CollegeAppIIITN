@@ -1,6 +1,6 @@
 package com.college.app.network.login
 
-import com.college.app.data.LoginRepository
+import com.college.app.data.repositories.LoginRepository
 import com.college.app.models.network.requests.LoginRequest
 import com.college.app.models.network.responses.LoginResponse
 import com.college.base.AppCoroutineDispatcher

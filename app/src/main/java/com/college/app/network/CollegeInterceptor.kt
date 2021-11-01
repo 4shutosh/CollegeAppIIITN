@@ -1,6 +1,6 @@
 package com.college.app.network
 
-import com.college.app.data.DataStoreRepository
+import com.college.app.data.repositories.DataStoreRepository
 import com.college.app.utils.Constants.Injection.BUILD_VERSION_CODE
 import com.college.app.utils.Constants.Injection.BUILD_VERSION_NAME
 import kotlinx.coroutines.runBlocking

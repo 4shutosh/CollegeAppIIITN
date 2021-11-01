@@ -31,7 +31,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideCoroutineDispatchers() = AppCoroutineDispatcher()
+    fun provideCoroutineDispatchers(): AppCoroutineDispatcher = AppCoroutineDispatcher()
 
     @Provides
     @Named(IS_DEBUG)

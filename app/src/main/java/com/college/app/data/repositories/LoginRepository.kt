@@ -1,10 +1,9 @@
-package com.college.app.data
+package com.college.app.data.repositories
 
 import com.college.app.models.network.requests.LoginRequest
 import com.college.app.models.network.responses.LoginResponse
 import com.college.app.network.CollegeAppService
 import com.college.app.network.CollegeFirebaseService
-import com.college.base.domain.dataOrThrowException
 import javax.inject.Inject
 
 interface LoginRepository {

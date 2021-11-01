@@ -3,7 +3,7 @@ package com.college.app.ui.onboarding
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.college.app.data.DataStoreRepository
+import com.college.app.data.repositories.DataStoreRepository
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.logger.CollegeLogger
 import dagger.hilt.android.lifecycle.HiltViewModel

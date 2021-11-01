@@ -2,7 +2,7 @@ package com.college.app.ui.onboarding.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.college.app.data.DataStoreRepository
+import com.college.app.data.repositories.DataStoreRepository
 import com.college.app.models.local.CollegeUser
 import com.college.app.models.network.requests.LoginRequest
 import com.college.app.network.login.GoogleLogOutHelper

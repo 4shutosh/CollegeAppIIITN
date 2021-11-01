@@ -30,3 +30,5 @@ sealed class CollegeBuildVariantType {
 fun CollegeBuildVariantType.isCommunityType(): Boolean {
     return this == CommunityRelease || this == CommunityDebug
 }
+
+fun CollegeBuildVariantType.isCollegeType() = !isCommunityType()
