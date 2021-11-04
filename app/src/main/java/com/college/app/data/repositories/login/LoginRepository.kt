@@ -1,7 +1,7 @@
-package com.college.app.data.repositories
+package com.college.app.data.repositories.login
 
-import com.college.app.models.network.requests.LoginRequest
-import com.college.app.models.network.responses.LoginResponse
+import com.college.app.network.models.requests.LoginRequest
+import com.college.app.network.models.responses.LoginResponse
 import com.college.app.network.CollegeAppService
 import com.college.app.network.CollegeFirebaseService
 import javax.inject.Inject

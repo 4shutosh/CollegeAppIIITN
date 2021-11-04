@@ -1,6 +1,6 @@
 package com.college.app.network
 
-import com.college.app.models.network.responses.LoginResponse
+import com.college.app.network.models.responses.LoginResponse
 import com.college.app.network.EndPoints.LOGIN
 import com.college.app.utils.Constants.Params.EMAIL
 import com.college.app.utils.Constants.Params.IMAGE_URL

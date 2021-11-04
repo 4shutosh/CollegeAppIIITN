@@ -1,4 +1,4 @@
-package com.college.app.models.network.requests
+package com.college.app.network.models.requests
 
 data class LoginRequest(
     val email: String,

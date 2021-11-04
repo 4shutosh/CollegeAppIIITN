@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.data.repositories.DataStoreRepository
 import com.college.app.models.local.CollegeUser
-import com.college.app.models.network.requests.LoginRequest
+import com.college.app.network.models.requests.LoginRequest
 import com.college.app.network.login.GoogleLogOutHelper
 import com.college.app.network.login.LoginUseCase
 import com.college.app.utils.CollegeBuildVariantType
