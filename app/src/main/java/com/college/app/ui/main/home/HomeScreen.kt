@@ -1,16 +1,10 @@
 package com.college.app.ui.main.home
 
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(
-    navController: NavController
-) {
+fun HomeScreen() {
 
-    Scaffold {
-        Text(text = "Hello Main Screen")
-    }
+    Text(text = "This is Main Bottom Screen")
 }

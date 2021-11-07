@@ -18,14 +18,14 @@ sealed class OnBoardingDestinations(var route: String) {
 
 fun NavGraphBuilder.onBoardingNavGraph(
     scaffoldState: ScaffoldState,
-    navController: NavController
+    navHostController: NavController
 ) {
     navigation(
         startDestination = Login.route,
         route = CollegeDestinations.OnBoardingGraph.route
     ) {
         composable(Login.route) {
-            OnBoardingLogin(navController, scaffoldState)
+            OnBoardingLogin(navHostController, scaffoldState)
         }
         composable(Splash.route) {
             OnBoardingSplash()

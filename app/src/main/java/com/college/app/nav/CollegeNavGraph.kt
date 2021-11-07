@@ -17,15 +17,15 @@ sealed class CollegeDestinations(var route: String) {
 @Composable
 fun CollegeNavGraph(
     scaffoldState: ScaffoldState,
-    navController: NavHostController = rememberNavController(),
+    navHostController: NavHostController = rememberNavController(),
     startDestination: CollegeDestinations = CollegeDestinations.OnBoardingGraph
 ) {
 
-    NavHost(navController = navController, startDestination = startDestination.route) {
+    NavHost(navController = navHostController, startDestination = startDestination.route) {
 
-        onBoardingNavGraph(navController = navController, scaffoldState = scaffoldState)
+        onBoardingNavGraph(navHostController = navHostController, scaffoldState = scaffoldState)
 
-        mainNavGraph(navController = navController)
+        mainNavGraph(navHostController = navHostController, scaffoldState = scaffoldState)
 
     }
 }
