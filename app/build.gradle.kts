@@ -118,7 +118,7 @@ dependencies {
     implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.moshi)
     implementation(libs.moshi.converter)
-    implementation(libs.moshi.compiler)
+    kapt(libs.moshi.compiler)
 
     implementation(libs.coil.coil)
 

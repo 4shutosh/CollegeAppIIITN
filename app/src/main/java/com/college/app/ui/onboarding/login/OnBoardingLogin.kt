@@ -60,7 +60,7 @@ fun OnBoardingLogin(
                 viewModel.processGoogleUser(googleUser)
             } else {
                 // todo show error
-                viewModel.loginFail(it?.exception?.message.orEmpty())
+                viewModel.loginFail(it.toString())
             }
 
         } catch (e: ApiException) {

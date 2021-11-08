@@ -87,7 +87,7 @@ class OnBoardingLoginViewModel @Inject constructor(
 
                     navigateToMainScreen()
                 }.onError {
-                    loginFail(this.toString())
+                    loginFail("api failure $this")
                     viewModelScope.launch(appCoroutineDispatcher.main) {
                         _loginViewState.update { it.copy(isLoading = false) }
                     }
@@ -131,7 +131,7 @@ class OnBoardingLoginViewModel @Inject constructor(
     }
 
     fun loginFail(message: String) {
-        logger.e("login Fail $message")
+        logger.e("login Fail with exception : $message")
         toast.value = message
         command.value = null
     }

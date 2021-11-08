@@ -41,4 +41,10 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
+    private fun demoLogin(){
+        viewModelScope.launch(appCoroutineDispatcher.main) {
+            dataStoreRepository.setUserId("1L")
+        }
+    }
+
 }
