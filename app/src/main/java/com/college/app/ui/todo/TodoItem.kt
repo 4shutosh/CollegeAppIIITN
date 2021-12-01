@@ -3,6 +3,7 @@ package com.college.app.ui.todo
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,8 +27,9 @@ fun TodoItem(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp),
-        shape = RoundedCornerShape(0.3f)
+        shape = RoundedCornerShape(0.3f),
+        color = MaterialTheme.colors.onSurface
     ) {
-        
+
     }
 }
