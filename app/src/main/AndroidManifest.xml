@@ -32,6 +32,10 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
         <!--        <receiver-->
         <!--            android:name=".utils.FirebaseDataReceiver"-->
         <!--            android:exported="true"-->

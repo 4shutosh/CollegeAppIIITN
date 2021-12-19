@@ -1,5 +1,6 @@
 package com.college.app.ui.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -13,6 +14,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.college.app.nav.CollegeDestinations
 import com.college.app.nav.CollegeNavGraph
 import com.college.app.theme.CollegeAppTheme
+import com.college.app.ui.main.MainActivity
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +48,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun setUpObservers() {
         val content: View = findViewById(android.R.id.content)
         viewModel.onBoardingViewState.observe(this) { viewState ->
-            if (viewState.isReady) {
+            if (viewState.isReady && !viewState.loggedIn) {
                 content.viewTreeObserver.dispatchOnPreDraw()
                 setContent {
                     CollegeAppTheme {
@@ -58,16 +60,16 @@ class OnBoardingActivity : AppCompatActivity() {
                                 )
                                 CollegeNavGraph(
                                     scaffoldState = scaffoldState, startDestination =
-                                    if (viewState.loggedIn) {
-                                        CollegeDestinations.HomeGraph
-                                    } else {
-                                        CollegeDestinations.OnBoardingGraph
-                                    }
+                                    CollegeDestinations.OnBoardingGraph
                                 )
                             }
                         }
                     }
                 }
+            } else if (viewState.isReady && viewState.loggedIn) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }

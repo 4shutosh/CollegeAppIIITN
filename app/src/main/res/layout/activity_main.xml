@@ -13,7 +13,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            tools:context=".ui.main.MainActivity">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/HomeAppBar"
@@ -38,13 +38,16 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <com.college.app.utils.CollegeAppViewPager
-                android:id="@+id/fragment_container"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/activity_main_fragment_host"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:defaultNavHost="true"
                 app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
                 app:layout_constraintTop_toBottomOf="@+id/HomeAppBar"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                app:navGraph="@navigation/nav_home_graph" />
             <!-- android:layout_marginBottom="?android:attr/actionBarSize"
             -->
 
@@ -63,34 +66,6 @@
             -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/bottomSheet_notifications"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/includeLayoutNotifications"
-                layout="@layout/bottomsheet_notifications" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bottomSheets_profile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/bottomsheet_profile" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/includeLayoutTodo"
-                layout="@layout/bottomsheet_todo" />
-
-        </LinearLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"

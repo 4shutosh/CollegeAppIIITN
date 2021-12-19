@@ -91,6 +91,13 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.core.splash)
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    //    ui dependencies
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.google.material)
 
     implementation(libs.compose.ui.ui)
     implementation(libs.compose.ui.tooling)

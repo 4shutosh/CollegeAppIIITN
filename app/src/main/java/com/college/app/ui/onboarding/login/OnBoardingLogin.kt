@@ -1,5 +1,6 @@
 package com.college.app.ui.onboarding.login
 
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
@@ -8,9 +9,25 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -34,9 +51,9 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.college.app.R
-import com.college.app.nav.CollegeDestinations
 import com.college.app.network.login.GoogleLoginApiContract
 import com.college.app.theme.getAppColorScheme
+import com.college.app.ui.main.MainActivity
 import com.google.android.gms.common.api.ApiException
 
 @Composable
@@ -44,6 +61,8 @@ fun OnBoardingLogin(
     navigationController: NavController,
     scaffoldState: ScaffoldState
 ) {
+
+    val context = LocalContext.current
 
     val signInRequestCode = 1
     val viewModel = hiltViewModel<OnBoardingLoginViewModel>()
@@ -82,13 +101,15 @@ fun OnBoardingLogin(
         }
         is OnBoardingLoginViewModel.Command.NavigateToMainGraph -> {
             LaunchedEffect("navigation") {
-                navigationController.popBackStack()
-                navigationController.navigate(CollegeDestinations.HomeGraph.route) {
-                    popUpTo(CollegeDestinations.HomeGraph.route) {
-                        inclusive = true
-                    }
-                    launchSingleTop = true
-                }
+//                navigationController.popBackStack()
+                context.startActivity(Intent(context, MainActivity::class.java))
+//                navigationController.navigate(R.id.nav_home_graph)
+//                navigationController.navigate(CollegeDestinations.HomeGraph.route) {
+//                    popUpTo(CollegeDestinations.HomeGraph.route) {
+//                        inclusive = true
+//                    }
+//                    launchSingleTop = true
+//                }
             }
         }
     }
