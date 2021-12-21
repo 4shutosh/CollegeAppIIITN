@@ -9,6 +9,9 @@ abstract class TodoDao : EntityDao<TodoItem>() {
     @Query("SELECT * FROM todos")
     abstract suspend fun getAllTodoFlow(): Flow<List<TodoItem>>
 
+    @Query("SELECT * FROM todos")
+    abstract suspend fun getAllTodo(): List<TodoItem>
+
     @Query("SELECT * FROM todos WHERE isCompleted = :isCompleted")
     abstract suspend fun getAllIncompleteTodoFlow(isCompleted: Boolean = false): Flow<List<TodoItem>>
 

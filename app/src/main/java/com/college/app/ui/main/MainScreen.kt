@@ -11,7 +11,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.college.app.ui.main.home.HomeScreen
-import com.college.app.ui.todo.TodoScreen
 
 
 sealed class HomeBottomDestinations(var route: String) {
@@ -60,7 +59,7 @@ fun MainBottomNavigation(navHostController: NavHostController) {
             HomeScreen()
         }
         composable(HomeBottomDestinations.Todo.route) {
-            TodoScreen()
+//            TodoScreen()
         }
     }
 }
