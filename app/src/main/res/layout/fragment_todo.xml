@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.college.app.ui.todo.TodoViewModel" />-->
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -57,7 +64,7 @@
             tools:listitem="@layout/list_item_todo" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/todo_fab"
+            android:id="@+id/fragment_todo_add_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -65,7 +72,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_add_black_24dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

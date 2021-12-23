@@ -1,4 +1,4 @@
-package com.college.app.utils
+package com.college.app.utils.extensions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

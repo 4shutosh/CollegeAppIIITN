@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.androidx.recyclerview.selection)
     implementation(libs.androidx.startup)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.core.splash)
     implementation(libs.androidx.datastore.preferences)
@@ -143,6 +144,8 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.picasso)
+
+    implementation(libs.kotlinx.dateTime)
 }
 
 if (file("google-services.json").exists()) {

@@ -23,7 +23,7 @@ class RoomDatabaseModule {
         val builder = Room.databaseBuilder(context, CollegeRoomDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration()
         if (Debug.isDebuggerConnected()){
-//            builder.allowMainThreadQueries()
+            builder.allowMainThreadQueries()
         }
         return builder.build()
     }

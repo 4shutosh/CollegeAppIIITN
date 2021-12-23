@@ -3,7 +3,7 @@ package com.college.app.utils
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.college.app.MainActivity
+import com.college.app.ui.main.MainActivity
 
 class NotificationAction : BroadcastReceiver() {
     private val TODO_FRAGMENT = "3"

@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.college.app.R
-import com.college.app.utils.getImageBitmapFromDrawable
+import com.college.app.utils.extensions.getImageBitmapFromDrawable
 
 @Composable
 @Preview

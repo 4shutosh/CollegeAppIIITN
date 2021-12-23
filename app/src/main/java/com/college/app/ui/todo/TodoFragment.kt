@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.college.app.databinding.FragmentTodoBinding
+import com.college.app.utils.extensions.bringItemToView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
+import kotlin.time.ExperimentalTime
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
@@ -32,7 +31,6 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initViews()
         setObservers()
     }
@@ -41,6 +39,10 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         binding.fragmentTodoList.adapter = todoAdapter
         (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
             false
+
+        binding.fragmentTodoAddFab.setOnClickListener {
+            viewModel.addNewTodo()
+        }
     }
 
     private fun setObservers() {
@@ -50,22 +52,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
     }
 
     override fun onTodoItemClickListener(viewState: TodoListViewState, position: Int) {
-        bringItemToView(binding.fragmentTodoList, position)
-    }
-
-    private fun bringItemToView(recyclerView: RecyclerView, position: Int) {
-        val first = recyclerView.getChildAt(0)
-        val height = first.height
-        val current = recyclerView.getChildAdapterPosition(first)
-        val p = abs(position - current)
-
-        val distance = if (p > 2) (p - (p - 2)) * height
-        else p * height
-
-        (recyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
-            position,
-            distance
-        )
+        binding.fragmentTodoList.bringItemToView(position)
     }
 
 }

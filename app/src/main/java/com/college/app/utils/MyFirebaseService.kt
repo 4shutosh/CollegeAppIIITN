@@ -8,7 +8,7 @@ package com.college.app.utils
 //import android.os.Build
 //import android.util.Log
 //import androidx.core.app.NotificationCompat
-//import com.college.app.MainActivity
+//import com.college.app.ui.main.MainActivity
 //import com.college.app.Notification.NotificationAdapter
 //import com.college.app.R
 //import com.google.android.gms.tasks.Task

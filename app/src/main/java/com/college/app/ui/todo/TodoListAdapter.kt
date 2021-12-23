@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.college.app.databinding.ListItemTodoBinding
-import com.college.app.utils.executeAfter
+import com.college.app.utils.extensions.executeAfter
 
 class TodoListAdapter constructor(private val clickListener: TodoItemClickListener) :
     ListAdapter<TodoListViewState, TodoListAdapter.ViewHolder>(

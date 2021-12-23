@@ -1,4 +1,4 @@
-package com.college.app.utils
+package com.college.app.utils.extensions
 
 import android.content.Context
 import android.graphics.Bitmap
