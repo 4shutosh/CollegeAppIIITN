@@ -11,17 +11,23 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
 fun Instant.getCalendarFormattedDate(): String {
     val localDateTime = toLocalDateTime(TimeZone.currentSystemDefault())
-    return "${localDateTime.dayOfMonth}th ${localDateTime.month}, ${localDateTime.year}"
+    val month = localDateTime.month.name.take(3)
+    return "${localDateTime.dayOfMonth}th ${month}, ${localDateTime.year}"
 }
 
-fun Instant.getFormattedTime(): String {
-    val localDateTime = toLocalDateTime(TimeZone.currentSystemDefault())
-    return "${localDateTime.hour}:${localDateTime.minute}"
+fun getFormattedDate(timeStampMilliSeconds: Long, format: String): String {
+    return SimpleDateFormat(format, Locale.ENGLISH).format(Date(timeStampMilliSeconds))
+}
+
+fun getFormattedTime(timeStampMilliSeconds: Long): String {
+    return SimpleDateFormat("hh:mm aa", Locale.ENGLISH).format(Date(timeStampMilliSeconds))
 }
 
 
@@ -30,7 +36,7 @@ returns time left in [Int] and its unit in [String] (seconds, minutes, hours, da
 positive int implies future time and negative implies time in past
 this function has a zero error of 30 seconds (i.e future and past is differentiated by a diff of 30 seconds)
 */
-fun calculateTimeLeft(timeStampMilliSeconds : Long): Pair<Int, DateTimeDifferenceUnit> {
+fun calculateTimeLeft(timeStampMilliSeconds: Long): Pair<Int, DateTimeDifferenceUnit> {
 
     val now = Clock.System.now()
     val difference = timeStampMilliSeconds - now.toEpochMilliseconds()
@@ -42,9 +48,9 @@ fun calculateTimeLeft(timeStampMilliSeconds : Long): Pair<Int, DateTimeDifferenc
 
         val days = TimeUnit.MILLISECONDS.toDays(difference).toInt()
 
-        val years = days.div(365).toInt()
+        val years = days.div(365)
 
-        val months = days.div(30).toInt()
+        val months = days.div(30)
 
         val hours = TimeUnit.MILLISECONDS.toHours(difference).toInt()
         val minutes = TimeUnit.MILLISECONDS.toMinutes(difference).toInt()
