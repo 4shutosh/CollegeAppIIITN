@@ -3,7 +3,7 @@
     <!--    themeing colors-->
     <color name="colorPrimary">@color/black</color>
     <color name="colorOnPrimary">@color/white</color>
-    <color name="colorSurface">@color/grey900</color>
+    <color name="colorSurface">@color/purple_darker</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorControlNormal">@color/white</color>
     <color name="colorOnSurface">@color/white</color>

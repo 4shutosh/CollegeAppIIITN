@@ -18,7 +18,7 @@
     <color name="colorOnPrimary">@color/black</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorSurface">@color/white</color>
+    <color name="colorSurface">@color/purple_lighter</color>
     <color name="colorOnSurface">@color/black</color>
     <color name="colorControlNormal">@color/black</color>
 
@@ -65,6 +65,12 @@
     <color name="icon_inside_11">#ffbc57</color>
     <color name="icon_inside_12">#4e342e</color>
 
-    <color  name="splash_color">#DBD8E3</color>
+    <color name="splash_color">#DBD8E3</color>
+
+    <!--    after revamp colours-->
+    <color name="purple_darker">#2A2438</color>
+    <color name="purple_dark">#352F44</color>
+    <color name="purple_lighter">#DBD8E3</color>
+    <color name="purple_light">#5C5470</color>
 
 </resources>

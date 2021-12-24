@@ -6,7 +6,6 @@
     <string name="login_footer_message">You are only allowed to login using \n your college GSuite email.</string>
 
 
-
     <string name="welcome">Welcome!</string>
     <string name="login_text">Login to your account</string>
     <string name="username">Username</string>
@@ -276,5 +275,10 @@
 
 
     <string name="login_using_google_title">Sign In Using Google</string>
+
+
+    <!--  TodoFragment  -->
+    <string name="todo_item_edit">Edit</string>
+    <string name="todo_item_mark_as_complete">Mark as Complete</string>
 
 </resources>

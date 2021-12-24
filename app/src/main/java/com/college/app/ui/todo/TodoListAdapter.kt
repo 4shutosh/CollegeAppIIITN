@@ -13,6 +13,8 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
         TodoListDiffCallback()
     ) {
 
+    private var lastExpandedItemPosition = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ListItemTodoBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -25,6 +27,13 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
             viewState = getItem(position)
         }
         holder.binding.listItemTodoBg.setOnClickListener {
+            if (lastExpandedItemPosition != -1 && lastExpandedItemPosition != position) {
+                val lastItem = getItem(lastExpandedItemPosition)
+                lastItem.isExpanded = false
+                notifyItemChanged(lastExpandedItemPosition)
+            }
+            lastExpandedItemPosition = holder.absoluteAdapterPosition
+
             currentItem.isExpanded = !currentItem.isExpanded
             notifyItemChanged(position)
             clickListener.onTodoItemClickListener(currentItem, position)
