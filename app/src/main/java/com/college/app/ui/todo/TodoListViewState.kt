@@ -3,9 +3,8 @@ package com.college.app.ui.todo
 import com.college.app.data.entities.TodoItem
 import com.college.app.utils.extensions.DateTimeDifferenceUnit
 import com.college.app.utils.extensions.calculateTimeLeft
-import com.college.app.utils.extensions.getCalendarFormattedDate
+import com.college.app.utils.extensions.getFormattedDate
 import com.college.app.utils.extensions.getFormattedTime
-import kotlinx.datetime.Instant
 
 data class TodoListViewState(
     var id: Long,
@@ -45,10 +44,9 @@ fun TodoItem.toViewState(): TodoListViewState {
         DateTimeDifferenceUnit.PAST -> "DEAD"
     }
 
-    val itemInstant = Instant.fromEpochMilliseconds(timeStampMilliSeconds)
-
-    val date = itemInstant.getCalendarFormattedDate()
-    val time = itemInstant.getFormattedTime()
+//    val date = itemInstant.getCalendarFormattedDate()
+    val date = getFormattedDate(timeStampMilliSeconds, "EEE, MMM d, ''yy")
+    val time = getFormattedTime(timeStampMilliSeconds)
 
     return TodoListViewState(
         id = id,
