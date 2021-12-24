@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.college.app.MainActivity
+import com.college.app.ui.main.MainActivity
 import com.college.app.R
 import com.college.app.utils.NotificationAction
 
