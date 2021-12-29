@@ -19,4 +19,7 @@ abstract class TodoDao : EntityDao<TodoItem>() {
 
     @Query("SELECT * FROM todos WHERE id = :id")
     abstract suspend fun getTodoWithId(id: Long): TodoItem
+
+    @Query("DELETE FROM todos WHERE id = :id")
+    abstract suspend fun deleteById(id: Long)
 }

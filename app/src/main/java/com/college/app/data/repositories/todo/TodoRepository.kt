@@ -3,7 +3,6 @@ package com.college.app.data.repositories.todo
 import com.college.app.data.daos.TodoDao
 import com.college.app.data.entities.TodoItem
 import com.college.base.logger.CollegeLogger
-import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,6 +14,8 @@ class TodoRepository @Inject constructor(
 ) {
 
     suspend fun insertTodo(todo: TodoItem) = todoDao.insert(todo)
+
+    suspend fun deleteTodo(id: Long) = todoDao.deleteById(id)
 
     fun getAllTodoFlow(): Flow<List<TodoItem>> = todoDao.getAllTodoFlow()
 

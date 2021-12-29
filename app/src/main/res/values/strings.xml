@@ -280,5 +280,6 @@
     <!--  TodoFragment  -->
     <string name="todo_item_edit">Edit</string>
     <string name="todo_item_mark_as_complete">Mark as Complete</string>
+    <string name="todo_item_add_item">Add TODO</string>
 
 </resources>
