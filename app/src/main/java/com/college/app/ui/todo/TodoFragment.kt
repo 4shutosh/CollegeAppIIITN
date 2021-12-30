@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.college.app.databinding.FragmentTodoBinding
 import com.college.app.utils.extensions.bringItemToView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.time.ExperimentalTime
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
@@ -37,8 +36,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun initViews() {
         binding.fragmentTodoList.adapter = todoAdapter
-        (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
-            false
+        (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = true
 
         binding.fragmentTodoAddFab.setOnClickListener {
             viewModel.addNewTodo()
@@ -47,12 +45,20 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun setObservers() {
         viewModel.todoList.observe(viewLifecycleOwner) {
-            todoAdapter.submitList(it)
+            todoAdapter.submitList(ArrayList(it))
         }
     }
 
-    override fun onTodoItemClickListener(viewState: TodoListViewState, position: Int) {
+    override fun onTodoItemClick(viewState: TodoListViewState, position: Int) {
         binding.fragmentTodoList.bringItemToView(position)
+    }
+
+    override fun onTodoItemDelete(viewState: TodoListViewState, position: Int) {
+        viewModel.actionTodoDelete(viewState, position)
+    }
+
+    override fun onTodoItemEdit(viewState: TodoListViewState, position: Int) {
+
     }
 
 }

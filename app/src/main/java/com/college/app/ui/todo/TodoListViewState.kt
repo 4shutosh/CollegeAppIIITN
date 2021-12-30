@@ -1,10 +1,14 @@
 package com.college.app.ui.todo
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.library.baseAdapters.BR
 import com.college.app.data.entities.TodoItem
 import com.college.app.utils.extensions.DateTimeDifferenceUnit
 import com.college.app.utils.extensions.calculateTimeLeft
 import com.college.app.utils.extensions.getFormattedDate
 import com.college.app.utils.extensions.getFormattedTime
+import kotlin.properties.Delegates
 
 data class TodoListViewState(
     var id: Long,
@@ -15,9 +19,18 @@ data class TodoListViewState(
     var time: String,
     var date: String,
     var isNotifyOn: Boolean = false,
-    var isExpanded: Boolean = false,
-    var isCompleted: Boolean = false
-)
+    var isCompleted: Boolean = false,
+
+    var _isExpanded: Boolean = false,
+) : BaseObservable() {
+
+
+    @get:Bindable
+    var isExpanded: Boolean by Delegates.observable(false) { _, _, _ ->
+        notifyPropertyChanged(BR.expanded)
+    }
+
+}
 
 fun List<TodoItem>.toListOfViewState(): List<TodoListViewState> {
     val newList = mutableListOf<TodoListViewState>()
