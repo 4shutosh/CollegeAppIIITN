@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.college.app.R
 import com.college.app.databinding.FragmentTodoBinding
+import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
@@ -36,10 +39,11 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun initViews() {
         binding.fragmentTodoList.adapter = todoAdapter
-        (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = true
+        (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+            true
 
         binding.fragmentTodoAddFab.setOnClickListener {
-            viewModel.addNewTodo()
+            showAddTodoDatePickerDialog()
         }
     }
 
@@ -59,6 +63,16 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     override fun onTodoItemEdit(viewState: TodoListViewState, position: Int) {
 
+    }
+
+    private fun showAddTodoDatePickerDialog() {
+        CollegeAppPicker().showDatePickerDialog(
+            R.string.add_title_todo,
+            onSelected = {
+                Timber.d("selected something $it")
+            },
+            fragmentManager = childFragmentManager
+        )
     }
 
 }

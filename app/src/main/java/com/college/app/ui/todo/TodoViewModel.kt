@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// add make this testable use MVI and send triggers from UI to the view state then back to the UI
+
 @HiltViewModel
 class TodoViewModel @Inject constructor(
     private val appCoroutineDispatcher: AppCoroutineDispatcher,
@@ -62,9 +64,13 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    fun addNewTodo() {
-        logger.d("add new todo")
+    fun actionTodoDelete(itemTodo: TodoListViewState, position: Int) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            todoRepository.deleteTodo(itemTodo.id)
+        }
+    }
 
+    fun addNewTodo() {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             val temp = todoRepository.insertTodo(
                 TodoItem(
@@ -73,9 +79,6 @@ class TodoViewModel @Inject constructor(
                     timeStampMilliSeconds = 1640449510000
                 )
             )
-            logger.d("entire list $temp")
         }
-
-
     }
 }
