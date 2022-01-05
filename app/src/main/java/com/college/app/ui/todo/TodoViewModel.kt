@@ -7,14 +7,14 @@ import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.todo.TodoRepository
 import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
+import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
-
-// add make this testable use MVI and send triggers from UI to the view state then back to the UI
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
@@ -26,6 +26,13 @@ class TodoViewModel @Inject constructor(
 
     private val _todoList = MutableLiveData<List<TodoListViewState>>()
     val todoList = _todoList.toLiveData()
+
+    val command: SingleLiveEvent<Command> = SingleLiveEvent()
+
+    sealed class Command {
+        object ShowAddTodoDatePicker : Command()
+        class ShowAddTodoTimePicker(val dateTimeStamp: Long) : Command()
+    }
 
     init {
         viewModelScope.launch(appCoroutineDispatcher.io) {
@@ -80,5 +87,25 @@ class TodoViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun newTodoDateSelected(dateTimeStamp: Long) {
+        command.value = Command.ShowAddTodoTimePicker(dateTimeStamp)
+    }
+
+    fun newTodoTimeSelected(dateTimeStamp: Long, hour: Int, minute: Int) {
+        logger.d("save the time $hour and minute $minute")
+
+        val date = Date(dateTimeStamp)
+        date.hours = hour
+        date.minutes = minute
+        // todo use a better way
+
+        logger.d("got the time input $date")
+
+    }
+
+    fun actionAddTodoItemClicked() {
+        command.value = Command.ShowAddTodoDatePicker
     }
 }

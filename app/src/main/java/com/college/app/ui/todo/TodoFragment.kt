@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.college.app.R
 import com.college.app.databinding.FragmentTodoBinding
+import com.college.app.ui.todo.TodoViewModel.Command
+import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import java.sql.Timestamp
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
@@ -29,6 +31,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTodoBinding.inflate(inflater)
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -51,6 +54,19 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         viewModel.todoList.observe(viewLifecycleOwner) {
             todoAdapter.submitList(ArrayList(it))
         }
+
+        viewModel.command.observe(
+            viewLifecycleOwner
+        ) {
+            processCommand(it)
+        }
+    }
+
+    private fun processCommand(command: Command) {
+        when (command) {
+            is ShowAddTodoDatePicker -> showAddTodoDatePickerDialog()
+            is Command.ShowAddTodoTimePicker -> showAddTodoTimePickerDialog(command.dateTimeStamp)
+        }
     }
 
     override fun onTodoItemClick(viewState: TodoListViewState, position: Int) {
@@ -69,7 +85,17 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         CollegeAppPicker().showDatePickerDialog(
             R.string.add_title_todo,
             onSelected = {
-                Timber.d("selected something $it")
+                viewModel.newTodoDateSelected(it)
+            },
+            fragmentManager = childFragmentManager
+        )
+    }
+
+    private fun showAddTodoTimePickerDialog(dateTimestamp: Long) {
+        CollegeAppPicker().showTimePickerDialog(
+            R.string.add_title_todo,
+            onSelected = {
+                viewModel.newTodoTimeSelected(dateTimestamp, it.hour, it.minute)
             },
             fragmentManager = childFragmentManager
         )
