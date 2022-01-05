@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 
 // todo set custom themes here
 class CollegeAppPicker {
@@ -14,6 +16,7 @@ class CollegeAppPicker {
 
     companion object {
         private const val DATE_PICKER_TAG = "CollegeAppDatePickerTag"
+        private const val TIME_PICKER_TAG = "CollegeAppTimePickerTag"
     }
 
 
@@ -43,5 +46,44 @@ class CollegeAppPicker {
         materialDatePicker.show(fragmentManager, DATE_PICKER_TAG)
     }
 
+    fun showTimePickerDialog(
+        @StringRes titleText: Int,
+        fragmentManager: FragmentManager,
+        onSelected: (CollegeAppTimePickerReturn) -> Unit,
+        is24HourFormat: Boolean = false,
+        onDismiss: (() -> Unit)? = null
+    ) {
+
+        val clockFormat = if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+
+        val materialTimePicker = MaterialTimePicker.Builder()
+            .setTitleText(titleText)
+            .setHour(12)
+            .setMinute(10)
+            .setTimeFormat(clockFormat)
+            .build()
+
+        if (onDismiss != null) {
+            materialTimePicker.addOnDismissListener {
+                onDismiss()
+            }
+        }
+
+        materialTimePicker.addOnPositiveButtonClickListener {
+            onSelected(
+                CollegeAppTimePickerReturn(
+                    materialTimePicker.hour,
+                    materialTimePicker.minute
+                )
+            )
+        }
+
+        materialTimePicker.show(fragmentManager, DATE_PICKER_TAG)
+    }
+
+    data class CollegeAppTimePickerReturn(
+        val hour: Int,
+        val minute: Int
+    )
 
 }
