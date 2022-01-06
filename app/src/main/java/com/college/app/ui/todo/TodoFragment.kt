@@ -11,10 +11,10 @@ import com.college.app.R
 import com.college.app.databinding.FragmentTodoBinding
 import com.college.app.ui.todo.TodoViewModel.Command
 import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
+import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
 import dagger.hilt.android.AndroidEntryPoint
-import java.sql.Timestamp
 
 @AndroidEntryPoint
 class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
@@ -66,6 +66,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         when (command) {
             is ShowAddTodoDatePicker -> showAddTodoDatePickerDialog()
             is Command.ShowAddTodoTimePicker -> showAddTodoTimePickerDialog(command.dateTimeStamp)
+            is Command.ShowAddTodoDetailsDialog -> showAddTodoDetailsDialog(command.dateAndTimeStamp)
         }
     }
 
@@ -99,6 +100,17 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
             },
             fragmentManager = childFragmentManager
         )
+    }
+
+    private fun showAddTodoDetailsDialog(dateAndTimeStamp: Long) {
+        val addTodoDetailsDialog = AddTodoDetailsDialogFragment.instance(
+            todoDateAndTimeStamp = dateAndTimeStamp
+        )
+        addTodoDetailsDialog.show(childFragmentManager, ADD_TODO_DETAILS_DIALOG_TAG)
+    }
+
+    companion object {
+        private const val ADD_TODO_DETAILS_DIALOG_TAG = "ADD_TODO_DETAILS_DIALOG_TAG"
     }
 
 }

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.todo.TodoRepository
+import com.college.app.utils.extensions.getFormattedDate
+import com.college.app.utils.extensions.getFormattedTime
 import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,6 +35,7 @@ class TodoViewModel @Inject constructor(
     sealed class Command {
         object ShowAddTodoDatePicker : Command()
         class ShowAddTodoTimePicker(val dateTimeStamp: Long) : Command()
+        class ShowAddTodoDetailsDialog(val dateAndTimeStamp: Long) : Command()
     }
 
     init {
@@ -94,14 +98,20 @@ class TodoViewModel @Inject constructor(
     }
 
     fun newTodoTimeSelected(dateTimeStamp: Long, hour: Int, minute: Int) {
-        logger.d("save the time $hour and minute $minute")
+        val calendar = Calendar.getInstance(TimeZone.getDefault())
+        calendar.time = Date(dateTimeStamp)
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
 
-        val date = Date(dateTimeStamp)
-        date.hours = hour
-        date.minutes = minute
-        // todo use a better way
+        val timeStampMilliSeconds = TimeUnit.MILLISECONDS.toSeconds(calendar.timeInMillis)
 
-        logger.d("got the time input $date")
+        logger.d(
+            "with time stamp $timeStampMilliSeconds + ${getFormattedTime(calendar.timeInMillis)} + ${
+                getFormattedDate(
+                    calendar.timeInMillis
+                )
+            }"
+        )
 
     }
 
