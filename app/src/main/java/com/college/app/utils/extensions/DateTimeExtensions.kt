@@ -22,7 +22,7 @@ fun Instant.getCalendarFormattedDate(): String {
     return "${localDateTime.dayOfMonth}th ${month}, ${localDateTime.year}"
 }
 
-fun getFormattedDate(timeStampMilliSeconds: Long, format: String): String {
+fun getFormattedDate(timeStampMilliSeconds: Long, format: String = "EEE, MMM d, ''yy"): String {
     return SimpleDateFormat(format, Locale.ENGLISH).format(Date(timeStampMilliSeconds))
 }
 
