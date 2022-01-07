@@ -32,7 +32,7 @@ data class TodoListViewState(
 
 }
 
-fun List<TodoItem>.toListOfViewState(): List<TodoListViewState> {
+fun List<TodoItem>.toListOfViewState(): MutableList<TodoListViewState> {
     val newList = mutableListOf<TodoListViewState>()
     forEach {
         newList.add(

@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class TodoViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _todoList = MutableLiveData<List<TodoListViewState>>()
+    private val _todoList = MutableLiveData<MutableList<TodoListViewState>>()
     val todoList = _todoList.toLiveData()
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
@@ -54,27 +55,6 @@ class TodoViewModel @Inject constructor(
             }
     }
 
-    private fun populateTodo() {
-        viewModelScope.launch(appCoroutineDispatcher.io) {
-            val list = mutableListOf<TodoListViewState>()
-            for (i in 0..10) {
-                list.add(
-                    TodoListViewState(
-                        id = i.toLong(),
-                        title = "DSA Assignment $i",
-                        description = "This is a demo description for $i",
-                        timeLeft = "44!!",
-                        timeLeftUnit = "minutes left",
-                        time = "10:00 am",
-                        date = "22 January, 2022",
-                        isNotifyOn = false
-                    )
-                )
-            }
-            _todoList.postValue(list)
-        }
-    }
-
     fun actionTodoDelete(itemTodo: TodoListViewState, position: Int) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             todoRepository.deleteTodo(itemTodo.id)
@@ -83,36 +63,44 @@ class TodoViewModel @Inject constructor(
 
     fun addNewTodo() {
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            val temp = todoRepository.insertTodo(
+            todoRepository.insertTodo(
                 TodoItem(
                     name = "Temp TODO",
                     description = "Demo Description",
                     timeStampMilliSeconds = 1640449510000
                 )
             )
+
+            // todo show snack bar
         }
     }
 
     fun newTodoDateSelected(dateTimeStamp: Long) {
-        command.value = Command.ShowAddTodoTimePicker(dateTimeStamp)
+        viewModelScope.launch(appCoroutineDispatcher.main) {
+            command.value = Command.ShowAddTodoTimePicker(dateTimeStamp)
+        }
     }
 
     fun newTodoTimeSelected(dateTimeStamp: Long, hour: Int, minute: Int) {
-        val calendar = Calendar.getInstance(TimeZone.getDefault())
-        calendar.time = Date(dateTimeStamp)
-        calendar.set(Calendar.HOUR_OF_DAY, hour)
-        calendar.set(Calendar.MINUTE, minute)
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val calendar = Calendar.getInstance(TimeZone.getDefault())
+            calendar.time = Date(dateTimeStamp)
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+            calendar.set(Calendar.MINUTE, minute)
 
-        val timeStampMilliSeconds = TimeUnit.MILLISECONDS.toSeconds(calendar.timeInMillis)
+            val timeStampMilliSeconds = TimeUnit.MILLISECONDS.toSeconds(calendar.timeInMillis)
 
-        logger.d(
-            "with time stamp $timeStampMilliSeconds + ${getFormattedTime(calendar.timeInMillis)} + ${
-                getFormattedDate(
-                    calendar.timeInMillis
-                )
-            }"
-        )
-
+            logger.d(
+                "with time stamp $timeStampMilliSeconds + ${getFormattedTime(calendar.timeInMillis)} + ${
+                    getFormattedDate(
+                        calendar.timeInMillis
+                    )
+                }"
+            )
+            withContext(appCoroutineDispatcher.main) {
+                command.value = Command.ShowAddTodoDetailsDialog(calendar.timeInMillis)
+            }
+        }
     }
 
     fun actionAddTodoItemClicked() {

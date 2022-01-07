@@ -42,6 +42,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun initViews() {
         binding.fragmentTodoList.adapter = todoAdapter
+        binding.fragmentTodoList.setHasFixedSize(true)
         (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
             true
 
@@ -52,7 +53,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun setObservers() {
         viewModel.todoList.observe(viewLifecycleOwner) {
-            todoAdapter.submitList(ArrayList(it))
+            todoAdapter.submitList(it)
         }
 
         viewModel.command.observe(
