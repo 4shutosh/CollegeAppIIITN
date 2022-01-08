@@ -7,26 +7,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.college.app.R
-import com.college.app.databinding.TodoDailogBinding
+import com.college.app.databinding.DialogAddTodoDetailsBinding
 import com.college.app.ui.todo.TodoViewModel
 import com.college.app.utils.extensions.createBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddTodoDetailsDialogFragment : DialogFragment(R.layout.todo_dailog) {
+class AddTodoDetailsDialogFragment : DialogFragment(R.layout.dialog_add_todo_details) {
 
     private val parentViewModel: TodoViewModel by viewModels(
         ownerProducer = { requireParentFragment() }
     )
 
-    private lateinit var binding: TodoDailogBinding
+    private lateinit var binding: DialogAddTodoDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = createBinding(inflater, R.layout.todo_dailog, container)
+        binding = createBinding(inflater, R.layout.dialog_add_todo_details, container)
         return binding.root
     }
 
@@ -36,9 +36,19 @@ class AddTodoDetailsDialogFragment : DialogFragment(R.layout.todo_dailog) {
     }
 
     private fun setUpViews() {
-        binding.addTodoButton.setOnClickListener {
-            if (binding.todoTitileAdd.text.isNotEmpty()) {
-                parentViewModel.addNewTodo()
+
+        val timeStamp = arguments?.getLong(KEY_NEW_TODO_TIMESTAMP) ?: 0
+
+        if (timeStamp == 0L) {
+            dismiss()
+        }
+
+        binding.dialogAddTodoSaveButton.setOnClickListener {
+            val title = binding.dialogAddTodoTitleInput.text.toString()
+            val description = binding.dialogAddTodoDescriptionInput.text.toString()
+
+            if (parentViewModel.validateInputNewTodoDetails(title)) {
+                parentViewModel.addNewTodo(title, description, timeStamp)
                 dismiss()
             }
         }
