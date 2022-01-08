@@ -18,6 +18,6 @@ interface CollegeAppService {
         @Query(NAME) name: String,
         @Query(EMAIL) email: String,
         @Query(IMAGE_URL) imageUrl: String,
-    ): ServerResponse<LoginResponse>
+    ): LoginResponse
 
 }
