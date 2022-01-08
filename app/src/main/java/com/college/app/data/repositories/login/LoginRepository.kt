@@ -22,7 +22,7 @@ class LoginRepositoryImpl @Inject constructor(
             email = loginRequest.email,
             name = loginRequest.name,
             imageUrl = loginRequest.imageUrl.orEmpty()
-        ).dataOrThrowException()
+        )
     }
 
 }
