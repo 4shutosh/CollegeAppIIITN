@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,61 +10,43 @@
             type="com.college.app.ui.todo.TodoViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root_fragment_todo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_dodgeInsetEdges="bottom"
         app:layout_insetEdge="bottom">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fragment_todo_info_bg"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="8dp"
-            android:background="@drawable/dr_rounded_16"
-            android:backgroundTint="@color/green400"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_todo_on_top_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="@dimen/tenDp"
-            android:src="@drawable/info_round"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_todo_info_bg"
-            app:layout_constraintStart_toStartOf="@id/fragment_todo_info_bg"
-            app:layout_constraintTop_toTopOf="@id/fragment_todo_info_bg" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/fragment_todo_on_top_title"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            app:elevation="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tenDp"
-            android:padding="@dimen/five_dp"
-            android:text="@string/todoOnTop"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_todo_info_bg"
-            app:layout_constraintEnd_toEndOf="@id/fragment_todo_info_bg"
-            app:layout_constraintStart_toStartOf="@id/fragment_todo_info_bg"
-            app:layout_constraintTop_toTopOf="@id/fragment_todo_info_bg" />
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/fragment_todo_chip_group"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="0dp"
+                android:background="@color/purple_darker"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="0dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:selectionRequired="true"
+                app:singleSelection="true" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_todo_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="4dp"
             android:clipToPadding="false"
             android:paddingBottom="80dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_todo_info_bg"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/list_item_todo" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom|center"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/todo_item_mark_as_complete"
             android:onClick="@{()-> viewModel.actionAddTodoItemClicked()}"
@@ -78,6 +63,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

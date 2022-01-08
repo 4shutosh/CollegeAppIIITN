@@ -2,22 +2,14 @@ package com.college.app.ui.todo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.college.app.databinding.ListItemTodoBinding
 import com.college.app.utils.extensions.executeAfter
-import timber.log.Timber
 
 class TodoListAdapter constructor(private val clickListener: TodoItemClickListener) :
-    RecyclerView.Adapter<TodoListAdapter.ViewHolder>(),
-    AsyncListDiffer.ListListener<TodoListViewState> {
-
-    private val differ by lazy { AsyncListDiffer(this, TodoListDiffCallback) }
-
-    init {
-        differ.addListListener(this)
-    }
+    ListAdapter<TodoListViewState, TodoListAdapter.ViewHolder>(TodoListDiffCallback) {
 
     private var lastExpandedItemPosition = -1 // no position
 
@@ -36,17 +28,13 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
         }
 
         holder.binding.listItemTodoBg.setOnClickListener {
-            Timber.d("onBindViewHolder: $lastExpandedItemPosition current positoin $position")
-
             if (lastExpandedItemPosition != -1 && lastExpandedItemPosition != position
-                && lastExpandedItemPosition < differ.currentList.size
+                && lastExpandedItemPosition < currentList.size
             ) {
-
                 val lastItem = getItem(lastExpandedItemPosition)
                 lastItem.isExpanded = false
-                notifyItemChanged(position)
+                notifyItemChanged(lastExpandedItemPosition)
             }
-
             lastExpandedItemPosition = if (currentItem.isExpanded) -1
             else holder.absoluteAdapterPosition
 
@@ -54,14 +42,6 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
             clickListener.onTodoItemClick(currentItem, position)
         }
     }
-
-    fun submitList(list: List<TodoListViewState>) {
-        differ.submitList(list)
-    }
-
-    private fun getItem(position: Int) = differ.currentList[position]
-
-    override fun getItemCount() = differ.currentList.size
 
     interface TodoItemClickListener {
         fun onTodoItemClick(viewState: TodoListViewState, position: Int)
@@ -71,14 +51,6 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
 
     inner class ViewHolder(val binding: ListItemTodoBinding) :
         RecyclerView.ViewHolder(binding.root)
-
-    override fun onCurrentListChanged(
-        previousList: MutableList<TodoListViewState>,
-        currentList: MutableList<TodoListViewState>
-    ) {
-        Timber.d("prevList : $previousList")
-        Timber.d("newList : $currentList")
-    }
 }
 
 object TodoListDiffCallback : DiffUtil.ItemCallback<TodoListViewState>() {
@@ -88,8 +60,17 @@ object TodoListDiffCallback : DiffUtil.ItemCallback<TodoListViewState>() {
     override fun areContentsTheSame(
         oldItem: TodoListViewState,
         newItem: TodoListViewState
-    ) = oldItem == newItem
+    ) = oldItem.id == newItem.id
 
+}
+
+enum class TodoListTypes(val title: String) {
+    ALL("All"),
+    TODAY("Today"),
+    WEEK("Week"),
+    MONTH("Month"),
+    LATER("Later"),
+    DEAD("DEAD")
 }
 
 

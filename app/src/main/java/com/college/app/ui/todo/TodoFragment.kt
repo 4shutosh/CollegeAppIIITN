@@ -14,6 +14,8 @@ import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
+import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,6 +51,25 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         binding.fragmentTodoAddFab.setOnClickListener {
             showAddTodoDatePickerDialog()
         }
+
+        viewModel.todoListStateTypes.forEachIndexed { index, it ->
+            val chipToAdd = Chip(requireContext())
+            chipToAdd.apply {
+                text = it.title
+                isChipIconVisible = false
+                isCheckedIconVisible = false
+                checkedIcon
+                isClickable = true
+                isCheckable = true
+                id = index
+            }
+            binding.fragmentTodoChipGroup.addView(chipToAdd)
+        }
+        binding.fragmentTodoChipGroup.check(0)
+
+        binding.fragmentTodoChipGroup.setOnCheckedChangeListener { _, checkedId ->
+            viewModel.actionCheckedChipGroupChanged(checkedId)
+        }
     }
 
     private fun setObservers() {
@@ -68,6 +89,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
             is ShowAddTodoDatePicker -> showAddTodoDatePickerDialog()
             is Command.ShowAddTodoTimePicker -> showAddTodoTimePickerDialog(command.dateTimeStamp)
             is Command.ShowAddTodoDetailsDialog -> showAddTodoDetailsDialog(command.dateAndTimeStamp)
+            is Command.ShowSnackBar -> showSnackBar(command.message, command.showAction)
         }
     }
 
@@ -108,6 +130,11 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
             todoDateAndTimeStamp = dateAndTimeStamp
         )
         addTodoDetailsDialog.show(childFragmentManager, ADD_TODO_DETAILS_DIALOG_TAG)
+    }
+
+    private fun showSnackBar(message: String, showAction: Boolean) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
+            .show()
     }
 
     companion object {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_dialog_add_todo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dialog_add_todo_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/todo_dialog_title"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_add_todo_title_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/add_title_todo"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_add_todo_heading" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_add_todo_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/todo_description_dialog_text"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:minHeight="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/dialog_add_todo_title_input"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_add_todo_title_input" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dialog_add_todo_title_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_add_todo_heading"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_add_todo_heading"
+            app:layout_constraintTop_toTopOf="@+id/dialog_add_todo_heading"
+            app:srcCompat="@drawable/ic_content_paste_black_36dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialog_add_todo_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:text="@string/save_todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_add_todo_description_input" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -19,6 +19,8 @@ class TodoRepository @Inject constructor(
 
     fun getAllTodoFlow(): Flow<List<TodoItem>> = todoDao.getAllTodoFlow()
 
+    fun getAllTodoFlowSorted() = todoDao.getAllTodoTimestampSortedFlow()
+
     suspend fun getAllTodo(): List<TodoItem> = todoDao.getAllTodo()
 
     suspend fun getAllIncompleteTodo(): Flow<List<TodoItem>> = todoDao.getAllIncompleteTodoFlow()
