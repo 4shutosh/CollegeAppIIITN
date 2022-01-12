@@ -282,5 +282,6 @@
     <string name="todo_item_add_item">Add TODO</string>
     <string name="snackbar_action_undo">Undo</string>
     <string name="todo_dialog_title">TODO</string>
+    <string name="todo_fragment_no_data_message">No TODO Found. You are free*!</string>
 
 </resources>

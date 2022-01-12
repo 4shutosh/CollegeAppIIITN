@@ -14,6 +14,8 @@ import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
+import com.college.app.utils.extensions.gone
+import com.college.app.utils.extensions.visible
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +76,16 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     private fun setObservers() {
         viewModel.todoList.observe(viewLifecycleOwner) {
-            todoAdapter.submitList(it)
+            if (it.isEmpty()) {
+                binding.fragmentTodoList.gone()
+                binding.fragmentTodoNoDataImage.visible()
+                binding.fragmentTodoNoDataMessage.visible()
+            } else {
+                binding.fragmentTodoNoDataMessage.gone()
+                binding.fragmentTodoNoDataImage.gone()
+                todoAdapter.submitList(it)
+                binding.fragmentTodoList.visible()
+            }
         }
 
         viewModel.command.observe(

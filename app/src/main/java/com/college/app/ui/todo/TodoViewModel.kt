@@ -75,12 +75,12 @@ class TodoViewModel @Inject constructor(
                         .toLocalDateTime(timeZone)
                     when (type) {
                         ALL -> true
-                        TODAY -> itemLocalTime.date == todayDate
+                        TODAY -> itemLocalTime.date == todayDate && item.timeStampMilliSeconds > currentTimeStamp
                         WEEK -> {
                             val week = itemLocalTime.dayOfMonth / 7
-                            week == currentWeek
+                            week == currentWeek && item.timeStampMilliSeconds > currentTimeStamp
                         }
-                        MONTH -> itemLocalTime.monthNumber == currentMonthNumber
+                        MONTH -> itemLocalTime.monthNumber == currentMonthNumber && item.timeStampMilliSeconds > currentTimeStamp
                         LATER -> (itemLocalTime.monthNumber != currentMonthNumber && item.timeStampMilliSeconds > currentTimeStamp)
                         DEAD -> item.timeStampMilliSeconds < currentTimeStamp
                     }

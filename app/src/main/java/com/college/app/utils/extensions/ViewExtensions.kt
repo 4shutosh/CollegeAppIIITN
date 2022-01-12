@@ -1,6 +1,7 @@
 package com.college.app.utils.extensions
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -35,4 +36,16 @@ inline fun <T : ViewDataBinding> Fragment.createBinding(
     binding.lifecycleOwner = viewLifecycleOwner
     binding.bind()
     return binding
+}
+
+fun View?.visible() {
+    if (this?.visibility != View.VISIBLE) this?.visibility = View.VISIBLE
+}
+
+fun View?.gone() {
+    if (this?.visibility != View.GONE) this?.visibility = View.GONE
+}
+
+fun View?.invisible() {
+    if (this?.visibility != View.INVISIBLE) this?.visibility = View.INVISIBLE
 }
