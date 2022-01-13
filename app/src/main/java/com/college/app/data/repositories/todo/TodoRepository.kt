@@ -27,4 +27,6 @@ class TodoRepository @Inject constructor(
 
     suspend fun getTodoWithId(id: Long) = todoDao.getTodoWithId(id)
 
+    suspend fun insertOrUpdateTodo(todo: TodoItem) = todoDao.insertOrUpdate(todo)
+
 }

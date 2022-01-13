@@ -38,17 +38,28 @@ class AddTodoDetailsDialogFragment : DialogFragment(R.layout.dialog_add_todo_det
     private fun setUpViews() {
 
         val timeStamp = arguments?.getLong(KEY_NEW_TODO_TIMESTAMP) ?: 0
+        val title = arguments?.getString(KEY_NEW_TODO_TITLE) ?: ""
+        val description = arguments?.getString(KEY_NEW_TODO_DESCRIPTION) ?: ""
+        val id = arguments?.getLong(KEY_NEW_TODO_ID) ?: 0L
 
         if (timeStamp == 0L) {
             dismiss()
         }
+
+        binding.dialogAddTodoTitleInput.setText(title)
+        binding.dialogAddTodoDescriptionInput.setText(description)
 
         binding.dialogAddTodoSaveButton.setOnClickListener {
             val title = binding.dialogAddTodoTitleInput.text.toString()
             val description = binding.dialogAddTodoDescriptionInput.text.toString()
 
             if (parentViewModel.validateInputNewTodoDetails(title)) {
-                parentViewModel.addNewTodo(title, description, timeStamp)
+                parentViewModel.addNewTodo(
+                    itemId = id,
+                    title = title,
+                    description = description,
+                    timeStampMillis = timeStamp
+                )
                 dismiss()
             }
         }
@@ -57,12 +68,23 @@ class AddTodoDetailsDialogFragment : DialogFragment(R.layout.dialog_add_todo_det
 
     companion object {
         private const val KEY_NEW_TODO_TIMESTAMP = "KEY_NEW_TODO_TIMESTAMP"
+        private const val KEY_NEW_TODO_ID = "KEY_NEW_TODO_ID"
+        private const val KEY_NEW_TODO_TITLE = "KEY_NEW_TODO_TITLE"
+        private const val KEY_NEW_TODO_DESCRIPTION = "KEY_NEW_TODO_DESCRIPTION"
 
-        fun instance(todoDateAndTimeStamp: Long): AddTodoDetailsDialogFragment {
+        fun instance(
+            id: Long = 0L,
+            title: String = "",
+            description: String = "",
+            todoDateAndTimeStamp: Long,
+        ): AddTodoDetailsDialogFragment {
             val dialogFragment = AddTodoDetailsDialogFragment()
 
             val bundle = Bundle()
             bundle.putLong(KEY_NEW_TODO_TIMESTAMP, todoDateAndTimeStamp)
+            bundle.putString(KEY_NEW_TODO_TITLE, title)
+            bundle.putString(KEY_NEW_TODO_DESCRIPTION, description)
+            bundle.putLong(KEY_NEW_TODO_ID, id)
             dialogFragment.arguments = bundle
             return dialogFragment
         }

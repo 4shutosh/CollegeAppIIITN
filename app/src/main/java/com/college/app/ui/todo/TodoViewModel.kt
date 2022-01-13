@@ -11,9 +11,9 @@ import com.college.app.ui.todo.TodoListTypes.LATER
 import com.college.app.ui.todo.TodoListTypes.MONTH
 import com.college.app.ui.todo.TodoListTypes.TODAY
 import com.college.app.ui.todo.TodoListTypes.WEEK
-import com.college.app.utils.extensions.getFormattedDate
-import com.college.app.utils.extensions.getFormattedTime
 import com.college.app.utils.extensions.toLiveData
+import com.college.app.utils.extensions.updateDate
+import com.college.app.utils.extensions.updateTime
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
@@ -26,9 +26,8 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.toLocalDateTime
-import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.math.ceil
 
 @HiltViewModel
 class TodoViewModel @Inject constructor(
@@ -50,6 +49,10 @@ class TodoViewModel @Inject constructor(
         class ShowAddTodoTimePicker(val dateTimeStamp: Long) : Command()
         class ShowAddTodoDetailsDialog(val dateAndTimeStamp: Long) : Command()
         class ShowSnackBar(val message: String, val showAction: Boolean = false) : Command()
+
+        class ShowEditTodoDatePicker(val itemId: Long, val dateTimeStamp: Long) : Command()
+        class ShowEditTodoTimerPicker(val itemId: Long, val timeStampMillis: Long) : Command()
+        class ShowEditTodoDetailsFragment(val id : Long, val title: String, val description: String, val timeStampMillis: Long) : Command()
     }
 
     init {
@@ -65,7 +68,7 @@ class TodoViewModel @Inject constructor(
 
         val dayOfMonth = now.dayOfMonth
         val todayDate = now.date
-        val currentWeek = dayOfMonth / 7
+        val currentWeek = ceil(dayOfMonth.toDouble() / 7) // not the perfect solution but okay
         val currentMonthNumber = now.monthNumber
 
         todoRepository.getAllTodoFlowSorted().cancellable()
@@ -77,7 +80,7 @@ class TodoViewModel @Inject constructor(
                         ALL -> true
                         TODAY -> itemLocalTime.date == todayDate && item.timeStampMilliSeconds > currentTimeStamp
                         WEEK -> {
-                            val week = itemLocalTime.dayOfMonth / 7
+                            val week = ceil(itemLocalTime.dayOfMonth.toDouble() / 7)
                             week == currentWeek && item.timeStampMilliSeconds > currentTimeStamp
                         }
                         MONTH -> itemLocalTime.monthNumber == currentMonthNumber && item.timeStampMilliSeconds > currentTimeStamp
@@ -97,24 +100,31 @@ class TodoViewModel @Inject constructor(
                 todoRepository.deleteTodo(itemTodo.id)
             }
 
-            command.value = Command.ShowSnackBar("Todo Deleted")
-
+            command.postValue(Command.ShowSnackBar("Todo Deleted"))
         }
     }
 
-    fun addNewTodo(title: String, description: String, timeStampMillis: Long) {
+    fun addNewTodo(
+        itemId: Long = 0L,
+        title: String,
+        description: String,
+        timeStampMillis: Long = -1L
+    ) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            todoRepository.insertTodo(
+            val item = if (itemId != 0L) {
+                // update
+                todoRepository.getTodoWithId(itemId).copy(name = title, description = description)
+            } else {
+                // insert
                 TodoItem(
                     name = title,
                     description = description,
                     timeStampMilliSeconds = timeStampMillis
                 )
-            )
-
-            withContext(appCoroutineDispatcher.main) {
-                command.value = Command.ShowSnackBar("New TODO Added!")
             }
+
+            todoRepository.insertOrUpdateTodo(item)
+            command.postValue(Command.ShowSnackBar("New TODO Added!"))
         }
     }
 
@@ -126,23 +136,9 @@ class TodoViewModel @Inject constructor(
 
     fun newTodoTimeSelected(dateTimeStamp: Long, hour: Int, minute: Int) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            val calendar = Calendar.getInstance(TimeZone.getDefault())
-            calendar.time = Date(dateTimeStamp)
-            calendar.set(Calendar.HOUR_OF_DAY, hour)
-            calendar.set(Calendar.MINUTE, minute)
+            val newTimeStamp = updateTime(dateTimeStamp, hour, minute)
 
-            val timeStampMilliSeconds = TimeUnit.MILLISECONDS.toSeconds(calendar.timeInMillis)
-
-            logger.d(
-                "with time stamp $timeStampMilliSeconds + ${getFormattedTime(calendar.timeInMillis)} + ${
-                    getFormattedDate(
-                        calendar.timeInMillis
-                    )
-                }"
-            )
-            withContext(appCoroutineDispatcher.main) {
-                command.value = Command.ShowAddTodoDetailsDialog(calendar.timeInMillis)
-            }
+            command.postValue(Command.ShowAddTodoDetailsDialog(newTimeStamp))
         }
     }
 
@@ -156,6 +152,59 @@ class TodoViewModel @Inject constructor(
         if (checkedId == -1) return
         viewModelScope.launch(appCoroutineDispatcher.io) {
             getAllTodo(todoListStateTypes[checkedId])
+        }
+    }
+
+    fun actionEditTodoItemDate(viewState: TodoListViewState) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(viewState.id)
+            command.postValue(Command.ShowEditTodoDatePicker(item.id, item.timeStampMilliSeconds))
+        }
+    }
+
+    fun actionEditTodoItemTime(viewState: TodoListViewState) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(viewState.id)
+            command.postValue(Command.ShowEditTodoTimerPicker(item.id, item.timeStampMilliSeconds))
+        }
+    }
+
+    fun actionEditItemDetails(viewState: TodoListViewState) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+
+            val item = todoRepository.getTodoWithId(viewState.id)
+
+            command.postValue(
+                Command.ShowEditTodoDetailsFragment(
+                    id = viewState.id,
+                    title = viewState.title,
+                    description = viewState.description.orEmpty(),
+                    timeStampMillis = item.timeStampMilliSeconds
+                )
+            )
+        }
+    }
+
+    fun todoItemDateUpdated(itemId: Long, newDateStamp: Long) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(itemId)
+
+            val newTimeMilliSeconds = updateDate(item.timeStampMilliSeconds, newDateStamp)
+            todoRepository.insertOrUpdateTodo(item.copy(timeStampMilliSeconds = newTimeMilliSeconds))
+
+            command.postValue(Command.ShowSnackBar("Date Updated!"))
+        }
+    }
+
+    fun todoItemTimeUpdated(itemId: Long, hour: Int, minute: Int) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(itemId)
+
+            val newTimeStamp = updateTime(item.timeStampMilliSeconds, hour, minute)
+
+            todoRepository.insertOrUpdateTodo(item.copy(timeStampMilliSeconds = newTimeStamp))
+
+            command.postValue(Command.ShowSnackBar("Time Updated!"))
         }
     }
 }

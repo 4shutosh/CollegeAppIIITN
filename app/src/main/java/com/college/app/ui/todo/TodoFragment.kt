@@ -95,12 +95,27 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         }
     }
 
-    private fun processCommand(command: Command) {
-        when (command) {
+    private fun processCommand(it: Command) {
+        when (it) {
             is ShowAddTodoDatePicker -> showAddTodoDatePickerDialog()
-            is Command.ShowAddTodoTimePicker -> showAddTodoTimePickerDialog(command.dateTimeStamp)
-            is Command.ShowAddTodoDetailsDialog -> showAddTodoDetailsDialog(command.dateAndTimeStamp)
-            is Command.ShowSnackBar -> showSnackBar(command.message, command.showAction)
+            is Command.ShowAddTodoTimePicker -> showAddTodoTimePickerDialog(it.dateTimeStamp)
+            is Command.ShowAddTodoDetailsDialog -> showAddTodoDetailsDialog(dateAndTimeStamp = it.dateAndTimeStamp)
+            is Command.ShowSnackBar -> showSnackBar(it.message, it.showAction)
+
+            is Command.ShowEditTodoDatePicker -> showEditTodoDatePickerDialog(
+                it.itemId,
+                it.dateTimeStamp
+            )
+            is Command.ShowEditTodoTimerPicker -> showEditTodoTimePickerDialog(
+                it.itemId,
+                it.timeStampMillis
+            )
+            is Command.ShowEditTodoDetailsFragment -> showAddTodoDetailsDialog(
+                id = it.id,
+                title = it.title,
+                description = it.description,
+                dateAndTimeStamp = it.timeStampMillis
+            )
         }
     }
 
@@ -113,7 +128,15 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
     }
 
     override fun onTodoItemEdit(viewState: TodoListViewState, position: Int) {
+        viewModel.actionEditItemDetails(viewState)
+    }
 
+    override fun onTodoItemEditDate(viewState: TodoListViewState, position: Int) {
+        viewModel.actionEditTodoItemDate(viewState)
+    }
+
+    override fun onTodoItemEditTime(viewState: TodoListViewState, position: Int) {
+        viewModel.actionEditTodoItemTime(viewState)
     }
 
     private fun showAddTodoDatePickerDialog() {
@@ -136,8 +159,38 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
         )
     }
 
-    private fun showAddTodoDetailsDialog(dateAndTimeStamp: Long) {
+    private fun showEditTodoDatePickerDialog(itemId: Long, initialDate: Long) {
+        CollegeAppPicker().showDatePickerDialog(
+            R.string.add_title_todo,
+            onSelected = {
+                viewModel.todoItemDateUpdated(itemId, it)
+            },
+            initialDate = initialDate,
+            fragmentManager = childFragmentManager
+        )
+    }
+
+    private fun showEditTodoTimePickerDialog(itemId: Long, initialTime: Long) {
+        CollegeAppPicker().showTimePickerDialog(
+            R.string.add_title_todo,
+            onSelected = {
+                viewModel.todoItemTimeUpdated(itemId, it.hour, it.minute)
+            },
+            initialTime = initialTime,
+            fragmentManager = childFragmentManager
+        )
+    }
+
+    private fun showAddTodoDetailsDialog(
+        id: Long = 0L,
+        title: String = "",
+        description: String = "",
+        dateAndTimeStamp: Long
+    ) {
         val addTodoDetailsDialog = AddTodoDetailsDialogFragment.instance(
+            id = id,
+            title = title,
+            description = description,
             todoDateAndTimeStamp = dateAndTimeStamp
         )
         addTodoDetailsDialog.show(childFragmentManager, ADD_TODO_DETAILS_DIALOG_TAG)

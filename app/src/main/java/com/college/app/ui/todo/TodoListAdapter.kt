@@ -47,6 +47,8 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
         fun onTodoItemClick(viewState: TodoListViewState, position: Int)
         fun onTodoItemDelete(viewState: TodoListViewState, position: Int)
         fun onTodoItemEdit(viewState: TodoListViewState, position: Int)
+        fun onTodoItemEditDate(viewState: TodoListViewState, position: Int)
+        fun onTodoItemEditTime(viewState: TodoListViewState, position: Int)
     }
 
     inner class ViewHolder(val binding: ListItemTodoBinding) :
@@ -60,7 +62,7 @@ object TodoListDiffCallback : DiffUtil.ItemCallback<TodoListViewState>() {
     override fun areContentsTheSame(
         oldItem: TodoListViewState,
         newItem: TodoListViewState
-    ) = oldItem.id == newItem.id
+    ) = oldItem == newItem
 
 }
 
