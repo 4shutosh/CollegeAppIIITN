@@ -7,6 +7,10 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 // todo set custom themes here
 class CollegeAppPicker {
@@ -23,6 +27,7 @@ class CollegeAppPicker {
     fun showDatePickerDialog(
         @StringRes titleText: Int,
         fragmentManager: FragmentManager,
+        initialDate: Long = -1L,
         onSelected: (Long) -> Unit,
         onDismiss: (() -> Unit)? = null
     ) {
@@ -30,7 +35,7 @@ class CollegeAppPicker {
         val materialDatePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(titleText)
             .setCalendarConstraints(constraintsBuilder.build())
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .setSelection(if (initialDate == -1L) MaterialDatePicker.todayInUtcMilliseconds() else initialDate)
             .build()
 
         if (onDismiss != null) {
@@ -49,17 +54,25 @@ class CollegeAppPicker {
     fun showTimePickerDialog(
         @StringRes titleText: Int,
         fragmentManager: FragmentManager,
+        initialTime: Long = -1L,
         onSelected: (CollegeAppTimePickerReturn) -> Unit,
         is24HourFormat: Boolean = false,
         onDismiss: (() -> Unit)? = null
     ) {
 
         val clockFormat = if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+        val now = Clock.System.now()
+
+        val timeToSet = if (initialTime != -1L) Instant.fromEpochMilliseconds(initialTime)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+        else {
+            now.toLocalDateTime(TimeZone.currentSystemDefault())
+        }
 
         val materialTimePicker = MaterialTimePicker.Builder()
             .setTitleText(titleText)
-            .setHour(12)
-            .setMinute(10)
+            .setHour(timeToSet.hour)
+            .setMinute(timeToSet.minute)
             .setTimeFormat(clockFormat)
             .build()
 

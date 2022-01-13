@@ -80,6 +80,33 @@ fun calculateTimeLeft(timeStampMilliSeconds: Long): Pair<Int, DateTimeDifference
     }
 }
 
+// returns updated timestamp in milliseconds
+fun updateDate(timeStampMilliSeconds: Long, dateStamp: Long): Long {
+
+    val newDate = Instant.fromEpochMilliseconds(dateStamp)
+        .toLocalDateTime(TimeZone.currentSystemDefault()).date
+
+    val calendar = Calendar.getInstance(java.util.TimeZone.getDefault())
+    calendar.time = Date(timeStampMilliSeconds)
+    calendar.set(Calendar.DAY_OF_MONTH, newDate.dayOfMonth)
+    calendar.set(Calendar.MONTH, newDate.monthNumber - 1)
+    calendar.set(Calendar.YEAR, newDate.year)
+
+    return calendar.timeInMillis
+}
+
+// returns updated timestamp in milliseconds
+fun updateTime(timeStampMilliSeconds: Long, hour: Int, minute: Int): Long {
+
+    val calendar = Calendar.getInstance(java.util.TimeZone.getDefault())
+    calendar.time = Date(timeStampMilliSeconds)
+    calendar.set(Calendar.HOUR_OF_DAY, hour)
+    calendar.set(Calendar.MINUTE, minute)
+
+    return calendar.timeInMillis
+}
+
+
 enum class DateTimeDifferenceUnit(val unit: String) {
     PAST("past"),
 
