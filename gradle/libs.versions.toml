@@ -186,5 +186,6 @@ androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.0"
 
 androidx-recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
 androidx-recyclerview-selection = "androidx.recyclerview:recyclerview-selection:1.2.0-alpha01"
+# check use case of the selection
 
 kotlinx-dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.3.1"
