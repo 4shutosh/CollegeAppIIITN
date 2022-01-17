@@ -70,5 +70,6 @@ fun TodoItem.toViewState(): TodoListViewState {
         time = time,
         timeLeft = timeLeft,
         timeLeftUnit = "${timeLeftPair.second.unit} left",
+        isNotifyOn = notify
     )
 }

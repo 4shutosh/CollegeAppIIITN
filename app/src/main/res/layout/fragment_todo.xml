@@ -78,6 +78,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:visibility="gone"
+            tools:visibility="visible"
             app:srcCompat="@drawable/ic_baseline_check_24" />
 
         <com.google.android.material.textview.MaterialTextView

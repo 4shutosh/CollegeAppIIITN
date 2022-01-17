@@ -1,5 +1,10 @@
 package com.college.app.ui.todo
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +17,11 @@ import com.college.app.databinding.FragmentTodoBinding
 import com.college.app.ui.todo.TodoViewModel.Command
 import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
+import com.college.app.ui.todo.service.TodoBroadcastReceiver
+import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_DESCRIPTION
+import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_ID
+import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_TITLE
+import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.TODO_ACTION_SEND_NOTIFICATION
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
 import com.college.app.utils.extensions.gone
@@ -116,6 +126,13 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
                 description = it.description,
                 dateAndTimeStamp = it.timeStampMillis
             )
+            is Command.ActionTodoNotification -> processTodoNotification(
+                it.start,
+                it.timeStampMillis,
+                it.title,
+                it.description,
+                it.itemId
+            )
         }
     }
 
@@ -137,6 +154,10 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     override fun onTodoItemEditTime(viewState: TodoListViewState, position: Int) {
         viewModel.actionEditTodoItemTime(viewState)
+    }
+
+    override fun onTodoItemNotifyClicked(viewState: TodoListViewState, notify: Boolean) {
+        viewModel.todoItemNotifyUpdated(viewState, notify)
     }
 
     private fun showAddTodoDatePickerDialog() {
@@ -199,6 +220,46 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
     private fun showSnackBar(message: String, showAction: Boolean) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
             .show()
+    }
+
+    private fun processTodoNotification(
+        start: Boolean, timeStamp: Long, title: String,
+        description: String, todoItemId: Long
+    ) {
+
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        // create new intent
+        val intent = Intent(requireContext(), TodoBroadcastReceiver::class.java)
+        intent.action = TODO_ACTION_SEND_NOTIFICATION
+        intent.putExtra(KEY_TODO_ID, todoItemId.toInt())
+        intent.putExtra(KEY_TODO_TITLE, title)
+        if (description.isNotEmpty()) intent.putExtra(KEY_TODO_DESCRIPTION, description)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            todoItemId.toInt(),
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        if (start) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    timeStamp,
+                    pendingIntent
+                )
+            } else {
+                alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    timeStamp,
+                    pendingIntent
+                )
+            }
+        } else {
+            alarmManager.cancel(pendingIntent)
+        }
     }
 
     companion object {

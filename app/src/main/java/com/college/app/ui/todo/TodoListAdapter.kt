@@ -41,14 +41,22 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
             currentItem.isExpanded = (!currentItem.isExpanded)
             clickListener.onTodoItemClick(currentItem, position)
         }
+
+        holder.binding.listItemTodoNotifySwitch.setOnCheckedChangeListener { _, notify ->
+            clickListener.onTodoItemNotifyClicked(currentItem, notify)
+        }
     }
 
     interface TodoItemClickListener {
         fun onTodoItemClick(viewState: TodoListViewState, position: Int)
+
         fun onTodoItemDelete(viewState: TodoListViewState, position: Int)
+
         fun onTodoItemEdit(viewState: TodoListViewState, position: Int)
         fun onTodoItemEditDate(viewState: TodoListViewState, position: Int)
         fun onTodoItemEditTime(viewState: TodoListViewState, position: Int)
+
+        fun onTodoItemNotifyClicked(viewState: TodoListViewState, notify: Boolean)
     }
 
     inner class ViewHolder(val binding: ListItemTodoBinding) :

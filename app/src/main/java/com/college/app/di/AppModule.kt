@@ -1,6 +1,7 @@
 package com.college.app.di
 
 import android.content.Context
+import androidx.core.app.NotificationManagerCompat
 import com.college.app.BuildConfig
 import com.college.app.R
 import com.college.app.network.CollegeAppService
@@ -58,4 +59,9 @@ class AppModule {
     @Singleton
     fun provideCollegeAppService(collegeNetworking: CollegeNetworking): CollegeAppService =
         collegeNetworking.collegeAppService()
+
+    @Provides
+    @Singleton
+    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat =
+        NotificationManagerCompat.from(context)
 }

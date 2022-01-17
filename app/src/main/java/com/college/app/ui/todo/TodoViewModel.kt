@@ -18,6 +18,7 @@ import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
@@ -52,16 +53,29 @@ class TodoViewModel @Inject constructor(
 
         class ShowEditTodoDatePicker(val itemId: Long, val dateTimeStamp: Long) : Command()
         class ShowEditTodoTimerPicker(val itemId: Long, val timeStampMillis: Long) : Command()
-        class ShowEditTodoDetailsFragment(val id : Long, val title: String, val description: String, val timeStampMillis: Long) : Command()
+        class ShowEditTodoDetailsFragment(
+            val id: Long,
+            val title: String,
+            val description: String,
+            val timeStampMillis: Long
+        ) : Command()
+
+        class ActionTodoNotification(
+            val start: Boolean,
+            val timeStampMillis: Long,
+            val title: String,
+            val description: String,
+            val itemId: Long,
+        ) : Command()
     }
 
     init {
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            getAllTodo()
+            populateData()
         }
     }
 
-    private suspend fun getAllTodo(type: TodoListTypes = ALL) {
+    private suspend fun populateData(type: TodoListTypes = ALL) {
         val timeZone = kotlinx.datetime.TimeZone.currentSystemDefault()
         val now = Clock.System.now().toLocalDateTime(timeZone)
         val currentTimeStamp = Clock.System.now().toEpochMilliseconds()
@@ -151,7 +165,7 @@ class TodoViewModel @Inject constructor(
     fun actionCheckedChipGroupChanged(checkedId: Int) {
         if (checkedId == -1) return
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            getAllTodo(todoListStateTypes[checkedId])
+            populateData(todoListStateTypes[checkedId])
         }
     }
 
@@ -205,6 +219,42 @@ class TodoViewModel @Inject constructor(
             todoRepository.insertOrUpdateTodo(item.copy(timeStampMilliSeconds = newTimeStamp))
 
             command.postValue(Command.ShowSnackBar("Time Updated!"))
+        }
+    }
+
+    fun todoItemNotifyUpdated(viewState: TodoListViewState, notify: Boolean) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(viewState.id)
+
+            // show snack message
+
+            logger.d("found notify boolean $notify")
+            withContext(appCoroutineDispatcher.main) {
+                command.postValue(
+                    Command.ShowSnackBar(
+                        if (notify) "You will be notified for ${item.name}"
+                        else "Notification Cancelled!"
+                    )
+                )
+            }
+
+            val timeStamp = System.currentTimeMillis() + 20000
+
+            withContext(appCoroutineDispatcher.main) {
+                command.postValue(
+                    Command.ActionTodoNotification(
+                        notify,
+                        timeStamp,
+                        item.name,
+                        item.description,
+                        item.id
+                    )
+                )
+            }
+
+            withContext(appCoroutineDispatcher.io) {
+                todoRepository.insertOrUpdateTodo(item.copy(notify = notify))
+            }
         }
     }
 }

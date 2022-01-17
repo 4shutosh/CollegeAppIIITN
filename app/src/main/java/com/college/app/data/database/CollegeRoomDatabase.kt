@@ -8,7 +8,7 @@ import com.college.app.data.entities.TodoItem
     entities = [
         TodoItem::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class CollegeRoomDatabase : RoomDatabase(), CollegeAppDatabase

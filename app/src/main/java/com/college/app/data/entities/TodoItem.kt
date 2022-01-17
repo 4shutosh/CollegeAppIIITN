@@ -13,6 +13,7 @@ data class TodoItem(
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "timeStamp") var timeStampMilliSeconds: Long,
     @ColumnInfo(name = "isCompleted") var isCompleted: Boolean = false,
+    @ColumnInfo(name = "notify") var notify: Boolean = false,
     @PrimaryKey(autoGenerate = true) override val id: Long = 0
 ) : CollegeEntity {
 
