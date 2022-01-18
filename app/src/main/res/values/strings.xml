@@ -279,9 +279,14 @@
     <!--  TodoFragment  -->
     <string name="todo_item_edit">Edit</string>
     <string name="todo_item_mark_as_complete">Mark as Complete</string>
+    <string name="todo_item_completed">Completed</string>
+    <string name="todo_item_done">Done</string>
     <string name="todo_item_add_item">Add TODO</string>
+    <string name="todo_item_notify">Notify</string>
     <string name="snackbar_action_undo">Undo</string>
     <string name="todo_dialog_title">TODO</string>
     <string name="todo_fragment_no_data_message">No TODO Found. You are free*!</string>
+    <string name="todo_notification_mark_as_done">Mark as done</string>
+    <string name="todo_notification_extend_an_hour">Extend an hour</string>
 
 </resources>

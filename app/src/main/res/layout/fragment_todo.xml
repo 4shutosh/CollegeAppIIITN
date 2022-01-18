@@ -56,7 +56,7 @@
             android:paddingBottom="80dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/list_item_todo" />
+            tools:listitem="@layout/list_item_todo_incomplete" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_todo_add_fab"

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.college.app.ui.todo.TodoListViewState" />
+
+        <variable
+            name="itemPosition"
+            type="int" />
+
+        <variable
+            name="actionHandler"
+            type="com.college.app.ui.todo.TodoListAdapter.TodoItemClickListener" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <!--    todo auto text size everywhere-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_list_item_todo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_todo_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/dr_rounded_16"
+            android:backgroundTint="@color/purple_dark"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:focusable="false"
+            android:lines="1"
+            android:text="@{viewState.title}"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="28sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.7"
+            tools:text="DS Assignment" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeTextType="uniform"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:focusable="false"
+            android:includeFontPadding="false"
+            android:text="@{viewState.description}"
+            app:layout_constraintBottom_toTopOf="@id/list_item_todo_time"
+            app:layout_constraintEnd_toStartOf="@id/list_item_todo_unit_time_left"
+            app:layout_constraintStart_toStartOf="@id/list_item_todo_title"
+            app:layout_constraintTop_toBottomOf="@id/list_item_todo_title"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_todo_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:duplicateParentState="true"
+            app:layout_constraintBottom_toBottomOf="@+id/list_item_todo_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/list_item_todo_title"
+            app:layout_constraintVertical_bias="0"
+            app:srcCompat="@drawable/ic_baseline_done_all_24"
+            tools:text="44!!" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_unit_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:ellipsize="end"
+            android:includeFontPadding="true"
+            android:paddingHorizontal="4dp"
+            android:singleLine="true"
+            android:text="@string/todo_item_done"
+            android:textAlignment="textEnd"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@id/list_item_todo_time_left"
+            app:layout_constraintStart_toEndOf="@id/list_item_todo_description"
+            app:layout_constraintTop_toBottomOf="@+id/list_item_todo_time_left" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/time_icon_color"
+            android:drawablePadding="10dp"
+            android:duplicateParentState="false"
+            android:focusable="true"
+            android:gravity="center|start"
+            android:padding="4dp"
+            android:text="@{viewState.time}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/list_item_mark_as_complete"
+            app:layout_constraintEnd_toEndOf="@id/list_item_todo_time_left"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/list_item_todo_title"
+            app:layout_constraintWidth_percent="0.5"
+            tools:text="11:00 am" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeTextType="uniform"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="10dp"
+            android:duplicateParentState="false"
+            android:focusable="true"
+            android:gravity="center|start"
+            android:padding="4dp"
+            android:text="@{viewState.date}"
+            app:layout_constraintBottom_toBottomOf="@id/list_item_todo_time"
+            app:layout_constraintEnd_toEndOf="@id/list_item_todo_time_left"
+            app:layout_constraintStart_toEndOf="@id/list_item_todo_time"
+            app:layout_constraintTop_toTopOf="@id/list_item_todo_time"
+            tools:text="24th January 2022" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_mark_as_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_baseline_done_all_24"
+            android:drawablePadding="10dp"
+            android:duplicateParentState="false"
+            android:focusable="true"
+            android:gravity="center|start"
+            android:padding="4dp"
+            android:text="@string/todo_item_completed"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/list_item_todo_delete"
+            app:layout_constraintEnd_toEndOf="@id/list_item_todo_unit_time_left"
+            app:layout_constraintStart_toStartOf="@id/list_item_todo_title"
+            tools:layout_editor_absoluteY="115dp"
+            tools:text="Completed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_todo_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_delete_white_24dp"
+            android:drawablePadding="10dp"
+            android:duplicateParentState="false"
+            android:focusable="true"
+            android:gravity="center"
+            android:onClick="@{()-> actionHandler.onTodoItemDelete(viewState, itemPosition)}"
+            android:padding="4dp"
+            android:text="@string/delete"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/list_item_todo_title"
+            tools:text="@string/delete" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/list_item_todo_expanded_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewState.isExpanded ? View.VISIBLE : View.GONE, default = gone}"
+            app:constraint_referenced_ids="list_item_mark_as_complete,list_item_todo_delete,list_item_todo_date,list_item_todo_time"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
