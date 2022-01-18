@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.todo.TodoRepository
-import com.college.app.ui.todo.TodoListTypes.ALL
-import com.college.app.ui.todo.TodoListTypes.DEAD
-import com.college.app.ui.todo.TodoListTypes.LATER
-import com.college.app.ui.todo.TodoListTypes.MONTH
-import com.college.app.ui.todo.TodoListTypes.TODAY
-import com.college.app.ui.todo.TodoListTypes.WEEK
+import com.college.app.ui.todo.TodoListFilterTypes.ALL
+import com.college.app.ui.todo.TodoListFilterTypes.DEAD
+import com.college.app.ui.todo.TodoListFilterTypes.LATER
+import com.college.app.ui.todo.TodoListFilterTypes.MONTH
+import com.college.app.ui.todo.TodoListFilterTypes.TODAY
+import com.college.app.ui.todo.TodoListFilterTypes.WEEK
 import com.college.app.utils.extensions.toLiveData
 import com.college.app.utils.extensions.updateDate
 import com.college.app.utils.extensions.updateTime
@@ -18,7 +18,6 @@ import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
@@ -43,7 +42,7 @@ class TodoViewModel @Inject constructor(
 
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
 
-    val todoListStateTypes by lazy { enumValues<TodoListTypes>().toList() }
+    val todoListStateTypes by lazy { enumValues<TodoListFilterTypes>().toList() }
 
     sealed class Command {
         object ShowAddTodoDatePicker : Command()
@@ -75,7 +74,7 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    private suspend fun populateData(type: TodoListTypes = ALL) {
+    private suspend fun populateData(type: TodoListFilterTypes = ALL) {
         val timeZone = kotlinx.datetime.TimeZone.currentSystemDefault()
         val now = Clock.System.now().toLocalDateTime(timeZone)
         val currentTimeStamp = Clock.System.now().toEpochMilliseconds()
@@ -226,8 +225,6 @@ class TodoViewModel @Inject constructor(
         viewModelScope.launch(appCoroutineDispatcher.io) {
             val item = todoRepository.getTodoWithId(viewState.id)
 
-            // show snack message
-
             logger.d("found notify boolean $notify")
             withContext(appCoroutineDispatcher.main) {
                 command.postValue(
@@ -255,6 +252,14 @@ class TodoViewModel @Inject constructor(
             withContext(appCoroutineDispatcher.io) {
                 todoRepository.insertOrUpdateTodo(item.copy(notify = notify))
             }
+        }
+    }
+
+    fun todoItemMarkAsDone(viewState: TodoListViewState) {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val item = todoRepository.getTodoWithId(viewState.id)
+
+            todoRepository.insertOrUpdateTodo(item.copy(isCompleted = true))
         }
     }
 }

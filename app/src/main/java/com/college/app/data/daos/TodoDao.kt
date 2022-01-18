@@ -11,7 +11,7 @@ abstract class TodoDao : EntityDao<TodoItem>() {
     @Query("SELECT * FROM todos")
     abstract fun getAllTodoFlow(): Flow<List<TodoItem>>
 
-    @Query("SELECT * FROM todos ORDER BY timeStamp ASC")
+    @Query("SELECT * FROM todos ORDER BY timeStamp AND isCompleted ASC")
     abstract fun getAllTodoTimestampSortedFlow(): Flow<List<TodoItem>>
 
     @Query("SELECT * FROM todos")

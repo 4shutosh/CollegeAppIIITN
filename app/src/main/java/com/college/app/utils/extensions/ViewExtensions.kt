@@ -1,8 +1,10 @@
 package com.college.app.utils.extensions
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -49,3 +51,10 @@ fun View?.gone() {
 fun View?.invisible() {
     if (this?.visibility != View.INVISIBLE) this?.visibility = View.INVISIBLE
 }
+
+inline var TextView.strike: Boolean
+    set(visible) {
+        paintFlags = if (visible) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
+    get() = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG == Paint.STRIKE_THRU_TEXT_FLAG

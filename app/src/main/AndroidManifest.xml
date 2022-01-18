@@ -65,7 +65,7 @@
         </provider>
 
         <receiver
-            android:name=".ui.todo.service.TodoBroadcastReceiver"
+            android:name=".ui.todo.broadcast.TodoBroadcastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

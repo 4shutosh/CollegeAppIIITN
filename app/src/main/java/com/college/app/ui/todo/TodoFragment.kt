@@ -17,11 +17,11 @@ import com.college.app.databinding.FragmentTodoBinding
 import com.college.app.ui.todo.TodoViewModel.Command
 import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
-import com.college.app.ui.todo.service.TodoBroadcastReceiver
-import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_DESCRIPTION
-import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_ID
-import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.KEY_TODO_TITLE
-import com.college.app.ui.todo.service.TodoBroadcastReceiver.Companion.TODO_ACTION_SEND_NOTIFICATION
+import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver
+import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_DESCRIPTION
+import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_ID
+import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_TITLE
+import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.TODO_ACTION_SEND_NOTIFICATION
 import com.college.app.utils.CollegeAppPicker
 import com.college.app.utils.extensions.bringItemToView
 import com.college.app.utils.extensions.gone
@@ -158,6 +158,10 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     override fun onTodoItemNotifyClicked(viewState: TodoListViewState, notify: Boolean) {
         viewModel.todoItemNotifyUpdated(viewState, notify)
+    }
+
+    override fun onTodoItemMarkAsDone(viewState: TodoListViewState, position: Int) {
+        viewModel.todoItemMarkAsDone(viewState)
     }
 
     private fun showAddTodoDatePickerDialog() {

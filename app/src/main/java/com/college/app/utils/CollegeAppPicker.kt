@@ -71,7 +71,7 @@ class CollegeAppPicker {
 
         val materialTimePicker = MaterialTimePicker.Builder()
             .setTitleText(titleText)
-            .setHour(timeToSet.hour)
+            .setHour(timeToSet.hour + 1)
             .setMinute(timeToSet.minute)
             .setTimeFormat(clockFormat)
             .build()
