@@ -135,8 +135,8 @@ enum class TodoListFilterTypes(val title: String) {
     ALL("All"),
     TODAY("Today"),
     WEEK("Week"),
-    MONTH("Month"),
     LATER("Later"),
+    DONE("DONE"),
     DEAD("DEAD")
 }
 

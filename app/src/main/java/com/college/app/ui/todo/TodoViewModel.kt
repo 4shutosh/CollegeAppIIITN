@@ -7,8 +7,8 @@ import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.todo.TodoRepository
 import com.college.app.ui.todo.TodoListFilterTypes.ALL
 import com.college.app.ui.todo.TodoListFilterTypes.DEAD
+import com.college.app.ui.todo.TodoListFilterTypes.DONE
 import com.college.app.ui.todo.TodoListFilterTypes.LATER
-import com.college.app.ui.todo.TodoListFilterTypes.MONTH
 import com.college.app.ui.todo.TodoListFilterTypes.TODAY
 import com.college.app.ui.todo.TodoListFilterTypes.WEEK
 import com.college.app.utils.extensions.toLiveData
@@ -96,9 +96,9 @@ class TodoViewModel @Inject constructor(
                             val week = ceil(itemLocalTime.dayOfMonth.toDouble() / 7)
                             week == currentWeek && item.timeStampMilliSeconds > currentTimeStamp
                         }
-                        MONTH -> itemLocalTime.monthNumber == currentMonthNumber && item.timeStampMilliSeconds > currentTimeStamp
+                        DONE -> item.isCompleted && item.timeStampMilliSeconds > currentTimeStamp
                         LATER -> (itemLocalTime.monthNumber != currentMonthNumber && item.timeStampMilliSeconds > currentTimeStamp)
-                        DEAD -> item.timeStampMilliSeconds < currentTimeStamp
+                        DEAD -> item.timeStampMilliSeconds < currentTimeStamp && !item.isCompleted
                     }
                 }.toListOfViewState()
             }.collect {

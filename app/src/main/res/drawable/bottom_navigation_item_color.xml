@@ -4,5 +4,5 @@
         android:color="@color/colorControlNormal" />
 
     <item android:state_checked="false"
-        android:color="@color/grey600" />
+        android:color="@color/bottomNavOff" />
 </selector>

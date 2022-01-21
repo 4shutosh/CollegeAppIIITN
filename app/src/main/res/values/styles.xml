@@ -138,4 +138,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="CollegeAppTodoChipItem" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_item_color</item>
+    </style>
+
+    <style name="CollegeAppTodoChipItemText">
+        <item name="android:textColor">@color/chip_item_title_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

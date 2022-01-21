@@ -16,7 +16,7 @@
         <item name="colorPrimaryVariant">?colorPrimary</item>
         <item name="colorSecondary">?colorPrimary</item>
         <item name="colorControlNormal">@color/colorControlNormal</item>
-        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondaryVariant">?colorPrimary</item>
         <item name="android:colorBackground">?colorSurface</item>

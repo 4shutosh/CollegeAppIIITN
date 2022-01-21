@@ -11,33 +11,54 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.college.app.R
 import com.college.app.databinding.FragmentTodoBinding
 import com.college.app.ui.todo.TodoViewModel.Command
 import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
-import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_DESCRIPTION
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_ID
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.KEY_TODO_TITLE
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver.Companion.TODO_ACTION_SEND_NOTIFICATION
+import com.college.app.ui.todo.newTodo.AddTodoDetailsDialogFragment
 import com.college.app.utils.CollegeAppPicker
+import com.college.app.utils.SwipeActionRecyclerViewItem
 import com.college.app.utils.extensions.bringItemToView
 import com.college.app.utils.extensions.gone
 import com.college.app.utils.extensions.visible
+import com.college.base.logger.CollegeLogger
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
+class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
+    SwipeActionRecyclerViewItem.SwipeActionCallback {
+
+    @Inject
+    lateinit var logger: CollegeLogger
 
     private lateinit var binding: FragmentTodoBinding
 
     private val viewModel: TodoViewModel by viewModels()
 
     private val todoAdapter by lazy { TodoListAdapter(this) }
+
+    private val itemTouchHelper by lazy {
+        SwipeActionRecyclerViewItem(
+            requireContext(),
+            swipeRightIcon = R.drawable.ic_delete_sweep_24dp,
+            swipeLeftIcon = R.drawable.ic_baseline_check_24,
+            swipeRightBgColor = R.color.green400,
+            swipeLeftBgColor = android.R.color.holo_red_dark,
+            this
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +78,8 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
     private fun initViews() {
         binding.fragmentTodoList.adapter = todoAdapter
         binding.fragmentTodoList.setHasFixedSize(true)
+        val touchHelper = ItemTouchHelper(itemTouchHelper)
+        touchHelper.attachToRecyclerView(binding.fragmentTodoList)
         (binding.fragmentTodoList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
             true
 
@@ -66,7 +89,10 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
         viewModel.todoListStateTypes.forEachIndexed { index, it ->
             val chipToAdd = Chip(requireContext())
+            val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, R.style.CollegeAppTodoChipItem)
             chipToAdd.apply {
+                setChipDrawable(chipDrawable)
+                setTextAppearance(R.style.CollegeAppTodoChipItemText)
                 text = it.title
                 isChipIconVisible = false
                 isCheckedIconVisible = false
@@ -268,6 +294,14 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener {
 
     companion object {
         private const val ADD_TODO_DETAILS_DIALOG_TAG = "ADD_TODO_DETAILS_DIALOG_TAG"
+    }
+
+    override fun onLeftSwipe(position: Int) {
+        logger.d("onLeftSwipe")
+    }
+
+    override fun onRightSwipe(position: Int) {
+        logger.d("onRightSwipe")
     }
 
 }

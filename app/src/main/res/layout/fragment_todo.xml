@@ -27,6 +27,7 @@
                 android:id="@+id/fragment_todo_chip_group_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorSurface"
                 android:scrollbars="none"
                 app:layout_scrollFlags="scroll|enterAlways">
 
@@ -36,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="0dp"
-                    android:background="@color/purple_darker"
+                    android:background="@color/colorSurface"
                     android:nestedScrollingEnabled="true"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="0dp"
@@ -65,6 +66,7 @@
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorControlNormal"
             android:contentDescription="@string/todo_item_mark_as_complete"
             android:onClick="@{()-> viewModel.actionAddTodoItemClicked()}"
             android:src="@drawable/ic_add_black_24dp"

@@ -18,9 +18,13 @@
     <color name="colorOnPrimary">@color/black</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorSurface">@color/purple_lighter</color>
-    <color name="colorOnSurface">@color/black</color>
-    <color name="colorControlNormal">@color/black</color>
+    <color name="colorSurface">@color/white</color>
+    <color name="colorOnSurface">@color/blue_1</color>
+    <color name="colorControlNormal">@color/blue_4</color>
+    <color name="colorControlHighlight">@color/blue_4</color>
+
+    <color name="textColorPrimary">@color/blue_4</color>
+    <color name="textColorSecondary">@color/blue_4</color>
 
 
     <color name="bottomSheetBackground">@color/white</color>
@@ -32,6 +36,7 @@
     <color name="statusBarColor">@color/white</color>
     <color name="alertDialogText">@color/black</color>
     <color name="cardViewBackground">@color/white</color>
+    <color name="bottomNavOff">@color/blue_2</color>
 
     <color name="toolbarColor">@color/white</color>
 
@@ -72,5 +77,14 @@
     <color name="purple_dark">#352F44</color>
     <color name="purple_lighter">#DBD8E3</color>
     <color name="purple_light">#5C5470</color>
+
+    <color name="grey_darker">#222831</color>
+    <color name="grey_dark">#393E46</color>
+    <color name="orange_primary">#D65A31</color>
+
+    <color name="blue_4">#1B262C</color>
+    <color name="blue_3">#0F4C75</color>
+    <color name="blue_2">#3282B8</color>
+    <color name="blue_1">#BBE1FA</color>
 
 </resources>

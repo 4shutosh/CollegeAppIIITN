@@ -2,7 +2,10 @@ package com.college.app.utils
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.ColorDrawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -25,13 +28,25 @@ class SwipeActionRecyclerViewItem(
         private const val SWIPE_THRESHOLD = 0.7f
     }
 
-    private val swipeRightBackground by lazy { ColorDrawable() }
-    private val swipeLeftBackground by lazy { ColorDrawable() }
-
-    init {
-        swipeRightBackground.color = ContextCompat.getColor(context, swipeRightBgColor)
-        swipeLeftBackground.color = ContextCompat.getColor(context, swipeLeftBgColor)
+    private val swipeRightBackground by lazy {
+        ColorDrawable(
+            ContextCompat.getColor(
+                context,
+                swipeRightBgColor
+            )
+        )
     }
+    private val swipeLeftBackground by lazy {
+        ColorDrawable(
+            ContextCompat.getColor(
+                context,
+                swipeLeftBgColor
+            )
+        )
+    }
+
+    private val swipeRightDr by lazy { ContextCompat.getDrawable(context, swipeRightIcon) }
+    private val swipeLeftDr by lazy { ContextCompat.getDrawable(context, swipeLeftIcon) }
 
     interface SwipeActionCallback {
         fun onLeftSwipe(position: Int)
@@ -75,18 +90,62 @@ class SwipeActionRecyclerViewItem(
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
 
         val itemView = viewHolder.itemView
-        val height = itemView.height
         val isCancelled = (dX == 0f) && !isCurrentlyActive
         if (isCancelled) {
             clearCanvas(
                 c,
-                itemView.left.toFloat() + dX,
+                itemView.left.toFloat(),
                 itemView.top.toFloat(),
                 itemView.right.toFloat(),
                 itemView.bottom.toFloat()
             )
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
+        }
+
+        when {
+            dX > 0 -> {
+                swipeRightBackground.setBounds(
+                    itemView.left,
+                    itemView.top,
+                    itemView.right + dX.toInt(),
+                    itemView.bottom
+                )
+                swipeRightBackground.draw(c)
+//                swipeRightDr?.let {
+//                    it.setBounds(
+//                        itemView.right - it.intrinsicWidth,
+//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2,
+//                        itemView.right - (itemView.height - it.intrinsicHeight) / 2,
+//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2 + it.intrinsicHeight
+//                    )
+//                    it.draw(c)
+//                }
+
+            }
+            dX < 0 -> {
+                swipeLeftBackground.setBounds(
+                    itemView.right + dX.toInt(),
+                    itemView.top,
+                    itemView.right,
+                    itemView.bottom
+                )
+                swipeLeftBackground.draw(c)
+
+//                swipeLeftDr?.let {
+//                    it.setBounds(
+//                        itemView.right - it.intrinsicWidth,
+//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2,
+//                        itemView.right - (itemView.height - it.intrinsicHeight) / 2,
+//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2 + it.intrinsicHeight
+//                    )
+//                    it.draw(c)
+//                }
+            }
+            else -> {
+                swipeLeftBackground.setBounds(0, 0, 0, 0)
+                swipeRightBackground.setBounds(0, 0, 0, 0)
+            }
         }
 
 
@@ -99,7 +158,10 @@ class SwipeActionRecyclerViewItem(
         right: Float,
         bottom: Float
     ) {
-        c.drawRect(left, top, right, bottom, Paint())
+        val clearPaint = Paint()
+        clearPaint.color = Color.TRANSPARENT
+        clearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SCREEN)
+        c.drawRect(left, top, right, bottom, clearPaint)
     }
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder) = SWIPE_THRESHOLD
