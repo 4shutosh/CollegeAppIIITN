@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/todo_fragment_no_data_message"
-            android:textColor="@color/colorOnSurface"
+            android:textColor="@color/colorControlNormal"
             android:visibility="gone"
             app:layout_anchor="@id/fragment_todo_no_data_image"
             app:layout_anchorGravity="bottom|center"

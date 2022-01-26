@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="@color/colorControlNormal" android:state_enabled="true" android:state_checked="true"/>
-    <item android:color="@color/colorOnSurface" android:state_enabled="true" android:state_checked="false"/>
-    <item android:color="@color/colorSurface" android:state_enabled="true"/>
+    <item android:color="@color/blue_secondary" android:state_enabled="true" android:state_checked="true"/>
+    <item android:color="@color/blue_primary" android:state_enabled="true" android:state_checked="false"/>
+    <item android:color="@color/blue_primary" android:state_enabled="true"/>
 </selector>

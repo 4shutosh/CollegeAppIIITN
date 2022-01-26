@@ -112,42 +112,45 @@ class SwipeActionRecyclerViewItem(
                     itemView.bottom
                 )
                 swipeRightBackground.draw(c)
-//                swipeRightDr?.let {
-//                    it.setBounds(
-//                        itemView.right - it.intrinsicWidth,
-//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2,
-//                        itemView.right - (itemView.height - it.intrinsicHeight) / 2,
-//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2 + it.intrinsicHeight
-//                    )
-//                    it.draw(c)
-//                }
+
+                swipeLeftDr?.let { drawable ->
+                    val itemTop: Int =
+                        itemView.top + (itemView.height - drawable.intrinsicHeight) / 2
+                    val itemMargin: Int = (itemView.height - drawable.intrinsicHeight) / 2
+                    val itemLeft = itemView.left + itemMargin
+                    val itemRight: Int = itemView.left + itemMargin + drawable.intrinsicWidth
+                    val itemBottom: Int = itemTop + drawable.intrinsicHeight
+
+                    drawable.setBounds(itemLeft, itemTop, itemRight, itemBottom)
+                    drawable.draw(c)
+                }
 
             }
             dX < 0 -> {
                 swipeLeftBackground.setBounds(
-                    itemView.right + dX.toInt(),
+                    itemView.left + dX.toInt(),
                     itemView.top,
                     itemView.right,
                     itemView.bottom
                 )
                 swipeLeftBackground.draw(c)
 
-//                swipeLeftDr?.let {
-//                    it.setBounds(
-//                        itemView.right - it.intrinsicWidth,
-//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2,
-//                        itemView.right - (itemView.height - it.intrinsicHeight) / 2,
-//                        itemView.top + (itemView.height - it.intrinsicHeight) / 2 + it.intrinsicHeight
-//                    )
-//                    it.draw(c)
-//                }
+                swipeRightDr?.let { drawable ->
+                    val itemTop: Int =
+                        itemView.top + (itemView.height - drawable.intrinsicHeight) / 2
+                    val itemMargin: Int = (itemView.height - drawable.intrinsicHeight) / 2
+                    val itemLeft: Int = itemView.right - itemMargin - drawable.intrinsicWidth
+                    val itemRight = itemView.right - itemMargin
+                    val itemBottom: Int = itemTop + drawable.intrinsicHeight
+                    drawable.setBounds(itemLeft, itemTop, itemRight, itemBottom)
+                    drawable.draw(c)
+                }
             }
             else -> {
                 swipeLeftBackground.setBounds(0, 0, 0, 0)
                 swipeRightBackground.setBounds(0, 0, 0, 0)
             }
         }
-
 
     }
 

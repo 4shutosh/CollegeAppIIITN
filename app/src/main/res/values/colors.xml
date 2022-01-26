@@ -2,7 +2,6 @@
 <resources>
     <!--    color values-->
     <color name="black">#000000</color>
-    <color name="blue400">#42a5f5</color>
     <color name="white">#FFFFFF</color>
     <color name="green400">#66bb6a</color>
     <color name="grey900">#212121</color>
@@ -19,12 +18,12 @@
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorSurface">@color/white</color>
-    <color name="colorOnSurface">@color/blue_1</color>
+    <color name="colorOnSurface">@color/blue_4</color>
     <color name="colorControlNormal">@color/blue_4</color>
-    <color name="colorControlHighlight">@color/blue_4</color>
+    <color name="colorControlHighlight">@color/blue_secondary</color>
 
     <color name="textColorPrimary">@color/blue_4</color>
-    <color name="textColorSecondary">@color/blue_4</color>
+    <color name="textColorSecondary">@color/blue_1</color>
 
 
     <color name="bottomSheetBackground">@color/white</color>
@@ -86,5 +85,8 @@
     <color name="blue_3">#0F4C75</color>
     <color name="blue_2">#3282B8</color>
     <color name="blue_1">#BBE1FA</color>
+
+    <color name="blue_primary">@color/blue_1</color>
+    <color name="blue_secondary">@color/blue_4</color>
 
 </resources>

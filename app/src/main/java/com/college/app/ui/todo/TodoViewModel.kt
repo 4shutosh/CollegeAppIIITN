@@ -107,10 +107,10 @@ class TodoViewModel @Inject constructor(
             }
     }
 
-    fun actionTodoDelete(itemTodo: TodoListViewState, position: Int) {
+    fun actionTodoDelete(todoItemId: Long) {
         viewModelScope.launch(appCoroutineDispatcher.main) {
             withContext(appCoroutineDispatcher.io) {
-                todoRepository.deleteTodo(itemTodo.id)
+                todoRepository.deleteTodo(todoItemId)
             }
 
             command.postValue(Command.ShowSnackBar("Todo Deleted"))
@@ -226,22 +226,13 @@ class TodoViewModel @Inject constructor(
             val item = todoRepository.getTodoWithId(viewState.id)
 
             logger.d("found notify boolean $notify")
-            withContext(appCoroutineDispatcher.main) {
-                command.postValue(
-                    Command.ShowSnackBar(
-                        if (notify) "You will be notified for ${item.name}"
-                        else "Notification Cancelled!"
-                    )
-                )
-            }
 
-            val timeStamp = System.currentTimeMillis() + 20000
-
+//            val timeStamp = System.currentTimeMillis() + 20000
             withContext(appCoroutineDispatcher.main) {
                 command.postValue(
                     Command.ActionTodoNotification(
                         notify,
-                        timeStamp,
+                        item.timeStampMilliSeconds,
                         item.name,
                         item.description,
                         item.id
@@ -252,12 +243,21 @@ class TodoViewModel @Inject constructor(
             withContext(appCoroutineDispatcher.io) {
                 todoRepository.insertOrUpdateTodo(item.copy(notify = notify))
             }
+
+            withContext(appCoroutineDispatcher.main) {
+                command.postValue(
+                    Command.ShowSnackBar(
+                        if (notify) "You will be notified for ${item.name}"
+                        else "Notification Cancelled!"
+                    )
+                )
+            }
         }
     }
 
-    fun todoItemMarkAsDone(viewState: TodoListViewState) {
+    fun todoItemMarkAsDone(todoItemId: Long) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
-            val item = todoRepository.getTodoWithId(viewState.id)
+            val item = todoRepository.getTodoWithId(todoItemId)
 
             todoRepository.insertOrUpdateTodo(item.copy(isCompleted = true))
         }

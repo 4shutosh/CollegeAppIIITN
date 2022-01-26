@@ -94,6 +94,8 @@ class TodoListAdapter constructor(private val clickListener: TodoItemClickListen
         if (getItem(position).isCompleted) TODO_LIST_VIEW_TYPE_COMPLETE
         else TODO_LIST_VIEW_TYPE_INCOMPLETE
 
+    override fun getItemId(position: Int) = getItem(position).id
+
     inner class ViewHolderItemComplete(val binding: ListItemTodoCompleteBinding) :
         RecyclerView.ViewHolder(binding.root)
 

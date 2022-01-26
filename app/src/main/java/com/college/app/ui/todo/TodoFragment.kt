@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.college.app.R
 import com.college.app.databinding.FragmentTodoBinding
+import com.college.app.ui.todo.TodoListAdapter.Companion.TODO_LIST_VIEW_TYPE_COMPLETE
 import com.college.app.ui.todo.TodoViewModel.Command
 import com.college.app.ui.todo.TodoViewModel.Command.ShowAddTodoDatePicker
 import com.college.app.ui.todo.broadcast.TodoBroadcastReceiver
@@ -33,7 +34,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,11 +52,11 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
     private val itemTouchHelper by lazy {
         SwipeActionRecyclerViewItem(
             requireContext(),
-            swipeRightIcon = R.drawable.ic_delete_sweep_24dp,
-            swipeLeftIcon = R.drawable.ic_baseline_check_24,
-            swipeRightBgColor = R.color.green400,
-            swipeLeftBgColor = android.R.color.holo_red_dark,
-            this
+            swipeLeftIcon = R.drawable.ic_delete_sweep_24dp,
+            swipeRightIcon = R.drawable.ic_baseline_done_all_24,
+            swipeLeftBgColor = R.color.green400,
+            swipeRightBgColor = android.R.color.holo_red_dark,
+            swipeActionCallback = this
         )
     }
 
@@ -89,7 +89,12 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
 
         viewModel.todoListStateTypes.forEachIndexed { index, it ->
             val chipToAdd = Chip(requireContext())
-            val chipDrawable = ChipDrawable.createFromAttributes(requireContext(), null, 0, R.style.CollegeAppTodoChipItem)
+            val chipDrawable = ChipDrawable.createFromAttributes(
+                requireContext(),
+                null,
+                0,
+                R.style.CollegeAppTodoChipItem
+            )
             chipToAdd.apply {
                 setChipDrawable(chipDrawable)
                 setTextAppearance(R.style.CollegeAppTodoChipItemText)
@@ -167,7 +172,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
     }
 
     override fun onTodoItemDelete(viewState: TodoListViewState, position: Int) {
-        viewModel.actionTodoDelete(viewState, position)
+        viewModel.actionTodoDelete(viewState.id)
     }
 
     override fun onTodoItemEdit(viewState: TodoListViewState, position: Int) {
@@ -187,7 +192,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
     }
 
     override fun onTodoItemMarkAsDone(viewState: TodoListViewState, position: Int) {
-        viewModel.todoItemMarkAsDone(viewState)
+        viewModel.todoItemMarkAsDone(viewState.id)
     }
 
     private fun showAddTodoDatePickerDialog() {
@@ -298,10 +303,14 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
 
     override fun onLeftSwipe(position: Int) {
         logger.d("onLeftSwipe")
+        if (todoAdapter.getItemViewType(position) != TODO_LIST_VIEW_TYPE_COMPLETE)
+            viewModel.todoItemMarkAsDone(todoAdapter.getItemId(position))
+        else todoAdapter.notifyItemChanged(position) // in order to remake the view and
     }
 
     override fun onRightSwipe(position: Int) {
         logger.d("onRightSwipe")
+        viewModel.actionTodoDelete(todoAdapter.getItemId(position))
     }
 
 }

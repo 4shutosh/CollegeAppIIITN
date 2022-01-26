@@ -3,11 +3,11 @@
     <!--    themeing colors-->
     <color name="colorPrimary">@color/black</color>
     <color name="colorOnPrimary">@color/orange_primary</color>
-    <color name="colorSurface">@color/blue_4</color>
     <color name="colorPrimaryDark">@color/black</color>
-    <color name="colorControlNormal">@color/white</color>
+    <color name="colorControlNormal">@color/blue_secondary</color>
+    <color name="colorSurface">@color/blue_4</color>
     <color name="colorOnSurface">@color/blue_3</color>
-    <color name="colorControlHighlight">@color/blue_4</color>
+    <color name="colorControlHighlight">@color/blue_secondary</color>
 
 
     <color name="bottomSheetBackground">@color/grey900</color>
@@ -52,4 +52,10 @@
     <color name="icon_inside_12">#bcaaa4</color>
 
     <color  name="splash_color">#2A2438</color>
+
+    <color name="blue_primary">@color/blue_3</color>
+    <color name="blue_secondary">@color/blue_1</color>
+
+    <color name="textColorPrimary">@color/blue_1</color>
+    <color name="textColorSecondary">@color/blue_4</color>
 </resources>
