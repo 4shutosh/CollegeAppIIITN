@@ -102,7 +102,9 @@ fun OnBoardingLogin(
         is OnBoardingLoginViewModel.Command.NavigateToMainGraph -> {
             LaunchedEffect("navigation") {
 //                navigationController.popBackStack()
-                context.startActivity(Intent(context, MainActivity::class.java))
+                val intent = Intent(context, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                context.startActivity(intent)
 //                navigationController.navigate(R.id.nav_home_graph)
 //                navigationController.navigate(CollegeDestinations.HomeGraph.route) {
 //                    popUpTo(CollegeDestinations.HomeGraph.route) {

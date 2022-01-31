@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.college.app.ui.main.home.list.HomeFeatureListViewState" />
+
+        <variable
+            name="actionHandler"
+            type="com.college.app.ui.main.home.list.HomeFeatureListAdapter.HomeFeatureListClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_list_item_home_feature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_home_feature_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/dr_rounded_16"
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{()-> actionHandler.onHomeFeatureListItemClick(viewState.id)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:backgroundTint="@color/icon_circle_8" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_home_feature_icon"
+            style="@style/CollegeAppImageHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/timetable"
+            android:padding="@dimen/five_dp"
+            android:src="@drawable/ic_website_round"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_website_round" />
+
+
+        <!--        todo add font here-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_home_feature_title"
+            style="@style/CollegeAppHomeFragmentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/tenDp"
+            android:gravity="start|center"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/list_item_home_feature_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/collegeWebsite"
+            tools:textColor="@color/icon_inside_8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
