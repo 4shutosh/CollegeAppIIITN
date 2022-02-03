@@ -38,6 +38,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.main.holder.HolderActivity"
+            android:exported="false" />
         <!--        <receiver-->
         <!--            android:name=".utils.FirebaseDataReceiver"-->
         <!--            android:exported="true"-->
@@ -72,7 +75,12 @@
                 <action android:name="TODO_ACTION_SEND_NOTIFICATION" />
             </intent-filter>
         </receiver>
-
     </application>
+    <queries>
+        <intent>
+            <action android:name=
+                "android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
 
 </manifest>

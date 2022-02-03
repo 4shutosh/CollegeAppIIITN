@@ -146,6 +146,7 @@ dependencies {
     implementation(libs.picasso)
 
     implementation(libs.kotlinx.dateTime)
+    implementation(libs.androidx.browser)
 }
 
 if (file("google-services.json").exists()) {
