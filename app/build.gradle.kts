@@ -25,20 +25,20 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
 
-            resValue("string", "app_name", "College App Debug")
-            resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
+            buildConfigField("String", "app_name", "\"College App Debug\"")
+            buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
         }
         getByName("release") {
             isDebuggable = false
             isMinifyEnabled = true
 //            applicationIdSuffix(".debug")
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            resValue("string", "app_name", "College App")
-            resValue("string", "college_endpoint", "http://192.168.0.103:8090/")
+            buildConfigField("String", "app_name", "\"College App Debug\"")
+            buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
             // todo add db options of product flavours
         }
     }
-    flavorDimensions("type")
+    flavorDimensions.add("type")
     productFlavors {
         create("community") {
             dimension = "type"

@@ -52,8 +52,7 @@ class AppModule {
 
     @Provides
     @Named(COLLEGE_ENDPOINT)
-    fun providesCollegeEndpoint(@ApplicationContext context: Context): String =
-        context.getString(R.string.college_endpoint)
+    fun providesCollegeEndpoint(): String = BuildConfig.college_endpoint
 
     @Provides
     @Singleton
