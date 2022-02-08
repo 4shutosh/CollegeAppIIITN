@@ -13,7 +13,7 @@ import javax.inject.Singleton
 open class CollegeNetworking @Inject constructor(
     @Named(Constants.Injection.IS_DEBUG) val isDebugMode: Boolean,
     @Named(Constants.Injection.COLLEGE_ENDPOINT) private val collegeEndPoint: String,
-    private val collegeInterceptor: CollegeInterceptor
+    private val collegeInterceptor: CollegeInterceptor,
 ) {
     private var retrofit: Retrofit? = null
     private var okHttpClient: OkHttpClient? = null

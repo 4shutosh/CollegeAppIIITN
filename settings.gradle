@@ -1,4 +1,4 @@
-rootProject.name='College App'
+rootProject.name = 'College App'
 include ':app'
 include ':base'
 

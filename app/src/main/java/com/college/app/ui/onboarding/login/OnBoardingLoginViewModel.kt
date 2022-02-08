@@ -132,8 +132,9 @@ class OnBoardingLoginViewModel @Inject constructor(
 
     fun loginFail(message: String) {
         logger.e("login Fail with exception : $message")
-        toast.value = message
-        command.value = null
+        viewModelScope.launch(appCoroutineDispatcher.main) {
+            toast.value = "login failed: $message"
+        }
     }
 
     companion object {
