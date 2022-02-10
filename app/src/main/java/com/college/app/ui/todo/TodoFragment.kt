@@ -299,6 +299,8 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
 
     companion object {
         private const val ADD_TODO_DETAILS_DIALOG_TAG = "ADD_TODO_DETAILS_DIALOG_TAG"
+
+        const val TODO_FRAGMENT_ID : Long = 2949
     }
 
     override fun onLeftSwipe(position: Int) {

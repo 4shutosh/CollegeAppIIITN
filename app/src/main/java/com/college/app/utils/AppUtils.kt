@@ -4,6 +4,11 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.fragment.app.Fragment
+import com.college.app.ui.main.home.HomeFragment
+import com.college.app.ui.main.home.HomeFragment.Companion.HOME_FRAGMENT_ID
+import com.college.app.ui.todo.TodoFragment
+import com.college.app.ui.todo.TodoFragment.Companion.TODO_FRAGMENT_ID
 
 object AppUtils {
     fun checkAppInstalled(context: Context, packageName: String?): Boolean {
@@ -47,4 +52,14 @@ object AppUtils {
             false
         }
     }
+
+
+    fun fragmentFromId(id: Long): Fragment {
+        return when (id) {
+            HOME_FRAGMENT_ID -> HomeFragment()
+            TODO_FRAGMENT_ID -> TodoFragment()
+            else -> throw ClassNotFoundException()
+        }
+    }
+
 }
