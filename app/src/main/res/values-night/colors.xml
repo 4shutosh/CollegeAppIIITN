@@ -5,7 +5,7 @@
     <color name="colorOnPrimary">@color/orange_primary</color>
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorControlNormal">@color/blue_secondary</color>
-    <color name="colorSurface">@color/blue_4</color>
+    <color name="colorSurface">@color/blue_5</color>
     <color name="colorOnSurface">@color/blue_3</color>
     <color name="colorControlHighlight">@color/blue_secondary</color>
 
@@ -20,6 +20,7 @@
     <color name="itemD">@color/white</color>
     <color name="iconTodoColor">@color/white</color>
     <color name="bottomNavOff">@color/blue_3</color>
+    <color name="colorCloseToSurface_1">@color/blue_4</color>
 
     <color name="toolbarColor">@color/grey850</color>
 
@@ -57,5 +58,5 @@
     <color name="blue_secondary">@color/blue_1</color>
 
     <color name="textColorPrimary">@color/blue_1</color>
-    <color name="textColorSecondary">@color/blue_4</color>
+    <color name="textColorSecondary">@color/blue_5</color>
 </resources>

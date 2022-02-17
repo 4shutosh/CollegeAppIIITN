@@ -18,11 +18,11 @@
     <color name="colorPrimaryDark">@color/black</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorSurface">@color/white</color>
-    <color name="colorOnSurface">@color/blue_4</color>
-    <color name="colorControlNormal">@color/blue_4</color>
+    <color name="colorOnSurface">@color/blue_5</color>
+    <color name="colorControlNormal">@color/blue_5</color>
     <color name="colorControlHighlight">@color/blue_secondary</color>
 
-    <color name="textColorPrimary">@color/blue_4</color>
+    <color name="textColorPrimary">@color/blue_5</color>
     <color name="textColorSecondary">@color/blue_1</color>
 
 
@@ -36,6 +36,7 @@
     <color name="alertDialogText">@color/black</color>
     <color name="cardViewBackground">@color/white</color>
     <color name="bottomNavOff">@color/blue_2</color>
+    <color name="colorCloseToSurface_1">@color/blue_0</color>
 
     <color name="toolbarColor">@color/white</color>
 
@@ -81,12 +82,14 @@
     <color name="grey_dark">#393E46</color>
     <color name="orange_primary">#D65A31</color>
 
-    <color name="blue_4">#1B262C</color>
+    <color name="blue_5">#1B262C</color>
+    <color name="blue_4">#303A3F</color>
     <color name="blue_3">#0F4C75</color>
     <color name="blue_2">#3282B8</color>
     <color name="blue_1">#BBE1FA</color>
+    <color name="blue_0">#ECF7FE</color>
 
     <color name="blue_primary">@color/blue_1</color>
-    <color name="blue_secondary">@color/blue_4</color>
+    <color name="blue_secondary">@color/blue_5</color>
 
 </resources>

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/compose-model-1644561387777.xml" value="0.6351351351351351" />
         <entry key="../../../layout/compose-model-1633363327534.xml" value="0.29307432432432434" />
         <entry key="../../../layout/compose-model-1633430216023.xml" value="0.2922297297297297" />
         <entry key="../../../layout/compose-model-1633499862392.xml" value="1.643835616438356" />
@@ -21,6 +22,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottomsheet_signup.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/layout/list_item_home_feature.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_item_todo_complete.xml" value="0.28894927536231885" />
+        <entry key="app/src/main/res/layout/list_item_todo_incomplete.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.3282051282051282" />
       </map>

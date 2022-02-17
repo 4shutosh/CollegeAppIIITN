@@ -25,7 +25,6 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
 
-            buildConfigField("String", "app_name", "\"College App Debug\"")
             buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
         }
         getByName("release") {
@@ -33,7 +32,6 @@ android {
             isMinifyEnabled = true
 //            applicationIdSuffix(".debug")
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "app_name", "\"College App Debug\"")
             buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
             // todo add db options of product flavours
         }
