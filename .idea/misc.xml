@@ -16,13 +16,25 @@
         <entry key="../../../layout/compose-model-1636222993695.xml" value="0.5564814814814815" />
         <entry key="../../../layout/compose-model-1636264025908.xml" value="0.5564814814814815" />
         <entry key="../../../layout/compose-model-1636270291119.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_assistant_round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_attendance_round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_courses_round.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_google_logo.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/drawable/ic_library_round.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_course.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/barcode_scanner_fragment.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/bottomsheet_barcode_scanner.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/bottomsheet_signup.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_offline_library.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_ofline_library.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/list_item_home_feature.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_item_issue_book.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/list_item_todo_complete.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/layout/list_item_todo_incomplete.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3388888888888889" />

@@ -49,6 +49,10 @@ androidx-collection = "androidx.collection:collection-ktx:1.1.0"
 androidx-core = "androidx.core:core-ktx:1.6.0"
 androidx-emoji = "androidx.emoji:emoji:1.1.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.0"
+androidx-camera = "androidx.camera:camera-core:1.1.0-beta01"
+androidx-camera-camera2 = "androidx.camera:camera-camera2:1.1.0-beta01"
+androidx-camera-lifecycle = "androidx.camera:camera-lifecycle:1.1.0-beta01"
+androidx-camera-view = "androidx.camera:camera-view:1.1.0-beta01"
 
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxhilt" }
 androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
@@ -189,3 +193,9 @@ androidx-recyclerview-selection = "androidx.recyclerview:recyclerview-selection:
 # check use case of the selection
 
 kotlinx-dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.3.1"
+
+zxing-embedded = "com.journeyapps:zxing-android-embedded:4.3.0"
+google-barcode-scanning = "com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0"
+
+# https://stackoverflow.com/a/68128677
+google-guava = "com.google.guava:guava:27.0.1-android"

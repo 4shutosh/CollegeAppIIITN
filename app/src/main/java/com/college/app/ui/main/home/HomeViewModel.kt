@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.R
+import com.college.app.ui.books.OfflineLibraryFragment.Companion.OFFLINE_LIBRARY_FRAGMENT_ID
 import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_FRAGMENT_ID
 import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_URL
 import com.college.app.ui.main.home.HomeViewModel.Command.*
@@ -74,6 +75,13 @@ class HomeViewModel @Inject constructor(
                 titleRes = R.string.clubs,
                 itemBackgroundColorRes = R.color.icon_circle_5,
                 textColorRes = R.color.icon_inside_5
+            ),
+            HomeFeatureListViewState(
+                id = OFFLINE_LIBRARY_FRAGMENT_ID,
+                iconRes = R.drawable.ic_library_round,
+                titleRes = R.string.library,
+                itemBackgroundColorRes = R.color.icon_circle_12,
+                textColorRes = R.color.icon_inside_12
             ),
             HomeFeatureListViewState(
                 id = 5,

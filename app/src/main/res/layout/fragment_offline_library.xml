@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_fragment_offline_library"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_library_info_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/dr_rounded_16"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_library_info_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fragment_library_info_image"
+            tools:backgroundTint="@color/icon_circle_12" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_library_info_image"
+            style="@style/CollegeAppImageHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:contentDescription="@string/timetable"
+            android:padding="@dimen/five_dp"
+            android:src="@drawable/info_round"
+            app:layout_constraintStart_toStartOf="@id/fragment_library_info_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp"
+            tools:src="@drawable/info_round" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragment_library_info_title"
+            style="@style/CollegeAppHomeFragmentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_library_info_image"
+            app:layout_constraintEnd_toEndOf="@id/fragment_library_info_bg"
+            app:layout_constraintStart_toEndOf="@id/fragment_library_info_image"
+            app:layout_constraintTop_toTopOf="@+id/fragment_library_info_image"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="@string/collegeWebsite"
+            tools:textColor="@color/icon_inside_12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_library_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_library_info_bg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -5,6 +5,8 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.fragment.app.Fragment
+import com.college.app.ui.books.OfflineLibraryFragment
+import com.college.app.ui.books.OfflineLibraryFragment.Companion.OFFLINE_LIBRARY_FRAGMENT_ID
 import com.college.app.ui.main.home.HomeFragment
 import com.college.app.ui.main.home.HomeFragment.Companion.HOME_FRAGMENT_ID
 import com.college.app.ui.todo.TodoFragment
@@ -58,6 +60,7 @@ object AppUtils {
         return when (id) {
             HOME_FRAGMENT_ID -> HomeFragment()
             TODO_FRAGMENT_ID -> TodoFragment()
+            OFFLINE_LIBRARY_FRAGMENT_ID -> OfflineLibraryFragment()
             else -> throw ClassNotFoundException()
         }
     }

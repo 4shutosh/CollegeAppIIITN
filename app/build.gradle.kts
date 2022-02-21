@@ -145,6 +145,15 @@ dependencies {
 
     implementation(libs.kotlinx.dateTime)
     implementation(libs.androidx.browser)
+
+    implementation(libs.google.barcode.scanning)
+
+    // camerax
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.lifecycle)
+
+    implementation(libs.google.guava)
 }
 
 if (file("google-services.json").exists()) {
