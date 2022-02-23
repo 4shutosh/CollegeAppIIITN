@@ -1,9 +1,6 @@
 package com.college.base.domain
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import com.squareup.moshi.*
 import java.lang.reflect.ParameterizedType
 
 data class ServerResponse<T>(

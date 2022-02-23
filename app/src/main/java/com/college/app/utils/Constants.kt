@@ -10,6 +10,7 @@ class Constants {
         const val ACCESS_TOKEN = "accessToken"
         const val EMAIL = "email"
         const val IMAGE_URL = "imageUrl"
+        const val LIBRARY_BOOK_NUMBER = "libraryBookNumber"
     }
 
     object Injection {

@@ -33,6 +33,7 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     lateinit var logger: CollegeLogger
 
     private lateinit var globalCameraProcessProvider: ProcessCameraProvider
+    private lateinit var globalAnalysisUseCase: ImageAnalysis
 
     private val parentViewModel: LibraryViewModel by viewModels(
         ownerProducer = { requireParentFragment() }
@@ -65,12 +66,11 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                 return@observe
             } else {
                 globalCameraProcessProvider = provider
-                val previewUseCase = Preview.Builder()
-                    .setTargetAspectRatio(RATIO_4_3)
-                    .build()
-
-                if (binding.barcodeScannerCameraView.display != null) previewUseCase.targetRotation =
-                    binding.barcodeScannerCameraView.display.rotation
+                val previewUseCase = Preview.Builder().apply {
+                    setTargetAspectRatio(RATIO_4_3)
+                    if (binding.barcodeScannerCameraView.display != null)
+                        setTargetRotation(binding.barcodeScannerCameraView.display.rotation)
+                }.build()
 
                 previewUseCase.setSurfaceProvider(binding.barcodeScannerCameraView.surfaceProvider)
 
@@ -80,12 +80,13 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                     previewUseCase
                 )
 
-
                 val barcodeScanner = BarcodeScanning.getClient()
 
                 val analysisUseCase = ImageAnalysis.Builder()
                     .setTargetAspectRatio(RATIO_4_3)
                     .build()
+
+                globalAnalysisUseCase = analysisUseCase
 
                 if (binding.barcodeScannerCameraView.display != null)
                     analysisUseCase.targetRotation =
@@ -95,21 +96,35 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                 val cameraExecutor = Executors.newSingleThreadExecutor()
 
                 analysisUseCase.setAnalyzer(cameraExecutor) {
-                    processImageProxy(barcodeScanner, it)
+                    processImageProxy(barcodeScanner, it, previewUseCase, provider)
                 }
+
+                provider.bindToLifecycle(viewLifecycleOwner,
+                    cameraSelector,
+                    analysisUseCase
+                )
             }
         }
     }
 
     @SuppressLint("UnsafeOptInUsageError")
-    private fun processImageProxy(barcodeScanner: BarcodeScanner, imageProxy: ImageProxy) {
+    private fun processImageProxy(
+        barcodeScanner: BarcodeScanner,
+        imageProxy: ImageProxy,
+        previewUseCase: Preview,
+        provider: ProcessCameraProvider,
+    ) {
         imageProxy.image?.let {
             val inputImage = InputImage.fromMediaImage(it, imageProxy.imageInfo.rotationDegrees)
             barcodeScanner.process(inputImage)
                 .addOnSuccessListener { barcodes ->
-                    barcodes.forEach { barcode ->
-                        logger.d("found barcode ${barcode.rawValue}")
-                    }
+                    if (barcodes.isNotEmpty())
+                        barcodes[0].let { barcode ->
+                            logger.d("found barcode ${barcode.rawValue}")
+                            provider.unbind(previewUseCase)
+                            provider.unbind(globalAnalysisUseCase)
+                            parentViewModel.getBookByLibraryNumber(barcode.rawValue?.toLong() ?: 0L)
+                        }
                 }.addOnFailureListener { exception ->
                     logger.e(exception)
                 }.addOnCompleteListener {
