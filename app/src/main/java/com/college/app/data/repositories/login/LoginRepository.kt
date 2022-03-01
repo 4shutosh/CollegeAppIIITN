@@ -4,8 +4,6 @@ import com.college.app.network.models.requests.LoginRequest
 import com.college.app.network.models.responses.LoginResponse
 import com.college.app.network.CollegeAppService
 import com.college.app.network.CollegeFirebaseService
-import com.college.base.domain.dataOrThrowException
-import com.college.base.domain.getMoshiAdapterServerResponse
 import javax.inject.Inject
 
 interface LoginRepository {

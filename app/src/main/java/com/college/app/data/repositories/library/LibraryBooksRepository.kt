@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface LibraryBooksRepository {
 
     suspend fun issueBookRequest(issueBookRequest : IssueBookRequest) : IssueBookResponse
-    suspend fun getBookByLibraryNumber(libraryBookNumber : Long) : Any
+    suspend fun getBookByLibraryNumber(libraryBookNumber : Long) : CollegeBook
 
 }
 
@@ -22,8 +22,8 @@ class LibraryBooksRepositoryImpl @Inject constructor(
         return collegeAppService.issueABook(issueBookRequest).dataOrThrowException()
     }
 
-    override suspend fun getBookByLibraryNumber(libraryBookNumber: Long): Any {
-        return collegeAppService.getBookByLibraryNumber(libraryBookNumber)
+    override suspend fun getBookByLibraryNumber(libraryBookNumber: Long): CollegeBook {
+        return collegeAppService.getBookByLibraryNumber(libraryBookNumber).dataOrThrowException()
     }
 
 }

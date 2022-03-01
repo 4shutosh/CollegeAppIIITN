@@ -17,7 +17,11 @@ import com.college.app.R
 import com.college.app.databinding.BottomsheetBarcodeScannerBinding
 import com.college.app.ui.books.LibraryViewModel
 import com.college.app.utils.extensions.bindWithLifecycleOwner
+import com.college.app.utils.extensions.gone
+import com.college.app.utils.extensions.showToast
+import com.college.app.utils.extensions.visible
 import com.college.base.logger.CollegeLogger
+import com.college.base.result.DataUiResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -33,7 +37,6 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     lateinit var logger: CollegeLogger
 
     private lateinit var globalCameraProcessProvider: ProcessCameraProvider
-    private lateinit var globalAnalysisUseCase: ImageAnalysis
 
     private val parentViewModel: LibraryViewModel by viewModels(
         ownerProducer = { requireParentFragment() }
@@ -52,10 +55,33 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpViews()
+        setUpListeners()
     }
 
     private fun setUpViews() {
         setUpCameraAndAnalyze()
+    }
+
+    private fun setUpListeners() {
+        parentViewModel.scannedCollegeBook.observe(viewLifecycleOwner) {
+            when (it) {
+                is DataUiResult.Success -> {
+
+                    binding.barcodeScannerProgressBar.gone()
+
+                    binding.barcodeScannerBookDetails.text = it.data.bookName
+                    binding.barcodeScannerBookAvailability.text = it.data.maxDaysAllowed.toString()
+                }
+                is DataUiResult.Error -> {
+                    showToast("No Book Found ${it.exception}")
+                }
+                is DataUiResult.Loading -> {
+                    if (it.loading) binding.barcodeScannerProgressBar.visible()
+                    else binding.barcodeScannerProgressBar.gone()
+                }
+            }
+
+        }
     }
 
     private fun setUpCameraAndAnalyze() {
@@ -86,8 +112,6 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                     .setTargetAspectRatio(RATIO_4_3)
                     .build()
 
-                globalAnalysisUseCase = analysisUseCase
-
                 if (binding.barcodeScannerCameraView.display != null)
                     analysisUseCase.targetRotation =
                         binding.barcodeScannerCameraView.display.rotation
@@ -96,10 +120,11 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                 val cameraExecutor = Executors.newSingleThreadExecutor()
 
                 analysisUseCase.setAnalyzer(cameraExecutor) {
-                    processImageProxy(barcodeScanner, it, previewUseCase, provider)
+                    processImageProxy(barcodeScanner, it, previewUseCase, provider, analysisUseCase)
                 }
 
-                provider.bindToLifecycle(viewLifecycleOwner,
+                provider.bindToLifecycle(
+                    viewLifecycleOwner,
                     cameraSelector,
                     analysisUseCase
                 )
@@ -113,6 +138,7 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
         imageProxy: ImageProxy,
         previewUseCase: Preview,
         provider: ProcessCameraProvider,
+        analysisUseCase: ImageAnalysis,
     ) {
         imageProxy.image?.let {
             val inputImage = InputImage.fromMediaImage(it, imageProxy.imageInfo.rotationDegrees)
@@ -122,7 +148,7 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                         barcodes[0].let { barcode ->
                             logger.d("found barcode ${barcode.rawValue}")
                             provider.unbind(previewUseCase)
-                            provider.unbind(globalAnalysisUseCase)
+                            provider.unbind(analysisUseCase)
                             parentViewModel.getBookByLibraryNumber(barcode.rawValue?.toLong() ?: 0L)
                         }
                 }.addOnFailureListener { exception ->
@@ -136,7 +162,6 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         globalCameraProcessProvider.unbindAll()
     }
-
 
     companion object {
         const val BARCODE_SCANNER_FRAGMENT_KEY = "BARCODE_SCANNER_FRAGMENT_KEY"

@@ -20,7 +20,7 @@ room = "2.4.0"
 threetenbp = "1.5.1"
 spotless = "5.14.3"
 gradleDependencyUpdate = "0.42.0"
-moshi = "1.12.0"
+moshi = "1.13.0"
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
@@ -140,6 +140,7 @@ kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-te
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-reflect = "org.jetbrains.kotlin:kotlin-reflect:1.4.0"
 kotlin-coroutines-play-services = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2"
 
 leakCanary = "com.squareup.leakcanary:leakcanary-android:2.7"
@@ -154,6 +155,7 @@ retrofit-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = 
 
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-converter = "com.squareup.retrofit2:converter-moshi:2.9.0"
+moshi-kotlin = "com.squareup.moshi:moshi-kotlin:1.13.0"
 moshi-compiler = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
 robolectric = "org.robolectric:robolectric:4.6.1"

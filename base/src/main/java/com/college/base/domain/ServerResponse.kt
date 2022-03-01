@@ -1,8 +1,9 @@
 package com.college.base.domain
 
-import com.squareup.moshi.*
-import java.lang.reflect.ParameterizedType
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ServerResponse<T>(
     @Json(name = "data")
     var data: T,
@@ -12,15 +13,6 @@ data class ServerResponse<T>(
 
     @Json(name = "status")
     var status: Int,
-
-    @Json(name = "errCode")
-    var error: Any?,
-
-    @Json(name = "disabled")
-    var disabled: Boolean,
-
-    @Json(name = "update")
-    var update: Boolean
 )
 
 fun <T> ServerResponse<T>.dataOrThrowException(executeOnSuccess: T.() -> Unit = {}): T {
@@ -46,8 +38,3 @@ suspend fun <T, E> ServerResponse<T>.mapDataOrThrowException(
 fun <T> ServerResponse<T>.isSuccess() = status == 200
 
 fun <T> ServerResponse<T>.serverException() = ServerException(status, message)
-
-inline fun <reified T> getMoshiAdapterServerResponse(): JsonAdapter<out ParameterizedType>? {
-    val type = Types.newParameterizedType(ServerResponse::class.java, T::class.java)
-    return Moshi.Builder().build().adapter(type::class.java)
-}

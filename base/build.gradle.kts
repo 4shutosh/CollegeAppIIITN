@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -27,5 +28,7 @@ dependencies {
 
     implementation(libs.moshi)
     implementation(libs.moshi.converter)
-    implementation(libs.moshi.compiler)
+    kapt(libs.moshi.compiler)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.kotlin.reflect)
 }

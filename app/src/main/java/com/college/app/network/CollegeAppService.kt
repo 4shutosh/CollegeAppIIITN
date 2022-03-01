@@ -1,5 +1,6 @@
 package com.college.app.network
 
+import com.college.app.models.local.CollegeBook
 import com.college.app.network.EndPoints.BOOKS
 import com.college.app.network.EndPoints.ISSUE_BOOK
 import com.college.app.network.EndPoints.LOGIN
@@ -30,7 +31,7 @@ interface CollegeAppService {
     @GET(BOOKS)
     suspend fun getBookByLibraryNumber(
         @Query(LIBRARY_BOOK_NUMBER) libraryBookNumber: Long,
-    ): Any
+    ): ServerResponse<CollegeBook>
 
     @POST(ISSUE_BOOK)
     suspend fun issueABook(

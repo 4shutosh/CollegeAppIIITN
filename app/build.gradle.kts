@@ -123,6 +123,8 @@ dependencies {
     implementation(libs.okhttp.okhttp)
     implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.kotlin.reflect)
     implementation(libs.moshi.converter)
     kapt(libs.moshi.compiler)
 
