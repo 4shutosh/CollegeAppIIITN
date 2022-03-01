@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -29,6 +29,4 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.converter)
     kapt(libs.moshi.compiler)
-    implementation(libs.moshi.kotlin)
-    implementation(libs.kotlin.reflect)
 }

@@ -59,6 +59,7 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     }
 
     private fun setUpViews() {
+        isCancelable = true
         setUpCameraAndAnalyze()
     }
 
@@ -160,7 +161,9 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     }
 
     override fun onDismiss(dialog: DialogInterface) {
+        parentViewModel.barcodeScannerDialogClosed()
         globalCameraProcessProvider.unbindAll()
+        super.onDismiss(dialog)
     }
 
     companion object {

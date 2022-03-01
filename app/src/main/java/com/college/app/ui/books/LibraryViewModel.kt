@@ -14,6 +14,7 @@ import com.college.app.network.library.IssueBookUseCase
 import com.college.app.network.models.requests.IssueBookRequest
 import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
+import com.college.base.SingleLiveEvent
 import com.college.base.logger.CollegeLogger
 import com.college.base.result.DataUiResult
 import com.college.base.result.onError
@@ -38,15 +39,29 @@ class LibraryViewModel
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
-//    todo check if the books is already issued
+//    todo check if the books is already issued: getting checked in the server but can be checked on front end as well ?
 
     private val _viewList = MutableLiveData(mutableListOf<Pair<Int, Any>>())
     val viewList = _viewList.toLiveData()
 
     private var cameraProviderLiveData: MutableLiveData<ProcessCameraProvider>? = null
 
-    private val _scannedCollegeBook = MutableLiveData<DataUiResult<CollegeBook>>()
+    private val _scannedCollegeBook = MutableLiveData<DataUiResult<CollegeBook>?>()
     val scannedCollegeBook = _scannedCollegeBook.toLiveData()
+
+    sealed class Command {
+        object ShowBarcodeScannerFragment : Command()
+    }
+
+    val command = SingleLiveEvent<Command>()
+
+    init {
+
+    }
+
+    companion object {
+
+    }
 
     val processCameraProvider: LiveData<ProcessCameraProvider>
         get() {
@@ -72,14 +87,6 @@ class LibraryViewModel
             return cameraProviderLiveData!!
         }
 
-    init {
-
-    }
-
-    companion object {
-
-    }
-
 
     fun issueABook(libraryBookNumber: Long) {
         if (libraryBookNumber != 0L)
@@ -104,9 +111,12 @@ class LibraryViewModel
             }
     }
 
-    private fun populateData() {
-        val list = mutableListOf<Pair<Int, Any>>()
-        _viewList.postValue(list)
+    fun barcodeScannerDialogClosed() {
+        _scannedCollegeBook.value = null
+    }
+
+    fun actionIssueBookClicked() {
+        command.postValue(Command.ShowBarcodeScannerFragment)
     }
 
 
