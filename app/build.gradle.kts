@@ -26,13 +26,14 @@ android {
             isMinifyEnabled = false
 
             buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
+//            buildConfigField("String", "college_endpoint", "\"https://college-app-backend-ktor.herokuapp.com/\"")
         }
         getByName("release") {
             isDebuggable = false
             isMinifyEnabled = true
 //            applicationIdSuffix(".debug")
 //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
+            buildConfigField("String", "college_endpoint", "\"https://college-app-backend-ktor.herokuapp.com/\"")
             // todo add db options of product flavours
         }
     }

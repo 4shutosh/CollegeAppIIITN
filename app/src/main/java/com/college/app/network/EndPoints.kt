@@ -6,4 +6,5 @@ object EndPoints {
 
     const val BOOKS = "books"
     const val ISSUE_BOOK = "library/issue"
+    const val LIBRARY = "library"
 }

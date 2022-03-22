@@ -53,15 +53,29 @@
             tools:text="@string/collegeWebsite"
             tools:textColor="@color/icon_inside_12" />
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorSurface"
+            android:progressTint="@color/textColorPrimary"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_library_info_bg"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_library_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginBottom="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_library_info_bg" />
+            app:layout_constraintTop_toBottomOf="@id/progress_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

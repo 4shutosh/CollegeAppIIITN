@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.college.app.R
 import com.college.app.databinding.FragmentHomeBinding
 import com.college.app.ui.main.holder.HolderActivity
 import com.college.app.ui.main.home.HomeViewModel.Command.*
@@ -61,20 +62,20 @@ class HomeFragment : Fragment(), HomeFeatureListClickListener {
         }
     }
 
-    private fun navigateToFeatureScreen(fragmentId: Long) {
+    private fun navigateToFeatureScreen(fragmentId: Int) {
         val intent = HolderActivity.intent(requireContext(), fragmentId)
         requireContext().startActivity(intent)
     }
 
 
-    override fun onHomeFeatureListItemClick(itemId: Long) {
+    override fun onHomeFeatureListItemClick(itemId: Int) {
         viewModel.actionFeatureItemClick(itemId)
     }
 
     companion object {
-        const val HOME_FRAGMENT_ID = 98798L
+        const val HOME_FRAGMENT_ID = R.layout.fragment_home
 
-        const val HOME_WEBSITE_FRAGMENT_ID: Long = 6731
+        const val HOME_WEBSITE_FRAGMENT_ID: Int = 6731
         const val HOME_WEBSITE_URL = "https://iiitn.ac.in/"
     }
 

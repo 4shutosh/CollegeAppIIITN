@@ -28,7 +28,7 @@ class HolderActivity : AppCompatActivity() {
     }
 
     private fun setUpNavigation() {
-        when (val fragmentId = intent.extras?.getLong(KEY_HOLDER_ACTIVITY_FRAGMENT) ?: 0L) {
+        when (val fragmentId = intent.extras?.getInt(KEY_HOLDER_ACTIVITY_FRAGMENT) ?: 0) {
             else -> {
                 val fragment = fragmentFromId(fragmentId)
                 supportFragmentManager.beginTransaction()
@@ -43,10 +43,10 @@ class HolderActivity : AppCompatActivity() {
 
         private const val KEY_HOLDER_ACTIVITY_FRAGMENT = "HOLDER_ACTIVITY_FRAGMENT_KEY"
 
-        fun intent(context: Context, fragmentToHold: Long): Intent {
+        fun intent(context: Context, fragmentToHold: Int): Intent {
             val intent = Intent(context, HolderActivity::class.java)
             val bundle = Bundle()
-            bundle.putLong(KEY_HOLDER_ACTIVITY_FRAGMENT, fragmentToHold)
+            bundle.putInt(KEY_HOLDER_ACTIVITY_FRAGMENT, fragmentToHold)
             intent.putExtras(bundle)
             return intent
         }

@@ -290,6 +290,9 @@
     <string name="todo_notification_mark_as_done">Mark as done</string>
     <string name="todo_notification_extend_an_hour">Extend an hour</string>
     <string name="issue_book">Issue A Book</string>
+    <string name="issue">Issue</string>
+    <string name="issued_books">Issued Books</string>
     <string name="bottom_sheet_barcode_scanner_title">Please Scan the Code on the Book</string>
+    <string name="get_started_reading">No Books Issued! \n Reading Increases your CGPA by 10 times.</string>
 
 </resources>

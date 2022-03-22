@@ -41,3 +41,6 @@ fun Fragment.showToast(message: String){
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+
+fun Long?.orDef() = 0L
+fun Int?.orDef() = 0L

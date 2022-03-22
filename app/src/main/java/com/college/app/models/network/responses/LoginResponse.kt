@@ -1,4 +1,4 @@
-package com.college.app.network.models.responses
+package com.college.app.models.network.responses
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

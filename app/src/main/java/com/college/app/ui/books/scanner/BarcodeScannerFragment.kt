@@ -61,23 +61,28 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     private fun setUpViews() {
         isCancelable = true
         setUpCameraAndAnalyze()
+
+        binding.barcodeScannerConfirmButton.setOnClickListener {
+            parentViewModel.actionIssueBookButtonClicked()
+        }
     }
 
     private fun setUpListeners() {
-        parentViewModel.scannedCollegeBook.observe(viewLifecycleOwner) {
-            when (it) {
-                is DataUiResult.Success -> {
-
+        parentViewModel.barcodeScannerViewState.observe(viewLifecycleOwner) {
+            binding.barcodeScannerConfirmButton.isEnabled = it.issueBookButtonEnabled
+            when (it.scannedCollegeBook) {
+                is DataUiResult.Success,
+                -> {
                     binding.barcodeScannerProgressBar.gone()
-
-                    binding.barcodeScannerBookDetails.text = it.data.bookName
-                    binding.barcodeScannerBookAvailability.text = it.data.maxDaysAllowed.toString()
+                    binding.barcodeScannerBookDetails.text = it.scannedCollegeBook.data.bookName
+                    binding.barcodeScannerBookAvailability.text =
+                        it.scannedCollegeBook.data.maxDaysAllowed.toString()
                 }
                 is DataUiResult.Error -> {
-                    showToast("No Book Found ${it.exception}")
+                    showToast("No Book Found ${it.scannedCollegeBook.exception}")
                 }
                 is DataUiResult.Loading -> {
-                    if (it.loading) binding.barcodeScannerProgressBar.visible()
+                    if (it.scannedCollegeBook.loading) binding.barcodeScannerProgressBar.visible()
                     else binding.barcodeScannerProgressBar.gone()
                 }
             }

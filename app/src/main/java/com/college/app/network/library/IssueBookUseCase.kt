@@ -1,7 +1,7 @@
 package com.college.app.network.library
 
 import com.college.app.data.repositories.library.LibraryBooksRepository
-import com.college.app.network.models.requests.IssueBookRequest
+import com.college.app.models.network.requests.IssueBookRequest
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.domain.SuspendUseCase
 import javax.inject.Inject

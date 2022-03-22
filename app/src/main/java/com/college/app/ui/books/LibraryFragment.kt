@@ -8,20 +8,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.college.app.R
 import com.college.app.databinding.FragmentOfflineLibraryBinding
 import com.college.app.ui.books.LibraryViewModel.Command.ShowBarcodeScannerFragment
+import com.college.app.ui.books.list.LibraryListAdapter
 import com.college.app.ui.books.scanner.BarcodeScannerFragment
 import com.college.app.ui.books.scanner.BarcodeScannerFragment.Companion.BARCODE_SCANNER_FRAGMENT_KEY
 import com.college.app.utils.PermissionRequester
+import com.college.app.utils.extensions.gone
 import com.college.app.utils.extensions.showDialogFragmentIfNotPresent
+import com.college.app.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OfflineLibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemTouchListener {
+class LibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemTouchListener {
 
     private lateinit var binding: FragmentOfflineLibraryBinding
 
-    private val listAdapter by lazy { LibraryListAdapter(this) }
+    private val libraryListAdapter by lazy { LibraryListAdapter(this) }
 
     private val viewModel: LibraryViewModel by viewModels()
 
@@ -51,13 +55,23 @@ class OfflineLibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemT
 
     private fun setupViews() {
         binding.fragmentLibraryList.apply {
-            adapter = listAdapter
+            adapter = libraryListAdapter
         }
     }
 
     private fun setUpObservers() {
         viewModel.command.observe(viewLifecycleOwner) {
             processCommand(it)
+        }
+
+        viewModel.libraryListViewState.observe(viewLifecycleOwner) {
+            if (it.isLoading) binding.progressBar.visible()
+            else binding.progressBar.gone()
+
+            if (it.viewList.isNotEmpty()) {
+                libraryListAdapter.submitList(it.viewList)
+                libraryListAdapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -78,10 +92,14 @@ class OfflineLibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemT
     }
 
     companion object {
-        const val OFFLINE_LIBRARY_FRAGMENT_ID: Long = 228L
+        const val OFFLINE_LIBRARY_FRAGMENT_ID = R.layout.fragment_offline_library
     }
 
     override fun issueBookClicked() {
         viewModel.actionIssueBookClicked()
+    }
+
+    override fun issuedBookItemClicked() {
+
     }
 }

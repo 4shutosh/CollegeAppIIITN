@@ -11,14 +11,16 @@ import com.college.app.data.repositories.DataStoreRepository
 import com.college.app.models.local.CollegeBook
 import com.college.app.network.library.GetBookUseCase
 import com.college.app.network.library.IssueBookUseCase
-import com.college.app.network.models.requests.IssueBookRequest
+import com.college.app.models.network.requests.IssueBookRequest
+import com.college.app.network.library.GetIssuedBookUseCase
+import com.college.app.ui.books.list.LibraryListAdapter
+import com.college.app.utils.extensions.orDef
 import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
+import com.college.base.domain.ServerException
 import com.college.base.logger.CollegeLogger
-import com.college.base.result.DataUiResult
-import com.college.base.result.onError
-import com.college.base.result.onSuccess
+import com.college.base.result.*
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -36,18 +38,31 @@ class LibraryViewModel
     private val appCoroutineDispatcher: AppCoroutineDispatcher,
     private val issueBookUseCase: IssueBookUseCase,
     private val getBookUseCase: GetBookUseCase,
+    private val getIssuedBooksUseCase: GetIssuedBookUseCase,
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
 //    todo check if the books is already issued: getting checked in the server but can be checked on front end as well ?
 
-    private val _viewList = MutableLiveData(mutableListOf<Pair<Int, Any>>())
-    val viewList = _viewList.toLiveData()
-
     private var cameraProviderLiveData: MutableLiveData<ProcessCameraProvider>? = null
 
-    private val _scannedCollegeBook = MutableLiveData<DataUiResult<CollegeBook>?>()
-    val scannedCollegeBook = _scannedCollegeBook.toLiveData()
+    data class LibraryListViewState(
+        val isLoading: Boolean = false,
+        val viewList: MutableList<Any> = mutableListOf(),
+    )
+
+    data class BarcodeScannerViewState(
+        val issueBookButtonEnabled: Boolean = false,
+        val scannedCollegeBook: DataUiResult<CollegeBook>? = null,
+    )
+
+    val barcodeScannerViewState = MutableLiveData(BarcodeScannerViewState())
+
+    val libraryListViewState: MutableLiveData<LibraryListViewState> =
+        MutableLiveData(LibraryListViewState())
+
+    private fun currentLibraryListViewState() = libraryListViewState.value!!
+    private fun currentBarcodeScannerViewState() = barcodeScannerViewState.value!!
 
     sealed class Command {
         object ShowBarcodeScannerFragment : Command()
@@ -56,11 +71,29 @@ class LibraryViewModel
     val command = SingleLiveEvent<Command>()
 
     init {
-
+        populateInitialData()
+        getIssuedBooks()
     }
 
-    companion object {
+    private fun populateInitialData() {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            val newList = currentLibraryListViewState().viewList.apply {
+                add(LibraryListAdapter.LibraryListIssueABookViewState)
+            }
+            libraryListViewState.postValue(currentLibraryListViewState().copy(viewList = newList))
+        }
+    }
 
+    private fun getIssuedBooks() {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            libraryListViewState.postValue(currentLibraryListViewState().copy(isLoading = true))
+            dataStoreRepository.getUserId()?.let { string ->
+                getIssuedBooksUseCase(string).onSuccess {
+                    currentLibraryListViewState().viewList.add(this)
+                    libraryListViewState.postValue(currentLibraryListViewState().copy(isLoading = false))
+                }
+            }
+        }
     }
 
     val processCameraProvider: LiveData<ProcessCameraProvider>
@@ -102,21 +135,51 @@ class LibraryViewModel
     fun getBookByLibraryNumber(libraryBookNumber: Long) {
         if (libraryBookNumber != 0L)
             viewModelScope.launch(appCoroutineDispatcher.io) {
-                _scannedCollegeBook.postValue(DataUiResult.Loading(true))
+                barcodeScannerViewState.postValue(
+                    currentBarcodeScannerViewState().copy(
+                        scannedCollegeBook = DataUiResult.Loading(true)
+                    )
+                )
                 getBookUseCase(libraryBookNumber).onSuccess {
-                    _scannedCollegeBook.postValue(DataUiResult.Success(this))
-                }.onError {
-                    _scannedCollegeBook.postValue(DataUiResult.Error(this.exception))
+                    barcodeScannerViewState.postValue(
+                        currentBarcodeScannerViewState().copy(
+                            issueBookButtonEnabled = this.isAvailableToIssue,
+                            scannedCollegeBook = DataUiResult.Success(this)
+                        )
+                    )
+                }.onServerError {
+                    barcodeScannerViewState.postValue(
+                        currentBarcodeScannerViewState().copy(
+                            scannedCollegeBook = DataUiResult.Error(this)
+                        )
+                    )
                 }
             }
     }
 
     fun barcodeScannerDialogClosed() {
-        _scannedCollegeBook.value = null
+        barcodeScannerViewState.postValue(
+            BarcodeScannerViewState()
+        )
     }
 
     fun actionIssueBookClicked() {
         command.postValue(Command.ShowBarcodeScannerFragment)
+    }
+
+    fun actionIssueBookButtonClicked() {
+        viewModelScope.launch(appCoroutineDispatcher.io) {
+            dataStoreRepository.getUserId()?.let { userId ->
+                issueBookUseCase(IssueBookRequest(
+                    userId = userId,
+                    libraryBookNumber = currentBarcodeScannerViewState().scannedCollegeBook?.data?.libraryBookNumber.orDef()
+                )).onSuccess {
+                    logger.d(this.toString())
+                }.onError {
+                    logger.d(this.exception)
+                }
+            }
+        }
     }
 
 

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root_barcode_scanner"
@@ -25,6 +27,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/barcode_scanner_camera_view"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/book_details_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="barcode_scanner_book_details, barcode_scanner_book_availability" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/barcode_scanner_book_details"
@@ -58,24 +66,31 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginVertical="20dp"
             android:background="@drawable/dr_rounded_16"
+            app:layout_constraintBottom_toTopOf="@id/barcode_scanner_confirm_button"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barcode_scanner_book_availability" />
+            app:layout_constraintTop_toBottomOf="@id/barcode_scanner_book_availability"
+            app:layout_constraintVertical_bias="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/barcode_scanner_confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginBottom="20dp"
+            android:enabled="false"
+            android:text="@string/issue"
             android:textAllCaps="false"
+            android:backgroundTint="@color/colorOnSurface"
+            android:textColor="@color/buttonText"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/barcode_scanner_camera_view"
             app:layout_constraintStart_toStartOf="@id/barcode_scanner_camera_view"
             app:layout_constraintTop_toBottomOf="@+id/barcode_scanner_camera_view"
-            tools:text="Confirm" />
+            tools:visibility="visible" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/barcode_scanner_progress_bar"

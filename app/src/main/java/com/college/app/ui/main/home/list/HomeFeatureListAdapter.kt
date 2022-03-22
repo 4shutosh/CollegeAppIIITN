@@ -33,7 +33,7 @@ class HomeFeatureListAdapter(private val clickListener: HomeFeatureListClickList
         holder.bind(item)
     }
 
-    override fun getItemId(position: Int) = currentList[position].id
+    override fun getItemId(position: Int) = currentList[position].id.toLong()
 
     inner class HomeFeatureListViewHolder(
         private val binding: ListItemHomeFeatureBinding,
@@ -63,7 +63,7 @@ class HomeFeatureListAdapter(private val clickListener: HomeFeatureListClickList
     }
 
     interface HomeFeatureListClickListener {
-        fun onHomeFeatureListItemClick(itemId: Long)
+        fun onHomeFeatureListItemClick(itemId: Int)
     }
 }
 
@@ -71,20 +71,20 @@ class HomeFeatureListAdapter(private val clickListener: HomeFeatureListClickList
 object HomeFeatureListDiffCallback : DiffUtil.ItemCallback<HomeFeatureListViewState>() {
     override fun areItemsTheSame(
         oldItem: HomeFeatureListViewState,
-        newItem: HomeFeatureListViewState
+        newItem: HomeFeatureListViewState,
     ) = oldItem == newItem
 
     override fun areContentsTheSame(
         oldItem: HomeFeatureListViewState,
-        newItem: HomeFeatureListViewState
+        newItem: HomeFeatureListViewState,
     ) = oldItem == newItem
 
 }
 
 data class HomeFeatureListViewState(
-    val id: Long,
+    val id: Int,
     @DrawableRes val iconRes: Int,
     @StringRes val titleRes: Int,
     @ColorRes val itemBackgroundColorRes: Int,
-    @ColorRes val textColorRes: Int
+    @ColorRes val textColorRes: Int,
 )

@@ -63,7 +63,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentTodoBinding.inflate(inflater)
         binding.viewModel = viewModel
@@ -241,7 +241,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
         id: Long = 0L,
         title: String = "",
         description: String = "",
-        dateAndTimeStamp: Long
+        dateAndTimeStamp: Long,
     ) {
         val addTodoDetailsDialog = AddTodoDetailsDialogFragment.instance(
             id = id,
@@ -259,7 +259,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
 
     private fun processTodoNotification(
         start: Boolean, timeStamp: Long, title: String,
-        description: String, todoItemId: Long
+        description: String, todoItemId: Long,
     ) {
 
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -300,7 +300,7 @@ class TodoFragment : Fragment(), TodoListAdapter.TodoItemClickListener,
     companion object {
         private const val ADD_TODO_DETAILS_DIALOG_TAG = "ADD_TODO_DETAILS_DIALOG_TAG"
 
-        const val TODO_FRAGMENT_ID : Long = 2949
+        const val TODO_FRAGMENT_ID = R.layout.fragment_todo
     }
 
     override fun onLeftSwipe(position: Int) {

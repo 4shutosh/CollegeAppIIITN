@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_list_item_issue_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dr_rounded_16"
+        android:backgroundTint="@color/colorCloseToSurface_1"
+        android:clickable="false"
+        android:focusable="false">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_issue_book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginVertical="12dp"
+            android:drawableStart="@drawable/ic_book"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/textColorPrimary"
+            android:fontFamily="@font/font_open_sans_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/issued_books"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_item_issue_book_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_item_issue_book_title"
+            tools:itemCount="5"
+            tools:listitem="@layout/list_item_issue_book_item_book" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/no_books_found_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="list_item_book_item_banner,list_item_book_item_description" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_book_item_banner"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_books"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_item_issue_book_title"
+            app:tint="@color/textColorPrimary" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_book_item_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/font_open_sans_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/get_started_reading"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_item_book_item_banner"
+            app:layout_constraintVertical_bias="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

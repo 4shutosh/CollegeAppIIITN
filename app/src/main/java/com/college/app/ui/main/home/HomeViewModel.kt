@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.R
-import com.college.app.ui.books.OfflineLibraryFragment.Companion.OFFLINE_LIBRARY_FRAGMENT_ID
+import com.college.app.ui.books.LibraryFragment.Companion.OFFLINE_LIBRARY_FRAGMENT_ID
 import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_FRAGMENT_ID
 import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_URL
 import com.college.app.ui.main.home.HomeViewModel.Command.*
@@ -18,9 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val appCoroutineDispatcher: AppCoroutineDispatcher
+    private val appCoroutineDispatcher: AppCoroutineDispatcher,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val _homeFeatureList = MutableLiveData(homeFeatureList)
     val homeFeatureListLiveData = _homeFeatureList.toLiveData()
@@ -28,11 +28,11 @@ class HomeViewModel @Inject constructor(
     val command: SingleLiveEvent<Command> = SingleLiveEvent()
 
     sealed class Command {
-        class NavigateToFeatureScreen(val fragmentId: Long) : Command()
+        class NavigateToFeatureScreen(val fragmentId: Int) : Command()
         class OpenWebViewWithUrl(val url: String) : Command()
     }
 
-    fun actionFeatureItemClick(fragmentId: Long) {
+    fun actionFeatureItemClick(fragmentId: Int) {
         viewModelScope.launch(appCoroutineDispatcher.main) {
             command.postValue(
                 when (fragmentId) {
@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
                 textColorRes = R.color.icon_inside_8
             ),
             HomeFeatureListViewState(
-                id = 1L,
+                id = R.layout.fragment_courses,
                 iconRes = R.drawable.ic_courses_round,
                 titleRes = R.string.courses,
                 itemBackgroundColorRes = R.color.icon_circle_0,

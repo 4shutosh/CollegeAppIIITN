@@ -19,7 +19,7 @@ class CollegeInterceptor @Inject constructor(
         val newChain = chain.request().newBuilder()
 
         if (accessToken.isNullOrBlank().not()) {
-            newChain.addHeader("Authorization", "Token $accessToken")
+            newChain.addHeader("Authorization", "Bearer $accessToken")
         }
 
         newChain.addHeader("appVersion", buildVersionCode.toString())

@@ -44,6 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.holder.HolderActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:exported="false" />
         <!--        <receiver-->
         <!--            android:name=".utils.FirebaseDataReceiver"-->
