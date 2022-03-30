@@ -15,23 +15,24 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.fragment.app.viewModels
 import com.college.app.R
 import com.college.app.databinding.BottomsheetBarcodeScannerBinding
+import com.college.app.models.local.CollegeBarcodeData
 import com.college.app.ui.books.LibraryViewModel
-import com.college.app.utils.extensions.bindWithLifecycleOwner
-import com.college.app.utils.extensions.gone
-import com.college.app.utils.extensions.showToast
-import com.college.app.utils.extensions.visible
+import com.college.app.utils.extensions.*
+import com.college.app.utils.isJSONValid
 import com.college.base.logger.CollegeLogger
 import com.college.base.result.DataUiResult
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import com.squareup.moshi.Moshi
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class BarcodeScannerFragment : BottomSheetDialogFragment() {
+class LibraryBarcodeScannerFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var logger: CollegeLogger
@@ -61,10 +62,6 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
     private fun setUpViews() {
         isCancelable = true
         setUpCameraAndAnalyze()
-
-        binding.barcodeScannerConfirmButton.setOnClickListener {
-            parentViewModel.actionIssueBookButtonClicked()
-        }
     }
 
     private fun setUpListeners() {
@@ -75,8 +72,25 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                 -> {
                     binding.barcodeScannerProgressBar.gone()
                     binding.barcodeScannerBookDetails.text = it.scannedCollegeBook.data.bookName
-                    binding.barcodeScannerBookAvailability.text =
-                        it.scannedCollegeBook.data.maxDaysAllowed.toString()
+
+                    val availableText =
+                        if (it.scannedCollegeBook.data.isAvailableToIssue) "Available till ${
+                            getDateInFuture(it.scannedCollegeBook.data.maxDaysAllowed)
+                        }"
+                        else {
+                            "Not Available to Issue! \n Issued by ${it.scannedCollegeBook.data.ownerData?.email}"
+                        }
+
+                    if (it.scannedCollegeBook.data.isAvailableToIssue) {
+                        binding.barcodeScannerConfirmButton.visible()
+                        binding.barcodeScannerConfirmButton.setOnClickListener { view ->
+                            parentViewModel.actionIssueBookButtonClicked(it.scannedCollegeBook.data.libraryBookNumber)
+                        }
+                    } else binding.barcodeScannerConfirmButton.gone()
+
+                    binding.barcodeScannerBookAvailability.text = availableText
+
+
                 }
                 is DataUiResult.Error -> {
                     showToast("No Book Found ${it.scannedCollegeBook.exception}")
@@ -153,9 +167,24 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
                     if (barcodes.isNotEmpty())
                         barcodes[0].let { barcode ->
                             logger.d("found barcode ${barcode.rawValue}")
-                            provider.unbind(previewUseCase)
-                            provider.unbind(analysisUseCase)
-                            parentViewModel.getBookByLibraryNumber(barcode.rawValue?.toLong() ?: 0L)
+
+                            try {
+                                val moshi: Moshi = Moshi.Builder().build()
+                                val jsonAdapter =
+                                    moshi.adapter(CollegeBarcodeData::class.java).lenient()
+                                val dataString = barcode.rawValue.orEmpty()
+                                if (dataString.isNotEmpty() && isJSONValid(dataString)) {
+                                    val barcodeData = jsonAdapter.fromJson(dataString)
+                                    if (barcodeData != null && barcodeData.identifier == BARCODE_IDENTIFIER) {
+                                        provider.unbind(previewUseCase)
+                                        provider.unbind(analysisUseCase)
+                                        parentViewModel.getBookByLibraryNumber(barcodeData.data.toLong())
+                                    }
+                                }
+                            } catch (exception: Exception) {
+                                logger.d("Something wrong happened ${exception.message}")
+                            }
+
                         }
                 }.addOnFailureListener { exception ->
                     logger.e(exception)
@@ -173,7 +202,7 @@ class BarcodeScannerFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val BARCODE_SCANNER_FRAGMENT_KEY = "BARCODE_SCANNER_FRAGMENT_KEY"
+        const val BARCODE_IDENTIFIER = "69694242"
     }
-
 
 }

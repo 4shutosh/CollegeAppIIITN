@@ -8,6 +8,9 @@ import android.net.Uri
 import android.os.Build
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService.ACTION_CUSTOM_TABS_CONNECTION
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 
 fun getBroadCastReceiveListener(action: (context: Context, intent: Intent) -> Unit): BroadcastReceiver {
@@ -59,4 +62,17 @@ fun getCustomTabsPackages(context: Context): ArrayList<ResolveInfo> {
         }
     }
     return packagesSupportingCustomTabs
+}
+
+fun isJSONValid(test: String): Boolean {
+    try {
+        JSONObject(test);
+    } catch (ex: JSONException) {
+        try {
+            JSONArray(test);
+        } catch (ex1: JSONException) {
+            return false;
+        }
+    }
+    return true;
 }

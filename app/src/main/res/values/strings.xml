@@ -290,6 +290,8 @@
     <string name="todo_notification_mark_as_done">Mark as done</string>
     <string name="todo_notification_extend_an_hour">Extend an hour</string>
     <string name="issue_book">Issue A Book</string>
+    <string name="return_book">Return Books</string>
+    <string name="return_book_description">Returning Books is not automatic, for the simple reason of ensuring the quality of book while returning.\n\nThe librarian will do the process on their dashboard for returning your book which will be reflected instantly along with the penalties.</string>
     <string name="issue">Issue</string>
     <string name="issued_books">Issued Books</string>
     <string name="bottom_sheet_barcode_scanner_title">Please Scan the Code on the Book</string>

@@ -26,6 +26,11 @@ fun getFormattedDate(timeStampMilliSeconds: Long, format: String = "EEE, MMM d, 
     return SimpleDateFormat(format, Locale.ENGLISH).format(Date(timeStampMilliSeconds))
 }
 
+fun getDateInFuture(numberOfDays: Int, format: String = "EEE, MMM d, ''yy"): String {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DATE, numberOfDays)
+    return SimpleDateFormat(format, Locale.ENGLISH).format(Date(calendar.timeInMillis))}
+
 fun getFormattedTime(timeStampMilliSeconds: Long): String {
     return SimpleDateFormat("hh:mm aa", Locale.ENGLISH).format(Date(timeStampMilliSeconds))
 }
@@ -109,7 +114,6 @@ fun updateTime(timeStampMilliSeconds: Long, hour: Int, minute: Int): Long {
 
 enum class DateTimeDifferenceUnit(val unit: String) {
     PAST("past"),
-
     SECONDS("seconds"),
     MINUTES("minutes"),
     HOURS("hours"),

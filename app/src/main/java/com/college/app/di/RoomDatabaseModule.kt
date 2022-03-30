@@ -3,6 +3,8 @@ package com.college.app.di
 import android.content.Context
 import android.os.Debug
 import androidx.room.Room
+import com.college.app.data.daos.CoursesDao
+import com.college.app.data.daos.TodoDao
 import com.college.app.data.database.CollegeRoomDatabase
 import dagger.Module
 import dagger.Provides
@@ -18,11 +20,11 @@ class RoomDatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): CollegeRoomDatabase {
         val builder = Room.databaseBuilder(context, CollegeRoomDatabase::class.java, DATABASE_NAME)
             .fallbackToDestructiveMigration()
-        if (Debug.isDebuggerConnected()){
+        if (Debug.isDebuggerConnected()) {
             builder.allowMainThreadQueries()
         }
         return builder.build()
@@ -38,5 +40,8 @@ class RoomDatabaseModule {
 object DatabaseDaoModule {
 
     @Provides
-    fun provideTodoDatabase(db: CollegeRoomDatabase) = db.todoDao()
+    fun provideTodoDatabase(db: CollegeRoomDatabase): TodoDao = db.todoDao()
+
+    @Provides
+    fun provideCoursesDatabase(db: CollegeRoomDatabase): CoursesDao = db.coursesDao()
 }

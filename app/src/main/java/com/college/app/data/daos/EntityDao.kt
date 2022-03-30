@@ -1,9 +1,6 @@
 package com.college.app.data.daos
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Transaction
-import androidx.room.Update
+import androidx.room.*
 import com.college.app.data.entities.CollegeEntity
 
 abstract class EntityDao<in E : CollegeEntity> {
@@ -13,7 +10,7 @@ abstract class EntityDao<in E : CollegeEntity> {
     @Insert
     abstract suspend fun insertAll(vararg entity: E)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertAll(entities: List<E>)
 
     @Update

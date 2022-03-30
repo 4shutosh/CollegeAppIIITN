@@ -1,6 +1,7 @@
 package com.college.app.network
 
 import com.college.app.models.local.CollegeBook
+import com.college.app.models.local.CollegeCourse
 import com.college.app.network.EndPoints.BOOKS
 import com.college.app.network.EndPoints.ISSUE_BOOK
 import com.college.app.network.EndPoints.LIBRARY
@@ -9,6 +10,8 @@ import com.college.app.models.network.requests.IssueBookRequest
 import com.college.app.models.network.responses.IssueBookResponse
 import com.college.app.models.network.responses.LoginResponse
 import com.college.app.models.network.responses.UserLibraryItemResponse
+import com.college.app.models.network.responses.UserLibraryResponse
+import com.college.app.network.EndPoints.COURSES
 import com.college.app.utils.Constants.Params.EMAIL
 import com.college.app.utils.Constants.Params.IMAGE_URL
 import com.college.app.utils.Constants.Params.LIBRARY_BOOK_NUMBER
@@ -39,11 +42,14 @@ interface CollegeAppService {
     @POST(ISSUE_BOOK)
     suspend fun issueABook(
         @Body issueBookRequest: IssueBookRequest,
-    ): ServerResponse<IssueBookResponse>
+    ): ServerResponse<UserLibraryResponse>
 
     @GET(LIBRARY)
     suspend fun getIssuedBooks(
         @Query(USER_ID) userId: String,
-    ): ServerResponse<List<UserLibraryItemResponse>>
+    ): ServerResponse<UserLibraryResponse>
+
+    @GET(COURSES)
+    suspend fun getAllCourses(): ServerResponse<List<CollegeCourse>>
 
 }

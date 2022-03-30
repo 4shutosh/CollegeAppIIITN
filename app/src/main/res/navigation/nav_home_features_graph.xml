@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home_features_graph">
 
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.college.app.ui.courses.CoursesFragment"
+        android:label="CoursesFragment"
+        tools:layout="@layout/fragment_courses" />
 
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.college.app.ui.books.LibraryFragment"
+        android:label="LibraryFragment"
+        tools:layout="@layout/fragment_offline_library" />
 
 </navigation>

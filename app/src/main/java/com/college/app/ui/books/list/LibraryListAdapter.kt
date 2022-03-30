@@ -32,6 +32,13 @@ class LibraryListAdapter(
                     ), itemClickListener
                 )
             }
+            RETURN_A_BOOK -> {
+                ReturnBookViewHolder(
+                    ListItemReturnBookBinding.inflate(
+                        LayoutInflater.from(parent.context), parent, false
+                    )
+                )
+            }
             else -> throw Exception("No valid view holder found for ${this.javaClass.name}")
         }
     }
@@ -40,7 +47,7 @@ class LibraryListAdapter(
         when (getItemViewType(position)) {
             ISSUE_A_BOOK -> {
                 val h = holder as IssueBookViewHolder
-                h.binding.rootListItemIssueBook.setOnClickListener {
+                h.binding.listItemIssueBookTitle.setOnClickListener {
                     itemClickListener.issueBookClicked()
                 }
             }
@@ -49,6 +56,9 @@ class LibraryListAdapter(
                 val item = getItem(position) as LibraryListIssuedBookViewState
                 viewHolder.bind(item)
             }
+            RETURN_A_BOOK -> {
+                val viewHolder = holder as ReturnBookViewHolder
+            }
         }
     }
 
@@ -56,16 +66,21 @@ class LibraryListAdapter(
         return when (getItem(position)) {
             is LibraryListIssueABookViewState -> ISSUE_A_BOOK
             is LibraryListIssuedBookViewState -> ISSUED_BOOKS
+            is LibraryListReturnABookViewState -> RETURN_A_BOOK
             else -> throw Exception("No valid view type found for ${getItem(position).javaClass}")
         }
     }
 
     object LibraryListIssueABookViewState
+    object LibraryListReturnABookViewState
     data class LibraryListIssuedBookViewState(
-        val listOfBooks: List<LibraryListIssuedBookItemViewState> = emptyList(),
+        val listOfBooks: MutableList<LibraryListIssuedBookItemViewState> = mutableListOf(),
     )
 
     inner class IssueBookViewHolder(val binding: ListItemIssueBookBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    inner class ReturnBookViewHolder(val binding: ListItemReturnBookBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     inner class IssuedBookViewHolder(
@@ -102,6 +117,7 @@ class LibraryListAdapter(
     companion object {
         const val ISSUE_A_BOOK = R.layout.list_item_issue_book
         const val ISSUED_BOOKS = R.layout.list_item_issued_books
+        const val RETURN_A_BOOK = R.layout.list_item_return_book
     }
 
     interface LibraryListOnItemTouchListener {

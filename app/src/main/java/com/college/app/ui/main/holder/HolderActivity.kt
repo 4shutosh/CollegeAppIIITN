@@ -6,10 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.college.app.R
 import com.college.app.databinding.ActivityHolderBinding
-import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_FRAGMENT_ID
-import com.college.app.ui.main.home.HomeFragment.Companion.HOME_WEBSITE_URL
 import com.college.app.utils.AppUtils.fragmentFromId
-import com.college.app.utils.openURL
 import dagger.hilt.android.AndroidEntryPoint
 
 

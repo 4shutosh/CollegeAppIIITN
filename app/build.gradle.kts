@@ -25,8 +25,8 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
 
-            buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
-//            buildConfigField("String", "college_endpoint", "\"https://college-app-backend-ktor.herokuapp.com/\"")
+//            buildConfigField("String", "college_endpoint", "\"http://192.168.0.104:8090/\"")
+            buildConfigField("String", "college_endpoint", "\"https://college-app-backend-ktor.herokuapp.com/\"")
         }
         getByName("release") {
             isDebuggable = false
@@ -93,6 +93,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.swipeRefresh)
+    implementation(libs.androidx.viewpager2)
 
     //    ui dependencies
     implementation(libs.androidx.fragment)
@@ -112,7 +114,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.compose.livedata)
 
-    implementation(libs.accompanist.swiperefresh)
+//    implementation(libs.accompanist.swiperefresh)
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.insetsui)
     implementation(libs.accompanist.navigation.animation)

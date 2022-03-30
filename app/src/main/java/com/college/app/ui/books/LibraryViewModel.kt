@@ -7,13 +7,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.DataStoreRepository
+import com.college.app.data.repositories.library.LibraryBooksRepository
+import com.college.app.data.repositories.todo.TodoRepository
 import com.college.app.models.local.CollegeBook
 import com.college.app.network.library.GetBookUseCase
 import com.college.app.network.library.IssueBookUseCase
 import com.college.app.models.network.requests.IssueBookRequest
 import com.college.app.network.library.GetIssuedBookUseCase
 import com.college.app.ui.books.list.LibraryListAdapter
+import com.college.app.utils.extensions.getFormattedDate
 import com.college.app.utils.extensions.orDef
 import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
@@ -25,6 +29,7 @@ import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import okhttp3.internal.notifyAll
 import java.util.concurrent.ExecutionException
 import javax.inject.Inject
 
@@ -39,6 +44,7 @@ class LibraryViewModel
     private val issueBookUseCase: IssueBookUseCase,
     private val getBookUseCase: GetBookUseCase,
     private val getIssuedBooksUseCase: GetIssuedBookUseCase,
+    private val todoRepository: TodoRepository,
     private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
@@ -66,6 +72,8 @@ class LibraryViewModel
 
     sealed class Command {
         object ShowBarcodeScannerFragment : Command()
+        object CloseBarcodeScannerFragment : Command()
+        class ShowToastMessage(val message: String) : Command()
     }
 
     val command = SingleLiveEvent<Command>()
@@ -79,18 +87,21 @@ class LibraryViewModel
         viewModelScope.launch(appCoroutineDispatcher.io) {
             val newList = currentLibraryListViewState().viewList.apply {
                 add(LibraryListAdapter.LibraryListIssueABookViewState)
+                add(LibraryListAdapter.LibraryListReturnABookViewState)
             }
             libraryListViewState.postValue(currentLibraryListViewState().copy(viewList = newList))
         }
     }
 
-    private fun getIssuedBooks() {
+    fun getIssuedBooks() {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             libraryListViewState.postValue(currentLibraryListViewState().copy(isLoading = true))
             dataStoreRepository.getUserId()?.let { string ->
                 getIssuedBooksUseCase(string).onSuccess {
+                    currentLibraryListViewState().viewList.removeIf { it is LibraryListAdapter.LibraryListIssuedBookViewState }
                     currentLibraryListViewState().viewList.add(this)
-                    libraryListViewState.postValue(currentLibraryListViewState().copy(isLoading = false))
+                    libraryListViewState.postValue(currentLibraryListViewState().copy(
+                        isLoading = false))
                 }
             }
         }
@@ -167,14 +178,32 @@ class LibraryViewModel
         command.postValue(Command.ShowBarcodeScannerFragment)
     }
 
-    fun actionIssueBookButtonClicked() {
+    fun actionIssueBookButtonClicked(libraryBookNumber: Long) {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             dataStoreRepository.getUserId()?.let { userId ->
                 issueBookUseCase(IssueBookRequest(
                     userId = userId,
-                    libraryBookNumber = currentBarcodeScannerViewState().scannedCollegeBook?.data?.libraryBookNumber.orDef()
+                    libraryBookNumber = libraryBookNumber
                 )).onSuccess {
-                    logger.d(this.toString())
+                    val bookInserted =
+                        userBookList.find { it.book.libraryBookNumber == libraryBookNumber }
+
+                    if (bookInserted != null) {
+                        // check the issued book return stamp date here
+                        todoRepository.insertTodo(
+                            TodoItem(
+                                name = "Return Book ${bookInserted.book.bookName}",
+                                description = "Return Book by ${bookInserted.book.bookName} visiting the library, on or before the return date of ${
+                                    getFormattedDate(bookInserted.returnTimeStamp)
+                                }",
+                                timeStampMilliSeconds = bookInserted.returnTimeStamp,
+                                notify = true
+                            )
+                        )
+                        command.postValue(Command.CloseBarcodeScannerFragment)
+                        command.postValue(Command.ShowToastMessage("Book Issued! and Return TODO Added!"))
+                        getIssuedBooks()
+                    }
                 }.onError {
                     logger.d(this.exception)
                 }

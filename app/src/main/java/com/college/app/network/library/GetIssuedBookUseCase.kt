@@ -16,12 +16,12 @@ class GetIssuedBookUseCase @Inject constructor(
     appCoroutineDispatcher.io) {
     override suspend fun execute(parameters: String): LibraryListIssuedBookViewState {
         return LibraryListIssuedBookViewState(
-            libraryBooksRepository.getIssuedBookForUser(parameters).map {
+            libraryBooksRepository.getIssuedBookForUser(parameters).userBookList.map {
                 LibraryIssuedBooksAdapter.LibraryListIssuedBookItemViewState(
                     it.book,
                     "Return Date: ${getFormattedDate(it.returnTimeStamp)}"
                 )
-            }
+            }.toMutableList()
         )
     }
 }

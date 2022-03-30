@@ -1,5 +1,7 @@
 package com.college.app.di
 
+import com.college.app.data.repositories.courses.CoursesRepository
+import com.college.app.data.repositories.courses.CoursesRepositoryImpl
 import com.college.app.data.repositories.library.LibraryBooksRepository
 import com.college.app.data.repositories.library.LibraryBooksRepositoryImpl
 import com.college.app.data.repositories.login.LoginRepository
@@ -16,9 +18,16 @@ class ViewModelModule {
 
     @Provides
     @ViewModelScoped
-    fun providesLoginRepository(loginRepository: LoginRepositoryImpl): LoginRepository = loginRepository
+    fun providesLoginRepository(loginRepository: LoginRepositoryImpl): LoginRepository =
+        loginRepository
 
     @Provides
     @ViewModelScoped
-    fun providesLibraryRepository(libraryBooksRepository: LibraryBooksRepositoryImpl): LibraryBooksRepository = libraryBooksRepository
+    fun providesLibraryRepository(libraryBooksRepository: LibraryBooksRepositoryImpl): LibraryBooksRepository =
+        libraryBooksRepository
+
+    @Provides
+    @ViewModelScoped
+    fun providesCourseRepository(coursesRepository: CoursesRepositoryImpl): CoursesRepository =
+        coursesRepository
 }

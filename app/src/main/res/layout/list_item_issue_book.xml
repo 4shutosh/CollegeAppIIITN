@@ -1,43 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/root_list_item_issue_book"
+        android:id="@+id/list_item_issue_book_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/list_item_issue_bg"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/dr_rounded_16"
-            android:backgroundTint="@color/colorCloseToSurface_1"
-            app:layout_constraintBottom_toBottomOf="@id/list_item_issue_book_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/list_item_issue_book_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="18dp"
-            android:drawableStart="@drawable/ic_library_books"
-            android:drawablePadding="10dp"
-            android:drawableTint="@color/textColorPrimary"
-            android:fontFamily="@font/font_open_sans_bold"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/issue_book"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@id/list_item_issue_bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/list_item_issue_bg" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dr_rounded_16"
+        android:backgroundTint="@color/colorCloseToSurface_1"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_library_books"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/textColorPrimary"
+        android:focusable="true"
+        android:fontFamily="@font/google_sans_regular"
+        android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="18dp"
+        android:text="@string/issue_book"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </layout>

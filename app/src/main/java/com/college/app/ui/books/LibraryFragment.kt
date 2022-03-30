@@ -12,11 +12,12 @@ import com.college.app.R
 import com.college.app.databinding.FragmentOfflineLibraryBinding
 import com.college.app.ui.books.LibraryViewModel.Command.ShowBarcodeScannerFragment
 import com.college.app.ui.books.list.LibraryListAdapter
-import com.college.app.ui.books.scanner.BarcodeScannerFragment
-import com.college.app.ui.books.scanner.BarcodeScannerFragment.Companion.BARCODE_SCANNER_FRAGMENT_KEY
+import com.college.app.ui.books.scanner.LibraryBarcodeScannerFragment
+import com.college.app.ui.books.scanner.LibraryBarcodeScannerFragment.Companion.BARCODE_SCANNER_FRAGMENT_KEY
 import com.college.app.utils.PermissionRequester
 import com.college.app.utils.extensions.gone
 import com.college.app.utils.extensions.showDialogFragmentIfNotPresent
+import com.college.app.utils.extensions.showToast
 import com.college.app.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -57,6 +58,9 @@ class LibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemTouchLis
         binding.fragmentLibraryList.apply {
             adapter = libraryListAdapter
         }
+        binding.swipeLayout.setOnRefreshListener {
+            viewModel.getIssuedBooks()
+        }
     }
 
     private fun setUpObservers() {
@@ -65,8 +69,7 @@ class LibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemTouchLis
         }
 
         viewModel.libraryListViewState.observe(viewLifecycleOwner) {
-            if (it.isLoading) binding.progressBar.visible()
-            else binding.progressBar.gone()
+            binding.swipeLayout.isRefreshing = it.isLoading
 
             if (it.viewList.isNotEmpty()) {
                 libraryListAdapter.submitList(it.viewList)
@@ -78,14 +81,18 @@ class LibraryFragment : Fragment(), LibraryListAdapter.LibraryListOnItemTouchLis
     private fun processCommand(it: LibraryViewModel.Command) {
         when (it) {
             is ShowBarcodeScannerFragment -> openBarcodeScannerFragment()
+            is LibraryViewModel.Command.ShowToastMessage -> requireActivity().showToast(it.message)
+            LibraryViewModel.Command.CloseBarcodeScannerFragment -> {
+                childFragmentManager.popBackStackImmediate()
+            }
         }
     }
 
     private fun openBarcodeScannerFragment() {
         // open the qr code scanner
         requester.runWithPermission {
-            childFragmentManager.showDialogFragmentIfNotPresent<BarcodeScannerFragment>(
-                BarcodeScannerFragment::class.java,
+            childFragmentManager.showDialogFragmentIfNotPresent<LibraryBarcodeScannerFragment>(
+                LibraryBarcodeScannerFragment::class.java,
                 BARCODE_SCANNER_FRAGMENT_KEY,
                 null)
         }
