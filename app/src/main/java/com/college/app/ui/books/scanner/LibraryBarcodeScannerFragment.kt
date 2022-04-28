@@ -196,7 +196,8 @@ class LibraryBarcodeScannerFragment : BottomSheetDialogFragment() {
 
     override fun onDismiss(dialog: DialogInterface) {
         parentViewModel.barcodeScannerDialogClosed()
-        globalCameraProcessProvider.unbindAll()
+        if (this::globalCameraProcessProvider.isInitialized)
+            globalCameraProcessProvider.unbindAll()
         super.onDismiss(dialog)
     }
 

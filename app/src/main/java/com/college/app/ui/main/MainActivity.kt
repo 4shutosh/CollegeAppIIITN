@@ -10,6 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import coil.load
 import com.college.app.R
 import com.college.app.databinding.ActivityMainBinding
+import com.college.app.ui.main.holder.HolderActivity
+import com.college.app.ui.profile.ProfileSettingsFragment.Companion.FRAGMENT_PROFILE_SETTINGS_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +33,14 @@ class MainActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         setUpObservers()
+        setUpViews()
+    }
+
+    private fun setUpViews() {
+        binding.userImage.setOnClickListener {
+            val intent = HolderActivity.intent(this, FRAGMENT_PROFILE_SETTINGS_ID)
+            startActivity(intent)
+        }
     }
 
     private fun setUpNavigation() {

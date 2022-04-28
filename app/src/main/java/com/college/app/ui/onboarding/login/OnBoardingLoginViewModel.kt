@@ -84,6 +84,8 @@ class OnBoardingLoginViewModel @Inject constructor(
 
                     dataStoreRepository.setUserId(this.userId)
                     dataStoreRepository.setAccessToken(this.accessToken)
+                    dataStoreRepository.setUserName(this.name.orEmpty())
+                    dataStoreRepository.setUserEmail(this.email)
                     if (this.imageUrl != null)
                         dataStoreRepository.setUserImageUrl(this.imageUrl)
 

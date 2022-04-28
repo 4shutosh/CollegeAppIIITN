@@ -27,6 +27,8 @@ interface DataStoreRepository {
 
     suspend fun getAccessToken(): String?
     suspend fun setAccessToken(token: String)
+
+    suspend fun logOut()
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
@@ -35,6 +37,13 @@ class DataStoreRepositoryImpl @Inject constructor(
 
     private val Context._dataStore: DataStore<Preferences> by preferencesDataStore(name = APP_PREFERENCES)
     private val dataStore: DataStore<Preferences> = context._dataStore
+
+
+    override suspend fun logOut() {
+        dataStore.edit {
+            it.clear()
+        }
+    }
 
     override suspend fun setUserId(userId: String) {
         dataStore.edit { it[USER_KEY] = userId }
