@@ -15,12 +15,22 @@ interface DataStoreRepository {
     suspend fun setUserId(userId: String)
     suspend fun getUserId(): String?
 
+    suspend fun setUserImageUrl(url: String)
+    suspend fun getUserImageUrl(): String?
+
+    suspend fun setUserName(name: String)
+    suspend fun getUserName(): String?
+
+    suspend fun setUserEmail(email: String)
+    suspend fun getUserEmail(): String?
+
+
     suspend fun getAccessToken(): String?
     suspend fun setAccessToken(token: String)
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
 ) : DataStoreRepository {
 
     private val Context._dataStore: DataStore<Preferences> by preferencesDataStore(name = APP_PREFERENCES)
@@ -32,6 +42,30 @@ class DataStoreRepositoryImpl @Inject constructor(
 
     override suspend fun getUserId(): String? {
         return dataStore.data.map { it[USER_KEY] }.firstOrNull()
+    }
+
+    override suspend fun setUserImageUrl(url: String) {
+        dataStore.edit { it[USER_IMAGE_URL] = url }
+    }
+
+    override suspend fun getUserImageUrl(): String? {
+        return dataStore.data.map { it[USER_IMAGE_URL] }.firstOrNull()
+    }
+
+    override suspend fun setUserName(name: String) {
+        dataStore.edit { it[USER_NAME] = name }
+    }
+
+    override suspend fun getUserName(): String? {
+        return dataStore.data.map { it[USER_NAME] }.firstOrNull()
+    }
+
+    override suspend fun setUserEmail(email: String) {
+        dataStore.edit { it[USER_EMAIL] = email }
+    }
+
+    override suspend fun getUserEmail(): String? {
+        return dataStore.data.map { it[USER_EMAIL] }.firstOrNull()
     }
 
     override suspend fun getAccessToken(): String? {
@@ -47,6 +81,9 @@ class DataStoreRepositoryImpl @Inject constructor(
 
         val USER_KEY = stringPreferencesKey("user_id_key")
         val USER_TOKEN = stringPreferencesKey("user_token")
+        val USER_IMAGE_URL = stringPreferencesKey("user_url")
+        val USER_NAME = stringPreferencesKey("user_name")
+        val USER_EMAIL = stringPreferencesKey("user_email")
     }
 
 }

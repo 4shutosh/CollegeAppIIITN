@@ -34,7 +34,37 @@
                     android:elevation="8dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/welcome_message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/textColorPrimary"
+                            android:textSize="16sp"
+                            tools:text="Hello there!" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="end"
+                            app:civ_border_overlay="false"
+                            tools:background="@drawable/bg_mountain" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </com.google.android.material.appbar.MaterialToolbar>
 
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -55,8 +85,8 @@
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="0dp"
                 android:layout_gravity="bottom"
+                android:elevation="0dp"
                 app:itemIconTint="@drawable/bottom_navigation_item_color"
                 app:itemTextColor="@drawable/bottom_navigation_item_color"
                 app:layout_constraintBottom_toBottomOf="parent"

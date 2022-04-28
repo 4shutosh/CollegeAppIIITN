@@ -27,6 +27,9 @@ class CourseListAdapter constructor(
             llRoot.setOnClickListener {
                 itemClickListener.courseItemClicked(item)
             }
+            checkboxStar.setOnCheckedChangeListener { _, boolean ->
+                itemClickListener.courseEnrollStateClicked(boolean, item)
+            }
         }
     }
 
@@ -51,7 +54,7 @@ class CourseListAdapter constructor(
 
     object CourseListDiffCallback : DiffUtil.ItemCallback<CourseViewState>() {
         override fun areItemsTheSame(oldItem: CourseViewState, newItem: CourseViewState) =
-            (oldItem.name == newItem.name && oldItem.code == newItem.code)
+            (oldItem.name == newItem.name && oldItem.code == newItem.code && oldItem.userEnrolled == newItem.userEnrolled)
 
         override fun areContentsTheSame(
             oldItem: CourseViewState,

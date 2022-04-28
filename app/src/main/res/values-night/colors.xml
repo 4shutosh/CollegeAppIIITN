@@ -22,7 +22,7 @@
     <color name="bottomNavOff">@color/blue_3</color>
     <color name="colorCloseToSurface_1">@color/blue_4</color>
 
-    <color name="toolbarColor">@color/grey850</color>
+    <color name="toolbarColor">@color/colorCloseToSurface_1</color>
 
     <color name="icon_circle_0">#27303F</color>
     <color name="icon_circle_1">#3C282E</color>

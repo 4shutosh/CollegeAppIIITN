@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import com.college.app.R
 import com.college.app.databinding.ActivityHolderBinding
 import com.college.app.utils.AppUtils.fragmentFromId
+import com.college.app.utils.extensions.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,11 +28,21 @@ class HolderActivity : AppCompatActivity() {
 
     private fun setUpNavigation() {
         when (val fragmentId = intent.extras?.getInt(KEY_HOLDER_ACTIVITY_FRAGMENT) ?: 0) {
+            R.layout.fragment_courses -> {
+                val navHost =
+                    supportFragmentManager.findFragmentById(R.id.activity_holder_fragment) as NavHostFragment
+                val navController = navHost.navController
+                navController.setGraph(R.navigation.nav_courses)
+            }
             else -> {
                 val fragment = fragmentFromId(fragmentId)
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.activity_holder_fragment, fragment)
-                    .commit()
+                if (fragment == null) {
+                    showToast("Feature Not Yet Implemented!")
+                } else {
+                    supportFragmentManager.beginTransaction()
+                        .add(R.id.activity_holder_fragment, fragment)
+                        .commit()
+                }
             }
         }
 

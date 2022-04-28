@@ -18,7 +18,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways" />
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="@color/textColorPrimary" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"

@@ -30,13 +30,13 @@ class OnBoardingLoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val logger: CollegeLogger,
     private val googleLogOutHelper: GoogleLogOutHelper,
-    private val collegeBuildVariantType: CollegeBuildVariantType
+    private val collegeBuildVariantType: CollegeBuildVariantType,
 ) : ViewModel() {
 
     data class LoginViewState(
         var isLoading: Boolean = false,
         var communityEdition: Boolean = false,
-        val userState: CollegeUser? = null
+        val userState: CollegeUser? = null,
     )
 
     // view state update should be always on the main thread and not in any other scope
@@ -84,6 +84,8 @@ class OnBoardingLoginViewModel @Inject constructor(
 
                     dataStoreRepository.setUserId(this.userId)
                     dataStoreRepository.setAccessToken(this.accessToken)
+                    if (this.imageUrl != null)
+                        dataStoreRepository.setUserImageUrl(this.imageUrl)
 
                     navigateToMainScreen()
                 }.onError {

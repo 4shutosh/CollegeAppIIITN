@@ -1,254 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.college.app.ui.courses.adapter.CourseListAdapter.CourseViewState" />
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical">
-        <!--        course name -->
-        <LinearLayout
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="12dp"
+            android:background="@color/colorSurface"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/course_name_header"
                 style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nameOfCourse"
-                android:textColor="@color/colorOnSurface" />
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/course_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/course_name" />
 
             <TextView
+                android:id="@+id/course_name"
                 style="@style/CollegeAppTextViewBodyNormal"
-                android:id="@+id/courseName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:text="@string/courseNameExample" />
-
-        </LinearLayout>
-        <!--        course code-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
+                android:layout_marginStart="10dp"
+                android:text="@{viewState.name}"
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/course_name_header"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Data Sturctures" />
 
             <TextView
+                android:id="@+id/course_code_header"
                 style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/courseCode"
-                android:textColor="@color/colorOnSurface" />
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/course_code" />
 
             <TextView
+                android:id="@+id/course_code"
                 style="@style/CollegeAppTextViewBodyNormal"
-                android:id="@+id/courseCode"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:text="@string/courseCodeEx" />
-
-        </LinearLayout>
-        <!--course faculty-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:text="@{viewState.code}"
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/course_code_header"
+                app:layout_constraintTop_toBottomOf="@id/course_name"
+                tools:text="ABCD 1010" />
 
             <TextView
+                android:id="@+id/course_faculty_header"
                 style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/faculty"
-                android:textColor="@color/colorOnSurface" />
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/course_faculty"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/course_faculty" />
 
             <TextView
+                android:id="@+id/course_faculty"
                 style="@style/CollegeAppTextViewBodyNormal"
-                android:id="@+id/courseFacultyName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:text="@string/facultyExample" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:text="@{viewState.facultyName}"
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/course_faculty_header"
+                app:layout_constraintTop_toBottomOf="@id/course_code"
+                tools:text="Mr. Dwane Johnson Kapoor " />
 
             <TextView
+                android:id="@+id/course_enrollment_header"
                 style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/takingThisCourse"
-                android:textColor="@color/colorOnSurface" />
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/course_checkbox"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/course_checkbox" />
 
             <CheckBox
-                android:id="@+id/yourCourse"
+                android:id="@+id/course_checkbox"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/star_checkbox"
                 android:button="@null"
+                android:checked="@{viewState.userEnrolled}"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintStart_toEndOf="@id/course_enrollment_header"
+                app:layout_constraintTop_toBottomOf="@id/course_faculty" />
 
             <TextView
-
-                android:id="@+id/yesNo"
+                android:id="@+id/course_enrollment_yes_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/five_dp"
                 android:padding="@dimen/five_dp"
-                android:text="@string/no"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        <!--course about text-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="vertical">
+                android:text="@{viewState.userEnrolled ? @string/yes : @string/no}"
+                android:textColor="@color/textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/course_checkbox"
+                app:layout_constraintStart_toEndOf="@id/course_checkbox"
+                app:layout_constraintTop_toTopOf="@id/course_checkbox" />
 
             <TextView
+                android:id="@+id/course_about_header"
                 style="@style/CollegeAppTextViewHeadNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about"
-                android:textColor="@color/colorOnSurface" />
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/course_about"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/course_about"
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
+                android:id="@+id/course_about"
                 style="@style/CollegeAppTextViewBodyNormal"
-                android:id="@+id/courseAbout"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dp"
-                android:justificationMode="inter_word"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/loremIpsumP1" />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:text="@{viewState.description}"
+                android:textColor="@color/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/course_faculty_header"
+                app:layout_constraintTop_toBottomOf="@id/course_checkbox"
+                tools:text="@string/loremIpsumP1" />
 
-        </LinearLayout>
-        <!--classroom link        -->
-        <LinearLayout
-            android:id="@+id/classRoomLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                style="@style/CollegeAppTextViewHeadNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/classroomLink"
-                android:textColor="@color/colorOnSurface" />
+    </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/classRoomButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:padding="1dp"
-                android:paddingVertical="1dp"
-                android:text="@string/openLink" />
-
-        </LinearLayout>
-        <!-- suggested video Playlist       -->
-        <LinearLayout
-            android:id="@+id/PlayListLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/CollegeAppTextViewHeadNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/suggestedPlaylist"
-                android:textColor="@color/colorOnSurface" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/videoPlaylistButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:padding="1dp"
-                android:paddingVertical="1dp"
-                android:text="@string/openLink" />
-
-        </LinearLayout>
-        <!-- google drive books         -->
-        <LinearLayout
-            android:id="@+id/booksDriveLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="@dimen/five_dp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/CollegeAppTextViewHeadNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/googleDriveBooksLink"
-                android:textColor="@color/colorOnSurface" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/booksDriveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:padding="1dp"
-                android:paddingVertical="1dp"
-                android:text="@string/openLink" />
-
-        </LinearLayout>
-        <!-- faculty contact details        -->
-        <LinearLayout
-            android:layout_marginBottom="?attr/actionBarSize"
-            android:id="@+id/facultyContactLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="@dimen/tenDp"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/CollegeAppTextViewHeadNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/facultyContact"
-                android:textColor="@color/colorOnSurface" />
-
-            <TextView
-                style="@style/CollegeAppTextViewBodyNormal"
-                android:id="@+id/facultyContactTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tenDp"
-                android:text="@string/facultyContactExample" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</layout>

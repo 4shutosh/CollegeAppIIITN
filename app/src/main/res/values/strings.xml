@@ -287,6 +287,8 @@
     <string name="snackbar_action_undo">Undo</string>
     <string name="todo_dialog_title">TODO</string>
     <string name="todo_fragment_no_data_message">No TODO Found. You are free*!</string>
+    <string name="user_course_no_data_message">No Enrolled Courses Found\n Get Studying!!</string>
+    <string name="all_course_no_data_message">No Courses?! Please wait\n Or try restarting your computer</string>
     <string name="todo_notification_mark_as_done">Mark as done</string>
     <string name="todo_notification_extend_an_hour">Extend an hour</string>
     <string name="issue_book">Issue A Book</string>

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/green400">
+        android:background="@color/colorSurface">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
@@ -16,5 +16,38 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_course" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="no_data_image, no_data_message" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/no_data_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:srcCompat="@drawable/ic_courses_round" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/no_data_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/user_course_no_data_message"
+            android:textColor="@color/colorControlNormal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/no_data_image"
+            app:layout_constraintStart_toStartOf="@id/no_data_image"
+            app:layout_constraintTop_toBottomOf="@id/no_data_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.college.app.databinding.FragmentAllCoursesBinding
 import com.college.app.ui.courses.adapter.CourseListAdapter
+import com.college.app.utils.extensions.gone
+import com.college.app.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AllCoursesFragment() : Fragment(), CourseListAdapter.CourseListItemClickListener {
+class AllCoursesFragment : Fragment(), CourseListAdapter.CourseListItemClickListener {
 
     private val parentViewModel: CoursesViewModel by viewModels(
         ownerProducer = { requireParentFragment() }
@@ -22,7 +24,6 @@ class AllCoursesFragment() : Fragment(), CourseListAdapter.CourseListItemClickLi
     private val listAdapter by lazy {
         CourseListAdapter(this)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,16 +46,25 @@ class AllCoursesFragment() : Fragment(), CourseListAdapter.CourseListItemClickLi
 
     private fun setupObservers() {
         parentViewModel.allCoursesFlow.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it)
+            if (it.isEmpty()) {
+                binding.noData.visible()
+                binding.list.gone()
+            } else {
+                binding.noData.gone()
+                listAdapter.submitList(it)
+                binding.list.visible()
+            }
         }
     }
 
     override fun courseItemClicked(item: CourseListAdapter.CourseViewState) {
+        parentViewModel.actionCourseItemClicked(item)
     }
 
     override fun courseEnrollStateClicked(
         enroll: Boolean,
         item: CourseListAdapter.CourseViewState,
     ) {
+        parentViewModel.actionCourseEnrollmentChange(enroll, item)
     }
 }

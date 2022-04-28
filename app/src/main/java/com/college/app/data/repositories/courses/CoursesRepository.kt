@@ -13,11 +13,14 @@ import javax.inject.Inject
 
 interface CoursesRepository {
 
-    fun getAllCourses(): Flow<List<CollegeCourse>>
+    suspend fun updateLocalCourses()
 
+    fun getAllCourses(): Flow<List<CollegeCourse>>
     fun getAllUserCourses(): Flow<List<CollegeCourse>>
 
-    suspend fun enrollACourse(id: Long, enroll: Boolean = true)
+    fun enrollACourse(courseCode: String, enroll: Boolean = true)
+
+    suspend fun getCourseByCode(courseCode: String): CollegeCourse?
 
 }
 
@@ -28,15 +31,13 @@ class CoursesRepositoryImpl @Inject constructor(
     private val logger: CollegeLogger,
 ) : CoursesRepository {
 
-    override fun getAllCourses(): Flow<List<CollegeCourse>> = flow {
-        emit(coursesDao.getAllCourses())
-
+    override suspend fun updateLocalCourses() {
         try {
             val networkCoursesResponse = collegeAppService.getAllCourses()
             if (networkCoursesResponse.isSuccess()) {
-                coursesDao.deleteAll()
-                coursesDao.insertAll(networkCoursesResponse.data)
-                emit(coursesDao.getAllCourses())
+                networkCoursesResponse.data.forEach {
+                    coursesDao.insertOrUpdateCourse(it)
+                }
             } else {
                 logger.d("network response failed: ${networkCoursesResponse.serverException()}")
             }
@@ -45,11 +46,19 @@ class CoursesRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getAllCourses(): Flow<List<CollegeCourse>> {
+        return coursesDao.getAllCourses()
+    }
+
     override fun getAllUserCourses(): Flow<List<CollegeCourse>> {
         return coursesDao.getAllEnrolledCourses()
     }
 
-    override suspend fun enrollACourse(id: Long, enroll: Boolean) {
-        return coursesDao.enrollCourseById(id, enroll)
+    override fun enrollACourse(courseCode: String, enroll: Boolean) {
+        return coursesDao.enrollCourseById(courseCode, enroll)
+    }
+
+    override suspend fun getCourseByCode(courseCode: String): CollegeCourse? {
+        return coursesDao.getCourseByCode(courseCode)
     }
 }

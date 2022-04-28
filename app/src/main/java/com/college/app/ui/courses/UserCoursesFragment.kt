@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import com.college.app.R
 import com.college.app.databinding.FragmentUserCoursesBinding
 import com.college.app.ui.courses.adapter.CourseListAdapter
+import com.college.app.utils.extensions.gone
+import com.college.app.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,17 +49,26 @@ class UserCoursesFragment : Fragment(),
 
     private fun setupObservers() {
         parentViewModel.userCoursesFlow.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it)
+            if (it.isEmpty()) {
+                binding.noData.visible()
+                binding.list.gone()
+            } else {
+                binding.noData.gone()
+                listAdapter.submitList(it)
+                binding.list.visible()
+            }
         }
     }
 
     override fun courseItemClicked(item: CourseListAdapter.CourseViewState) {
+        parentViewModel.actionCourseItemClicked(item)
     }
 
     override fun courseEnrollStateClicked(
         enroll: Boolean,
         item: CourseListAdapter.CourseViewState,
     ) {
+        parentViewModel.actionCourseEnrollmentChange(enroll, item)
     }
 
 }

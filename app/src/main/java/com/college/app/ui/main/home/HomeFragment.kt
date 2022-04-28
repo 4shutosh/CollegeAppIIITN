@@ -12,6 +12,8 @@ import com.college.app.ui.main.holder.HolderActivity
 import com.college.app.ui.main.home.HomeViewModel.Command.*
 import com.college.app.ui.main.home.list.HomeFeatureListAdapter
 import com.college.app.ui.main.home.list.HomeFeatureListAdapter.HomeFeatureListClickListener
+import com.college.app.utils.AppUtils
+import com.college.app.utils.extensions.showToast
 import com.college.app.utils.openURL
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +29,7 @@ class HomeFragment : Fragment(), HomeFeatureListClickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         binding.viewModel = viewModel
@@ -57,7 +59,12 @@ class HomeFragment : Fragment(), HomeFeatureListClickListener {
 
     private fun processCommand(it: HomeViewModel.Command) {
         when (it) {
-            is NavigateToFeatureScreen -> navigateToFeatureScreen(it.fragmentId)
+            is NavigateToFeatureScreen -> {
+                val fragment = AppUtils.fragmentFromId(it.fragmentId)
+                if (fragment == null) {
+                    showToast("Feature Not Yet Implemented!")
+                } else navigateToFeatureScreen(it.fragmentId)
+            }
             is OpenWebViewWithUrl -> openURL(requireContext(), it.url)
         }
     }

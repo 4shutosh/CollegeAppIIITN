@@ -58,13 +58,15 @@ object AppUtils {
     }
 
 
-    fun fragmentFromId(id: Int): Fragment {
+    fun fragmentFromId(id: Int): Fragment? {
         return when (id) {
             HOME_FRAGMENT_ID -> HomeFragment()
             TODO_FRAGMENT_ID -> TodoFragment()
             OFFLINE_LIBRARY_FRAGMENT_ID -> LibraryFragment()
             COURSES_FRAGMENT -> CoursesFragment()
-            else -> throw ClassNotFoundException()
+            else -> {
+                null
+            }
         }
     }
 

@@ -157,6 +157,7 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
 
     implementation(libs.google.guava)
+    implementation(libs.circularview)
 }
 
 if (file("google-services.json").exists()) {
