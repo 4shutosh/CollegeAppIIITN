@@ -18,7 +18,7 @@
     <color name="statusBarColor">@color/white</color>
     <color name="itemDTrue">@color/white</color>
     <color name="itemD">@color/white</color>
-    <color name="iconTodoColor">@color/white</color>
+    <color name="iconTodoColor">@color/blue_1</color>
     <color name="bottomNavOff">@color/blue_3</color>
     <color name="colorCloseToSurface_1">@color/blue_4</color>
 
@@ -52,7 +52,7 @@
     <color name="icon_inside_11">#ffbc57</color>
     <color name="icon_inside_12">#bcaaa4</color>
 
-    <color  name="splash_color">#2A2438</color>
+    <color name="splash_color">#2A2438</color>
 
     <color name="blue_primary">@color/blue_3</color>
     <color name="blue_secondary">@color/blue_1</color>

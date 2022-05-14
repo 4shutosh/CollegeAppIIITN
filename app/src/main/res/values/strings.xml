@@ -229,7 +229,7 @@
     <string name="no_notifications_found">No Notifications Found!</string>
     <string name="notificationSheetText2">Notifications will include Announcements and Updates from Officials and Groups \n(Courses, Clubs, etc that you are a part of)</string>
     <string name="notificationSheetText3">Notifications will be sent by the faculties, Class Representatives, Club Managers, etc through a custom web portal </string>
-    <string name="notificationSheetText4">"We aim to make IMPORTANT notifications stand out from all the Whats App's garbage messages and notifications"</string>
+    <string name="notificationSheetText4">"We aim to make IMPORTANT notifications stand out from all the other Whats App's personal messages and notifications"</string>
     <string name="notificationSheetText5">Some Android Phones might not receive notifications due to rogue Chinese ROMS, future updates might fix this.</string>
     <string name="notificationsSheetText6">Done with a notification? Swipe it away</string>
     <string name="todoBottomSheetText1">// TODO is a note taking system for the tasks that we aim to do in future.</string>

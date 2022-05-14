@@ -40,7 +40,7 @@
 
     <color name="toolbarColor">@color/white</color>
 
-    <color name="iconTodoColor">@color/black</color>
+    <color name="iconTodoColor">@color/blue_4</color>
 
     <color name="icon_circle_0">#D7E5F8</color>
     <color name="icon_circle_1">#F8D7DF</color>

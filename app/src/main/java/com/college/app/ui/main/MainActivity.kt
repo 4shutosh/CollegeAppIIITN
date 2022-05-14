@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.activity_main_fragment_host) as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
 
-        navHostFragment.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.todoFragment -> binding.welcomeMessage.text = "// TODO"
                 R.id.homeFragment -> binding.welcomeMessage.text = "Home"

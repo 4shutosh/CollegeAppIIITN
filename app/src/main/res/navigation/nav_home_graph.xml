@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.college.app.ui.main.home.HomeFragment"
-        android:label="HomeFragment"
+        android:name="com.college.app.ui.notification.NotificationsFragment"
+        android:label="NotificationsFragment"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment

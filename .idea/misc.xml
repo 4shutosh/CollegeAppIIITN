@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/compose-model-1644561387777.xml" value="0.6351351351351351" />
+        <entry key="../../../../../layout/compose-model-1651143365294.xml" value="0.17195767195767195" />
         <entry key="../../../layout/compose-model-1633363327534.xml" value="0.29307432432432434" />
         <entry key="../../../layout/compose-model-1633430216023.xml" value="0.2922297297297297" />
         <entry key="../../../layout/compose-model-1633499862392.xml" value="1.643835616438356" />
@@ -16,27 +17,65 @@
         <entry key="../../../layout/compose-model-1636222993695.xml" value="0.5564814814814815" />
         <entry key="../../../layout/compose-model-1636264025908.xml" value="0.5564814814814815" />
         <entry key="../../../layout/compose-model-1636270291119.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/dr_rounded_16.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/dr_rounded_16_stroke_1.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/dr_rounded_bottom_16.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/dr_rounded_top_16.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_assistant_round.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_attendance_round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.166" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.166" />
         <entry key="app/src/main/res/drawable/ic_courses_round.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_google_logo.xml" value="0.3494791666666667" />
+        <entry key="app/src/main/res/drawable/ic_library_books.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_library_round.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_course.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1825" />
+        <entry key="app/src/main/res/drawable/info_round.xml" value="0.166" />
+        <entry key="app/src/main/res/drawable/star_checkbox.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/toolbar_corner.xml" value="0.248" />
+        <entry key="app/src/main/res/drawable/user_image.xml" value="0.166" />
+        <entry key="app/src/main/res/font/college_app_font_familiy.xml" value="0.3296296296296296" />
+        <entry key="app/src/main/res/layout-v21/fragment_all_courses.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_course.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_courses.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_holder.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31851851851851853" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/barcode_scanner_fragment.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/bottomsheet_barcode_scanner.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/bottomsheet_notifications.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottomsheet_signup.xml" value="0.31851851851851853" />
+        <entry key="app/src/main/res/layout/club_fragment.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/content_course.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/course_item.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/e_library_fragment.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_all_courses.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_course_detail.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/fragment_offline_library.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_offline_library.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_ofline_library.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_todo.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/list_item_home_feature.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_user_courses.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_item_book_return.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_course.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_home_feature.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_issue_book.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_issue_book_item_book.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/list_item_issue_book_item_no_books.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_issued_book_header.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_issued_books.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/list_item_notifications.xml" value="0.4503375120540019" />
+        <entry key="app/src/main/res/layout/list_item_return_book.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_todo_complete.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/layout/list_item_todo_incomplete.xml" value="0.28894927536231885" />
+        <entry key="app/src/main/res/layout/notification_item.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/menu/navigation_drawer_menu.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/menu/notifications_fragment_menu.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.3282051282051282" />
       </map>
