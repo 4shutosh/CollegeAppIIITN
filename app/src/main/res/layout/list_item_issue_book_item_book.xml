@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,16 +32,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/list_item_book_item_penalty"
+            app:layout_constraintEnd_toEndOf="@id/list_item_book_item_title"
+            app:layout_constraintStart_toStartOf="@id/list_item_book_item_title"
+            app:layout_constraintTop_toBottomOf="@id/list_item_book_item_title"
+            tools:text="Return Date: 16th April, 2022" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/list_item_book_item_penalty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
             android:gravity="start"
             android:includeFontPadding="false"
             android:textColor="@color/textColorPrimary"
             android:textSize="14sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/list_item_book_item_title"
             app:layout_constraintStart_toStartOf="@id/list_item_book_item_title"
-            app:layout_constraintTop_toBottomOf="@id/list_item_book_item_title"
-            tools:text="Return Date: 16th April, 2022" />
+            app:layout_constraintTop_toBottomOf="@id/list_item_book_item_return_date"
+            tools:text="Penalty: 2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

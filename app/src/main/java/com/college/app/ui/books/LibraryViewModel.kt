@@ -9,27 +9,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.college.app.data.entities.TodoItem
 import com.college.app.data.repositories.DataStoreRepository
-import com.college.app.data.repositories.library.LibraryBooksRepository
 import com.college.app.data.repositories.todo.TodoRepository
 import com.college.app.models.local.CollegeBook
-import com.college.app.network.library.GetBookUseCase
-import com.college.app.network.library.IssueBookUseCase
 import com.college.app.models.network.requests.IssueBookRequest
+import com.college.app.network.library.GetBookUseCase
 import com.college.app.network.library.GetIssuedBookUseCase
+import com.college.app.network.library.IssueBookUseCase
 import com.college.app.ui.books.list.LibraryListAdapter
 import com.college.app.utils.extensions.getFormattedDate
-import com.college.app.utils.extensions.orDef
-import com.college.app.utils.extensions.toLiveData
 import com.college.base.AppCoroutineDispatcher
 import com.college.base.SingleLiveEvent
-import com.college.base.domain.ServerException
 import com.college.base.logger.CollegeLogger
-import com.college.base.result.*
+import com.college.base.result.DataUiResult
+import com.college.base.result.onError
+import com.college.base.result.onServerError
+import com.college.base.result.onSuccess
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import okhttp3.internal.notifyAll
 import java.util.concurrent.ExecutionException
 import javax.inject.Inject
 
@@ -96,8 +94,8 @@ class LibraryViewModel
     fun getIssuedBooks() {
         viewModelScope.launch(appCoroutineDispatcher.io) {
             libraryListViewState.postValue(currentLibraryListViewState().copy(isLoading = true))
-            dataStoreRepository.getUserId()?.let { string ->
-                getIssuedBooksUseCase(string).onSuccess {
+            dataStoreRepository.getUserEmail()?.let { email ->
+                getIssuedBooksUseCase(email).onSuccess {
                     currentLibraryListViewState().viewList.removeIf { it is LibraryListAdapter.LibraryListIssuedBookViewState }
                     currentLibraryListViewState().viewList.add(this)
                     libraryListViewState.postValue(currentLibraryListViewState().copy(

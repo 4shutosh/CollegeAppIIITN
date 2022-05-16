@@ -19,25 +19,26 @@
         android:background="@drawable/dr_rounded_16"
         android:backgroundTint="@color/colorCloseToSurface_1"
         android:clickable="false"
-        android:focusable="false">
+        android:focusable="false"
+        android:foreground="?attr/selectableItemBackground">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notification_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:contentDescription="@string/notifications"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_notifications_black_24dp" />
+            app:srcCompat="@drawable/ic_link" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/notification_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="10dp"
             android:text="@{viewState.title}"
             android:textColor="@color/textColorPrimary"
@@ -61,7 +62,6 @@
             app:layout_constraintStart_toStartOf="@id/notification_title"
             app:layout_constraintTop_toBottomOf="@id/notification_title"
             tools:text="@string/message" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

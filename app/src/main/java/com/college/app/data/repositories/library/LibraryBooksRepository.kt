@@ -15,7 +15,7 @@ interface LibraryBooksRepository {
     suspend fun issueBookRequest(issueBookRequest: IssueBookRequest): UserLibraryResponse
     suspend fun getBookByLibraryNumber(libraryBookNumber: Long): CollegeBook
 
-    suspend fun getIssuedBookForUser(userId: String): UserLibraryResponse
+    suspend fun getIssuedBookForUser(userEmail: String): UserLibraryResponse
 }
 
 class LibraryBooksRepositoryImpl @Inject constructor(
@@ -29,8 +29,8 @@ class LibraryBooksRepositoryImpl @Inject constructor(
         return collegeAppService.getBookByLibraryNumber(libraryBookNumber).dataOrThrowException()
     }
 
-    override suspend fun getIssuedBookForUser(userId: String): UserLibraryResponse {
-        return collegeAppService.getIssuedBooks(userId).dataOrThrowException()
+    override suspend fun getIssuedBookForUser(userEmail: String): UserLibraryResponse {
+        return collegeAppService.getIssuedBooks(userEmail).dataOrThrowException()
     }
 
 }

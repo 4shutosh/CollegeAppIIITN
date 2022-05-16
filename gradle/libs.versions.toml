@@ -119,11 +119,13 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 
 google-material = "com.google.android.material:material:1.4.0"
-google-analytics = "com.google.firebase:firebase-analytics-ktx:19.0.0"
+google-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = "com.google.firebase:firebase-auth:21.0.1"
 firebase-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.1.0"
 firebase-storage = "com.google.firebase:firebase-storage:20.0.0"
-firebase-database = "com.google.firebase:firebase-database:20.0.2"
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+firebase-bom = "com.google.firebase:firebase-bom:30.0.1"
+firebase-database = { module = "com.google.firebase:firebase-database" }
 firebase-gmsauth = "com.google.android.gms:play-services-auth:19.2.0"
 firebase-crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
 google-gmsGoogleServices = "com.google.gms:google-services:4.3.8"
@@ -183,8 +185,6 @@ swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 shimmer = "com.facebook.shimmer:shimmer:0.1.0@aar"
 
 picasso = "com.squareup.picasso:picasso:2.71828"
-
-firebase-messaging = "com.google.firebase:firebase-messaging:20.2.4"
 
 eventbus = "org.greenrobot:eventbus:3.2.0"
 

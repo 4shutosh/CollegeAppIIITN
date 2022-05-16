@@ -8,15 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.college.app.databinding.FragmentNotificationsBinding
 import com.college.app.ui.notification.list.NotificationsAdapter
+import com.college.app.utils.extensions.gone
 import com.college.app.utils.extensions.showDialogFragmentIfNotPresent
+import com.college.app.utils.openURL
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(), NotificationsAdapter.ItemClickListener {
 
     private lateinit var binding: FragmentNotificationsBinding
 
-    private val listAdapter by lazy { NotificationsAdapter() }
+    private val listAdapter by lazy { NotificationsAdapter(this) }
     private val viewModel by viewModels<NotificationsViewModel>()
 
     override fun onCreateView(
@@ -45,11 +47,28 @@ class NotificationsFragment : Fragment() {
         binding.notificationRecyclerView.apply {
             adapter = listAdapter
         }
+
+        binding.swipeRefresh.setOnClickListener {
+            viewModel.swipeActionFetchAgainFromNetwork()
+        }
     }
 
     private fun setUpObservers() {
         viewModel.notificationsList.observe(viewLifecycleOwner) {
             listAdapter.submitList(it)
         }
+
+        viewModel.announcementsFlow.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = false
+            if (it.isEmpty()) {
+                binding.notificationRecyclerView.gone()
+            } else {
+                listAdapter.submitList(it)
+            }
+        }
+    }
+
+    override fun onItemLinkClick(url: String) {
+        openURL(requireContext(), url)
     }
 }

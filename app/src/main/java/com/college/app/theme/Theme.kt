@@ -19,7 +19,7 @@ val lightAppColors = lightColors(
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
-    onSurface = PurpleDarker,
+    onSurface = Color.White,
     onError = Color.White,
 )
 
@@ -29,7 +29,7 @@ val darkAppColors = darkColors(
     secondary = Color(0xFF03DAC6),
     secondaryVariant = Color(0xFF018786),
     background = Color.White,
-    surface = PurpleDarker,
+    surface = SurfaceDark,
     error = Color(0xFFB00020),
     onPrimary = Color.White,
     onSecondary = Color.Black,

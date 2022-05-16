@@ -1,5 +1,6 @@
 package com.college.app.network
 
+import com.college.app.models.local.CollegeAnnouncement
 import com.college.app.models.local.CollegeBook
 import com.college.app.models.local.CollegeCourse
 import com.college.app.network.EndPoints.BOOKS
@@ -7,10 +8,9 @@ import com.college.app.network.EndPoints.ISSUE_BOOK
 import com.college.app.network.EndPoints.LIBRARY
 import com.college.app.network.EndPoints.LOGIN
 import com.college.app.models.network.requests.IssueBookRequest
-import com.college.app.models.network.responses.IssueBookResponse
 import com.college.app.models.network.responses.LoginResponse
-import com.college.app.models.network.responses.UserLibraryItemResponse
 import com.college.app.models.network.responses.UserLibraryResponse
+import com.college.app.network.EndPoints.ANNOUNCEMENTS
 import com.college.app.network.EndPoints.COURSES
 import com.college.app.utils.Constants.Params.EMAIL
 import com.college.app.utils.Constants.Params.IMAGE_URL
@@ -52,4 +52,6 @@ interface CollegeAppService {
     @GET(COURSES)
     suspend fun getAllCourses(): ServerResponse<List<CollegeCourse>>
 
+    @GET(ANNOUNCEMENTS)
+    suspend fun getAllAnnouncements(): ServerResponse<List<CollegeAnnouncement>>
 }

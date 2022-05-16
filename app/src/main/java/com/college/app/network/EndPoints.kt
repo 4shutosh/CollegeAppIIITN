@@ -9,4 +9,5 @@ object EndPoints {
     const val LIBRARY = "library"
 
     const val COURSES = "courses"
+    const val ANNOUNCEMENTS = "announcements"
 }

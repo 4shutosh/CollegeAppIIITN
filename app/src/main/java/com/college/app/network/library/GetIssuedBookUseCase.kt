@@ -19,7 +19,8 @@ class GetIssuedBookUseCase @Inject constructor(
             libraryBooksRepository.getIssuedBookForUser(parameters).userBookList.map {
                 LibraryIssuedBooksAdapter.LibraryListIssuedBookItemViewState(
                     it.book,
-                    "Return Date: ${getFormattedDate(it.returnTimeStamp)}"
+                    if (it.penalty > 0) "Return Date: ${getFormattedDate(it.returnTimeStamp)} OVERDUE!!"
+                    else "Return Date: ${getFormattedDate(it.returnTimeStamp)}"
                 )
             }.toMutableList()
         )

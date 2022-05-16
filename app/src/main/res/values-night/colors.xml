@@ -52,7 +52,7 @@
     <color name="icon_inside_11">#ffbc57</color>
     <color name="icon_inside_12">#bcaaa4</color>
 
-    <color name="splash_color">#2A2438</color>
+    <color name="splash_color">@color/colorSurface</color>
 
     <color name="blue_primary">@color/blue_3</color>
     <color name="blue_secondary">@color/blue_1</color>

@@ -32,7 +32,7 @@
                     android:layout_margin="@dimen/tenDp"
                     android:src="@drawable/info_round" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/tenDp"
@@ -44,14 +44,36 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notification_recyclerView"
-            android:layout_width="match_parent"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/tenDp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/tenDp"
+            app:layout_constraintTop_toBottomOf="@id/info_card">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notification_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_announcements"
+            android:textAlignment="center"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

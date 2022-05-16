@@ -6,6 +6,7 @@ class Constants {
         const val GOOGLE_ACCESS_TOKEN = ""
 
         const val USER_ID = "userId"
+        const val USER_EMAIL = "userEmail"
         const val NAME = "name"
         const val ACCESS_TOKEN = "accessToken"
         const val EMAIL = "email"

@@ -49,6 +49,7 @@ class OnBoardingLoginViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(appCoroutineDispatcher.main) {
+            logger.d("build type: $collegeBuildVariantType")
             if (collegeBuildVariantType.isCommunityType()) {
                 _loginViewState.update { it.copy(communityEdition = true) }
             }

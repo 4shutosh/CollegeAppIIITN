@@ -11,7 +11,6 @@ import coil.load
 import com.college.app.R
 import com.college.app.databinding.FragmentProfileSettingsBinding
 import com.college.app.ui.onboarding.OnBoardingActivity
-import com.college.app.ui.onboarding.splash.OnBoardingSplash
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.system.exitProcess
 

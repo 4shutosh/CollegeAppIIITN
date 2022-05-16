@@ -3,6 +3,7 @@ package com.college.app.di
 import android.content.Context
 import android.os.Debug
 import androidx.room.Room
+import com.college.app.data.daos.AnnouncementsDao
 import com.college.app.data.daos.CoursesDao
 import com.college.app.data.daos.TodoDao
 import com.college.app.data.database.CollegeRoomDatabase
@@ -44,4 +45,8 @@ object DatabaseDaoModule {
 
     @Provides
     fun provideCoursesDatabase(db: CollegeRoomDatabase): CoursesDao = db.coursesDao()
+
+
+    @Provides
+    fun provideAnnouncementsDatabase(db: CollegeRoomDatabase): AnnouncementsDao = db.announcementsDao()
 }

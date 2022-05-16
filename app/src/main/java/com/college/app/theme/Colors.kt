@@ -16,6 +16,8 @@ val PurpleLight = Color(0xff5C5470)
 val PurpleDark = Color(0xff352F44)
 val PurpleDarker = Color(0xff2A2438)
 
+val SurfaceDark = Color(0xff1B262C)
+
 
 // property colours
 val textColorPrimary = Grey800

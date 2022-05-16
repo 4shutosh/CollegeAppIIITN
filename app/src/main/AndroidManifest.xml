@@ -25,8 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CollegeAppTheme"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="n">
+        android:usesCleartextTraffic="true">
         <activity
             android:name="com.college.app.ui.onboarding.OnBoardingActivity"
             android:exported="true"
@@ -44,8 +43,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.holder.HolderActivity"
-            android:parentActivityName=".ui.main.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity" />
         <!--        <receiver-->
         <!--            android:name=".utils.FirebaseDataReceiver"-->
         <!--            android:exported="true"-->
@@ -81,9 +80,26 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".notifications.AnnouncementBroadcastManager"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="ANNOUNCEMENT_NOTIFICATION_KEY" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".notifications.AnnouncementsNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
     <queries>
         <intent>

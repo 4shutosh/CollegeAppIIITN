@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/compose-model-1644561387777.xml" value="0.6351351351351351" />
         <entry key="../../../../../layout/compose-model-1651143365294.xml" value="0.17195767195767195" />
+        <entry key="../../../../../layout/compose-model-1652693239617.xml" value="0.29096283783783783" />
         <entry key="../../../layout/compose-model-1633363327534.xml" value="0.29307432432432434" />
         <entry key="../../../layout/compose-model-1633430216023.xml" value="0.2922297297297297" />
         <entry key="../../../layout/compose-model-1633499862392.xml" value="1.643835616438356" />
@@ -29,6 +30,7 @@
         <entry key="app/src/main/res/drawable/ic_google_logo.xml" value="0.3494791666666667" />
         <entry key="app/src/main/res/drawable/ic_library_books.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_library_round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_link.xml" value="0.1825" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1825" />
         <entry key="app/src/main/res/drawable/info_round.xml" value="0.166" />
         <entry key="app/src/main/res/drawable/star_checkbox.xml" value="0.178" />
@@ -68,7 +70,7 @@
         <entry key="app/src/main/res/layout/list_item_issue_book_item_no_books.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/list_item_issued_book_header.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/list_item_issued_books.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/list_item_notifications.xml" value="0.4503375120540019" />
+        <entry key="app/src/main/res/layout/list_item_notifications.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_item_return_book.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_todo_complete.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/layout/list_item_todo_incomplete.xml" value="0.28894927536231885" />

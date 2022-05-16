@@ -24,7 +24,6 @@ interface DataStoreRepository {
     suspend fun setUserEmail(email: String)
     suspend fun getUserEmail(): String?
 
-
     suspend fun getAccessToken(): String?
     suspend fun setAccessToken(token: String)
 

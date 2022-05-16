@@ -1,5 +1,7 @@
 package com.college.app.di
 
+import com.college.app.data.repositories.announcements.AnnouncementRepository
+import com.college.app.data.repositories.announcements.AnnouncementRepositoryImpl
 import com.college.app.data.repositories.courses.CoursesRepository
 import com.college.app.data.repositories.courses.CoursesRepositoryImpl
 import com.college.app.data.repositories.library.LibraryBooksRepository
@@ -30,4 +32,10 @@ class ViewModelModule {
     @ViewModelScoped
     fun providesCourseRepository(coursesRepository: CoursesRepositoryImpl): CoursesRepository =
         coursesRepository
+
+
+    @Provides
+    @ViewModelScoped
+    fun providesAnnouncementsRepository(announcementRepository: AnnouncementRepositoryImpl): AnnouncementRepository =
+        announcementRepository
 }
